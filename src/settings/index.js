@@ -29,10 +29,12 @@ export const settings = {
       },
     },
   },
-
 }
 
-const constants = {
+export const printers = [];
+export const printersObj = {};
+
+export const constants = {
   WS_CMD_STATUS: 'StatusConnected',
   WS_CMD_GET_PRINTERS: 'GetPrinters',
   WS_CMD_OPEN_LABEL: 'OpenLabelFile',
@@ -189,4 +191,25 @@ export const buildApiUrl = (command, {
     getSetting('WS_SVC_PATH') + '/'
 
   return url + command
+}
+
+export const addPrinterToCollection = (printer, result) => {
+  const {
+    name: printerName,
+  } = printer;
+
+  printers.push(printer);
+  printersObj[printerName] = printer;
+
+  result.push(printer);
+  result['byIndex'].push(printer);
+
+  if (printerName.match(/^\d+$/)) {
+    console.error('Printer name consisting of numbers only (' + printerName + ') will break proper array behavior. Consider using "byIndex" property for accessing elements by index reliably.');
+  }
+  if (printerName === 'length') {
+    console.error('Using "length" as printer name overrides Array.length property!');
+  }
+
+  result[printerName] = printer;
 }

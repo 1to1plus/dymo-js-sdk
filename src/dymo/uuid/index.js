@@ -1,3 +1,12 @@
+
+/*
+* Generate a RFC4122(v4) UUID
+*
+* based on https://github.com/broofa/node-uuid
+*/
+
+
+
 /**
  @public
  @return {string}

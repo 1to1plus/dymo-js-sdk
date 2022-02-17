@@ -20,6 +20,12 @@ import LabelSetRecord from './label/framework/LabelSetRecord'
 import TapeAlignment from './label/framework/TapeAlignment'
 import TwinTurboRoll from './label/framework/TwinTurboRoll'
 import CheckEnvironmentResult from './label/framework/CheckEnvironmentResult'
+import {
+  is550Printer,
+  is550PrinterAsync,
+  getConsumableInfoIn550Printer,
+  getConsumableInfoIn550PrinterAsync,
+} from './label/framework/SpecialPrinterLogic'
 
 const dymo = {
   xml: {
@@ -50,6 +56,11 @@ const dymo = {
       TapeAlignment,
       TwinTurboRoll,
       CheckEnvironmentResult,
+
+      is550Printer,
+      is550PrinterAsync,
+      getConsumableInfoIn550Printer,
+      getConsumableInfoIn550PrinterAsync,
     },
   },
 }

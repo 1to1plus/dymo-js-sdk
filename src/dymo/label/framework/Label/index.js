@@ -1,6 +1,15 @@
-//////////////////////////////////////////////////////////////////////////////
-// Label class
-//////////////////////////////////////////////////////////////////////////////
+// noinspection HtmlDeprecatedTag,HtmlUnknownAttribute
+
+import xml from '../../../xml';
+import {
+  renderLabel,
+  renderLabelAsync,
+  printLabel,
+  printLabelAndPollStatus, printLabelAndPollStatusAsync,
+} from '../OneOffFunctions'
+import printLabelAsync from '../printLabelAsync'
+import printLabel2, { printLabel2Async } from '../PrintLabel2'
+import AddressBarcodePosition from '../AddressBarcodePosition'
 
 /**
  @private
@@ -8,11 +17,11 @@
  @implements {ILabel}
  @param {string} labelXml
  */
-Label = function (labelXml) {
+const Label = function (labelXml) {
   /**
    @private
    */
-  this._doc = dymo.xml.parse(labelXml)
+  this._doc = xml.parse(labelXml)
 }
 
 /**
@@ -20,7 +29,7 @@ Label = function (labelXml) {
  */
 Label.prototype.getLabelXml = function () {
 
-  return dymo.xml.serialize(this._doc)
+  return xml.serialize(this._doc)
 }
 
 /**
@@ -49,13 +58,11 @@ Label.prototype.print = function (printerName, printParamsXml, labelSetXml) {
  */
 Label.prototype.printAsync = function (
   printerName, printParamsXml, labelSetXml) {
-  return printLabelAsync(printerName, printParamsXml, this.getLabelXml(),
-    labelSetXml)
+  // noinspection JSValidateTypes
+  return printLabelAsync(printerName, printParamsXml, this.getLabelXml(), labelSetXml)
 }
 
-/**
- @inheritDoc
- */
+// noinspection JSCheckFunctionSignatures
 Label.prototype.print2 = function (printerName, printParamsXml, labelSetXml) {
   return printLabel2(printerName, printParamsXml, this.getLabelXml(),
     labelSetXml)
@@ -106,7 +113,7 @@ let _allObjectTypes = [
  */
 Label.prototype._getObjectElements = function (opt_objectTypes) {
   let objectTypes = opt_objectTypes || _allObjectTypes
-  //return dymo.xml.getNodes(this._doc.documentElement, "//" + objectTypes.join("|//"));
+  //return xml.getNodes(this._doc.documentElement, "//" + objectTypes.join("|//"));
   //let dh = new goog.dom.DomHelper(this._doc);
 
   //goog.array.reduce(objectTypes,
@@ -124,9 +131,9 @@ Label.prototype.getObjectNames = function () {
   let objects = this._getObjectElements()
   let result = []
   for (let i = 0; i < objects.length; i++)
-    //result.push(dymo.xml.getElementText(dymo.xml.getNode(objects[i], "Name")));
+    //result.push(xml.getElementText(xml.getNode(objects[i], "Name")));
     result.push(
-      dymo.xml.getElementText(dymo.xml.getElement(objects[i], 'Name')))
+      xml.getElementText(xml.getElement(objects[i], 'Name')))
 
   return result
 }
@@ -137,7 +144,7 @@ Label.prototype.getObjectNames = function () {
  @return {(NodeList,Array.<Node>)}
  */
 Label.prototype._getAddressObjectElements = function () {
-  //return dymo.xml.getNodes(this._doc, "//AddressObject");
+  //return xml.getNodes(this._doc, "//AddressObject");
   return this._getObjectElements(['AddressObject'])
 }
 
@@ -170,8 +177,8 @@ Label.prototype._getAddressObjectElementByIndex = function (addressIndex) {
  */
 Label.prototype.getAddressBarcodePosition = function (addressIndex) {
   if (!this.isDCDLabel())
-    return dymo.xml.getElementText(
-      dymo.xml.getElement(this._getAddressObjectElementByIndex(addressIndex),
+    return xml.getElementText(
+      xml.getElement(this._getAddressObjectElementByIndex(addressIndex),
         'BarcodePosition'))
   else
     return ''
@@ -179,7 +186,7 @@ Label.prototype.getAddressBarcodePosition = function (addressIndex) {
 
 /** check the value of passed barcodePosition string to be a valid position value
  // TODO: create universal _verifyEnum() (using for/in); check all values for all defined enums
- // TODO: check other vlaues as well ???
+ // TODO: check other values as well ???
 
  @private
  @param {string} barcodePosition
@@ -204,8 +211,8 @@ Label.prototype.setAddressBarcodePosition = function (
   if (!this.isDCDLabel()) {
     this._verifyAddressBarcodePosition(barcodePosition)
 
-    dymo.xml.setElementText(
-      dymo.xml.getElement(this._getAddressObjectElementByIndex(addressIndex),
+    xml.setElementText(
+      xml.getElement(this._getAddressObjectElementByIndex(addressIndex),
         'BarcodePosition'), barcodePosition)
   }
   return this
@@ -239,7 +246,7 @@ Label.prototype._getObjectByNameElement = function (objectName) {
   // find object with name
   for (let i = 0; i < objects.length; i++) {
     let elem = objects[i]
-    let name = dymo.xml.getElementText(dymo.xml.getElement(elem, 'Name'))
+    let name = xml.getElementText(xml.getElement(elem, 'Name'))
     if (name == objectName)
       return elem
   }
@@ -250,7 +257,7 @@ Label.prototype._getObjectByNameElement = function (objectName) {
 }
 
 /** check if the current xml is a DYMO label
- // DYMOlabel or DieCutLabel
+ // DYMO label or DieCutLabel
 
  @inheritDoc
  */
@@ -261,13 +268,13 @@ Label.prototype.isDCDLabel = function () {
    */
   let labelXML = this.getLabelXml()
   if (labelXML) {
-    result = labelXML.indexOf('</DYMOLabel>') !== -1
+    result = labelXML.indexOf('</DYMO label>') !== -1
   }
   return result
 }
 
 /** check if the current xml is a DYMO label
- // DYMOlabel or DieCutLabel
+ // DYMO label or DieCutLabel
 
  @inheritDoc
  */
@@ -285,7 +292,7 @@ Label.prototype.isDLSLabel = function () {
 }
 
 /** check if the current xml is a valid label
- // DYMOlabel or DieCutLabel
+ // DYMO label or DieCutLabel
 
  @inheritDoc
  */
@@ -300,7 +307,7 @@ Label.prototype.isValidLabel = function () {
  @param {Element} objectElem
  */
 Label.prototype._getAddressObjectText = function (objectElem) {
-  //let textElems = dymo.xml.getNodes(objectElem, "StyledText/Element/String//text()");
+  //let textElems = xml.getNodes(objectElem, "StyledText/Element/String//text()");
   //let result = "";
   //for (let i = 0; i < textElems.length; i++)
   //    result = result + textElems[i].data;
@@ -308,19 +315,19 @@ Label.prototype._getAddressObjectText = function (objectElem) {
   let result = ''
 
   if (!this.isDCDLabel()) {
-    let styledTextElem = dymo.xml.getElement(objectElem, 'StyledText')
-    let stringElems = dymo.xml.getElements(styledTextElem, 'String')
+    let styledTextElem = xml.getElement(objectElem, 'StyledText')
+    let stringElems = xml.getElements(styledTextElem, 'String')
 
     result = goog.array.reduce(stringElems,
-      function (acc, v) { return acc + dymo.xml.getElementText(v) }, '')
+      function (acc, v) { return acc + xml.getElementText(v) }, '')
   } else {
-    let FormattedText = dymo.xml.getElement(objectElem, 'FormattedText')
-    let LineTextSpans = dymo.xml.getElements(FormattedText, 'LineTextSpan')
+    let FormattedText = xml.getElement(objectElem, 'FormattedText')
+    let LineTextSpans = xml.getElements(FormattedText, 'LineTextSpan')
     for (let i = 0; i < LineTextSpans.length; i++) {
-      let Spans = dymo.xml.getElements(LineTextSpans[i], 'TextSpan')
+      let Spans = xml.getElements(LineTextSpans[i], 'TextSpan')
       for (let k = 0; k < Spans.length; k++) {
-        let text = dymo.xml.getElement(Spans[k], 'Text')
-        result = result + dymo.xml.getElementText(text)
+        let text = xml.getElement(Spans[k], 'Text')
+        result = result + xml.getElementText(text)
       }
     }
   }
@@ -336,15 +343,15 @@ Label.prototype._getAddressObjectText = function (objectElem) {
 Label.prototype._getBarcodeObjectText = function (objectElem) {
   let result = ''
   let nodeName = this.isDCDLabel() ? 'Data' : 'Text'
-  let nodeElem = dymo.xml.getElement(objectElem, nodeName)
+  let nodeElem = xml.getElement(objectElem, nodeName)
 
   if (nodeElem)
-    result = dymo.xml.getElementText(nodeElem)
+    result = xml.getElementText(nodeElem)
 
   return result
 }
 
-/** extracts text content of a QRcode object represented by xml element objectElem
+/** extracts text content of a QR code object represented by xml element objectElem
  // the same function used to get Text object content
 
  @private
@@ -353,10 +360,10 @@ Label.prototype._getBarcodeObjectText = function (objectElem) {
 Label.prototype._getQRcodeObjectText = function (objectElem) {
   let result = ''
   if (this.isDCDLabel()) {
-    let nodeElem = dymo.xml.getElement(objectElem, 'Data')
+    let nodeElem = xml.getElement(objectElem, 'Data')
     if (nodeElem) {
-      let datastring = dymo.xml.getElement(nodeElem, 'DataString')
-      result = dymo.xml.getElementText(datastring)
+      let dataString = xml.getElement(nodeElem, 'DataString')
+      result = xml.getElementText(dataString)
     }
   }
   return result
@@ -370,10 +377,10 @@ Label.prototype._getQRcodeObjectText = function (objectElem) {
 Label.prototype._getImageObjectText = function (objectElem) {
   let result = ''
   let nodeName = this.isDCDLabel() ? 'Data' : 'Image'
-  let nodeElem = dymo.xml.getElement(objectElem, nodeName)
+  let nodeElem = xml.getElement(objectElem, nodeName)
 
   if (nodeElem)
-    result = dymo.xml.getElementText(nodeElem)
+    result = xml.getElementText(nodeElem)
 
   return result
 }
@@ -388,15 +395,15 @@ Label.prototype._getDateTimeCounterObjectText = function (objectElem) {
   let result = ''
 
   if (!this.isDCDLabel()) {
-    result = dymo.xml.getElementText(
-      dymo.xml.getElement(objectElem, 'PreText'))
+    result = xml.getElementText(
+      xml.getElement(objectElem, 'PreText'))
   } else {
-    let FormattedText = dymo.xml.getElement(objectElem, 'FormattedText')
-    let LineTextSpans = dymo.xml.getElements(FormattedText, 'LineTextSpan')
+    let FormattedText = xml.getElement(objectElem, 'FormattedText')
+    let LineTextSpans = xml.getElements(FormattedText, 'LineTextSpan')
     if (LineTextSpans) {
-      let Spans = dymo.xml.getElements(LineTextSpans[0], 'TextSpan')
-      let text = dymo.xml.getElement(Spans[0], 'Text')
-      result = result + dymo.xml.getElementText(text)
+      let Spans = xml.getElements(LineTextSpans[0], 'TextSpan')
+      let text = xml.getElement(Spans[0], 'Text')
+      result = result + xml.getElementText(text)
     }
   }
   return result
@@ -417,7 +424,7 @@ Label.prototype.getObjectText = function (objectName) {
       break
     case 'BarcodeObject':
       //TODO: Implement method to get barcode text
-      result = this._getBarcodeObjectText(objectElem) //dymo.xml.getElementText(dymo.xml.getElement(objectElem, "Text"));
+      result = this._getBarcodeObjectText(objectElem) //xml.getElementText(xml.getElement(objectElem, "Text"));
       break
     case 'ImageObject':
       // if image is embedded return it (base64 png stream)
@@ -426,7 +433,7 @@ Label.prototype.getObjectText = function (objectName) {
     case 'CircularTextObject':
       result = this.isDCDLabel()
         ? this._getAddressObjectText(objectElem)
-        : dymo.xml.getElementText(dymo.xml.getElement(objectElem, 'Text'))
+        : xml.getElementText(xml.getElement(objectElem, 'Text'))
       break
     case 'QRCodeObject':
       result = this._getQRcodeObjectText(objectElem)
@@ -442,18 +449,18 @@ Label.prototype.getObjectText = function (objectName) {
   return result // default
 }
 
-/** returns line-by-line attibutes (as xml Element) of the StyledText
+/** returns line-by-line attributes (as xml Element) of the StyledText
  @private
  @param {Node} styledTextElem
  @return {Array.<Element>}
  */
 Label.prototype._getStyledTextLineAttributes = function (styledTextElem) {
   let result = []
-  let elems = dymo.xml.getElements(styledTextElem, 'Element')
+  let elems = xml.getElements(styledTextElem, 'Element')
   let isNewLine = true
   for (let i = 0; i < elems.length; i++) {
     let elem = elems[i]
-    let str = dymo.xml.getElementText(dymo.xml.getElement(elem, 'String'))
+    let str = xml.getElementText(xml.getElement(elem, 'String'))
     if (!str || !str.length) // should not be, just a safeguard
       continue
 
@@ -465,13 +472,13 @@ Label.prototype._getStyledTextLineAttributes = function (styledTextElem) {
       continue
 
     //if (i > 0)
-    //    linesCount--; // don't count the 'first' line of second, and further element because it is a continuation of the line of the prevous element
+    //    linesCount--; // don't count the 'first' line of second, and further element because it is a continuation of the line of the previous element
 
     let l = 0
     if (!isNewLine)
       l = 1
 
-    let attributesElem = dymo.xml.getElement(elem, 'Attributes')
+    let attributesElem = xml.getElement(elem, 'Attributes')
     for (; l < linesCount - 1; l++)
       result.push(attributesElem)
 
@@ -491,17 +498,17 @@ Label.prototype._getStyledTextLineAttributes = function (styledTextElem) {
 Label.prototype._getStyledTextLineAttributes = function(styledTextElem)
 {
     let result = new Array();
-    let elems = dymo.xml.getElements(styledTextElem, "Element");
+    let elems = xml.getElements(styledTextElem, "Element");
     for (let i = 0; i < elems.length; i++)
     {
         let elem = elems[i];
-        let lines = dymo.xml.getElementText(dymo.xml.getElement(elem, "String")).split("\n");
+        let lines = xml.getElementText(xml.getElement(elem, "String")).split("\n");
 
         let linesCount = lines.length;
         if (i > 0)
-            linesCount--; // don't count the 'first' line of second, and further element because it is a continuation of the line of the prevous element
+            linesCount--; // don't count the 'first' line of second, and further element because it is a continuation of the line of the previous element
 
-        let attributesElem = dymo.xml.getElement(elem, "Attributes");
+        let attributesElem = xml.getElement(elem, "Attributes");
         for (let l = 0; l < linesCount; l++)
             result.push(attributesElem);
     }
@@ -514,7 +521,7 @@ Label.prototype._getStyledTextLineAttributes = function(styledTextElem)
  // Parameters:
  //      objectElem - Element corresponded to the address object
  //      text - plain text string of the address data
- // Note: text formating is applied on line-by-line basis using object's <LineFonts> list
+ // Note: text formatting is applied on line-by-line basis using object's <LineFonts> list
 
  @private
  @param {Element} objectElem
@@ -524,24 +531,24 @@ Label.prototype._getStyledTextLineAttributes = function(styledTextElem)
 Label.prototype._setAddressObjectText = function (objectElem, text) {
   if (!this.isDCDLabel()) {
     //get <StyledText>
-    let styledTextElem = dymo.xml.getElement(objectElem, 'StyledText')
+    let styledTextElem = xml.getElement(objectElem, 'StyledText')
     let attributes = this._getStyledTextLineAttributes(styledTextElem)
 
-    //let lineFonts = dymo.xml.getNodes(objectElem, "LineFonts/Font");
-    let lineFontsElem = dymo.xml.getElement(objectElem, 'LineFonts')
+    //let lineFonts = xml.getNodes(objectElem, "LineFonts/Font");
+    let lineFontsElem = xml.getElement(objectElem, 'LineFonts')
     let lineFonts = []
     if (lineFontsElem)
-      lineFonts = dymo.xml.getElements(lineFontsElem, 'Font')
+      lineFonts = xml.getElements(lineFontsElem, 'Font')
 
     let defaultFont
     if (lineFonts.length == 0)
-      defaultFont = dymo.xml.parse(
+      defaultFont = xml.parse(
         '<Font Family="Arial" Size="12" Bold="False" Italic="False" Underline="False" Strikeout="False" />').documentElement
-    let defaultColor = dymo.xml.parse(
+    let defaultColor = xml.parse(
       '<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />').documentElement
 
     // clear all text
-    dymo.xml.removeAllChildren(styledTextElem)
+    xml.removeAllChildren(styledTextElem)
 
     let lines = text.split('\n')
     for (let i = 0; i < lines.length; i++) {
@@ -559,21 +566,21 @@ Label.prototype._setAddressObjectText = function (objectElem, text) {
           font = lineFonts[lineFonts.length - 1]
       } else if (attributes.length > 0) {
         if (i < attributes.length)
-          font = dymo.xml.getElement(attributes[i], 'Font')
+          font = xml.getElement(attributes[i], 'Font')
         else
-          font = dymo.xml.getElement(attributes[attributes.length - 1], 'Font')
+          font = xml.getElement(attributes[attributes.length - 1], 'Font')
       }
 
       // font color
       let fontColor = defaultColor
       //alert(Xml.serialize(fontColor));
       if (i < attributes.length)
-        fontColor = dymo.xml.getElement(attributes[i], 'ForeColor')
+        fontColor = xml.getElement(attributes[i], 'ForeColor')
       //alert(Xml.serialize(fontColor));
       // create styledText element for the line
       let elemElem = styledTextElem.ownerDocument.createElement('Element')
       let stringElem = styledTextElem.ownerDocument.createElement('String')
-      dymo.xml.setElementText(stringElem, line)
+      xml.setElementText(stringElem, line)
       let attributesElem = styledTextElem.ownerDocument.createElement(
         'Attributes')
       attributesElem.appendChild(font.cloneNode(true))
@@ -584,13 +591,13 @@ Label.prototype._setAddressObjectText = function (objectElem, text) {
     }
     //alert(Xml.serialize(styledTextElem));
   } else {
-    let FormattedText = dymo.xml.getElement(objectElem, 'FormattedText')
-    let LineTextSpans = dymo.xml.getElements(FormattedText, 'LineTextSpan')
+    let FormattedText = xml.getElement(objectElem, 'FormattedText')
+    let LineTextSpans = xml.getElements(FormattedText, 'LineTextSpan')
     if (LineTextSpans) {
-      let Spans = dymo.xml.getElements(LineTextSpans[0], 'TextSpan')
+      let Spans = xml.getElements(LineTextSpans[0], 'TextSpan')
       if (Spans) {
-        let textElem = dymo.xml.getElement(Spans[0], 'Text')
-        dymo.xml.setElementText(textElem, text)
+        let textElem = xml.getElement(Spans[0], 'Text')
+        xml.setElementText(textElem, text)
       }
     }
   }
@@ -602,7 +609,7 @@ Label.prototype._setAddressObjectText = function (objectElem, text) {
  // Parameters:
  //      objectElem - Element corresponded to the address object
  //      text - plain text string of the address data
- // Note: text formating is applied on line-by-line basis using object's <LineFonts> list
+ // Note: text formatting is applied on line-by-line basis using object's <LineFonts> list
 
  @private
  @param {Element} objectElem
@@ -611,20 +618,20 @@ Label.prototype._setAddressObjectText = function (objectElem, text) {
  */
 Label.prototype._setQRCodeObjectText = function (objectElem, text) {
   if (this.isDCDLabel()) {
-    let dataElem = dymo.xml.getElement(objectElem, 'Data')
+    let dataElem = xml.getElement(objectElem, 'Data')
     if (dataElem) {
-      let dataStringElem = dymo.xml.getElement(dataElem, 'DataString')
-      dymo.xml.setElementText(dataStringElem, text)
+      let dataStringElem = xml.getElement(dataElem, 'DataString')
+      xml.setElementText(dataStringElem, text)
     }
   }
   return this
 }
 
-/** sets content for an Barcode object
+/** sets content for a Barcode object
  // Parameters:
  //      objectElem - Element corresponded to the address object
  //      text - plain text string of the address data
- // Note: text formating is applied on line-by-line basis using object's <LineFonts> list
+ // Note: text formatting is applied on line-by-line basis using object's <LineFonts> list
 
  @private
  @param {Element} objectElem
@@ -633,19 +640,19 @@ Label.prototype._setQRCodeObjectText = function (objectElem, text) {
  */
 Label.prototype._setBarcodeObjectText = function (objectElem, text) {
   let nodeName = this.isDCDLabel() ? 'Data' : 'Text'
-  let nodeElem = dymo.xml.getElement(objectElem, nodeName)
+  let nodeElem = xml.getElement(objectElem, nodeName)
 
   if (nodeElem)
-    dymo.xml.setElementText(nodeElem, text)
+    xml.setElementText(nodeElem, text)
 
   return this
 }
 
-/** sets content for an Barcode object
+/** sets content for a Barcode object
  // Parameters:
  //      objectElem - Element corresponded to the address object
  //      text - plain text string of the address data
- // Note: text formating is applied on line-by-line basis using object's <LineFonts> list
+ // Note: text formatting is applied on line-by-line basis using object's <LineFonts> list
 
  @private
  @param {Element} objectElem
@@ -654,27 +661,27 @@ Label.prototype._setBarcodeObjectText = function (objectElem, text) {
  */
 Label.prototype._setImageObjectText = function (objectElem, text) {
   if (!this.isDCDLabel()) {
-    let imageElem = dymo.xml.getElement(objectElem, 'Image')
+    let imageElem = xml.getElement(objectElem, 'Image')
     if (imageElem)
-      dymo.xml.setElementText(imageElem, text)
+      xml.setElementText(imageElem, text)
     else {
       // if there is no <Image> tag then there should be <ImageLocation>
       // so replace <ImageLocation> with <Image>
-      let imageLocationElem = dymo.xml.getElement(objectElem, 'ImageLocation')
+      let imageLocationElem = xml.getElement(objectElem, 'ImageLocation')
       if (!imageLocationElem)
         throw new Error(
           'setObjectText(): <ImageLocation> is expected but not found: ' +
-          dymo.xml.serialize(imageElem))
+          xml.serialize(imageElem))
 
       // create <Image> elem
       imageElem = imageLocationElem.ownerDocument.createElement('Image')
-      dymo.xml.setElementText(imageElem, text)
+      xml.setElementText(imageElem, text)
       objectElem.replaceChild(imageElem, imageLocationElem)
     }
   } else {
-    let nodeElem = dymo.xml.getElement(objectElem, 'Data')
+    let nodeElem = xml.getElement(objectElem, 'Data')
     if (nodeElem)
-      dymo.xml.setElementText(nodeElem, text)
+      xml.setElementText(nodeElem, text)
   }
 
   return this
@@ -684,7 +691,7 @@ Label.prototype._setImageObjectText = function (objectElem, text) {
  // Parameters:
  //      objectElem - Element corresponded to the address object
  //      text - plain text string of the address data
- // Note: text formating is applied on line-by-line basis using object's <LineFonts> list
+ // Note: text formatting is applied on line-by-line basis using object's <LineFonts> list
 
  @private
  @param {Element} objectElem
@@ -693,14 +700,14 @@ Label.prototype._setImageObjectText = function (objectElem, text) {
  */
 Label.prototype._setDateTimeCounterObjectText = function (objectElem, text) {
   if (!this.isDCDLabel()) {
-    dymo.xml.setElementText(dymo.xml.getElement(objectElem, 'PreText'), text)
+    xml.setElementText(xml.getElement(objectElem, 'PreText'), text)
   } else {
-    let FormattedText = dymo.xml.getElement(objectElem, 'FormattedText')
-    let LineTextSpans = dymo.xml.getElements(FormattedText, 'LineTextSpan')
+    let FormattedText = xml.getElement(objectElem, 'FormattedText')
+    let LineTextSpans = xml.getElements(FormattedText, 'LineTextSpan')
     if (LineTextSpans) {
-      let Spans = dymo.xml.getElements(LineTextSpans[0], 'TextSpan')
-      let textElem = dymo.xml.getElement(Spans[0], 'Text')
-      dymo.xml.setElementText(textElem, text)
+      let Spans = xml.getElements(LineTextSpans[0], 'TextSpan')
+      let textElem = xml.getElement(Spans[0], 'Text')
+      xml.setElementText(textElem, text)
     }
   }
 
@@ -710,10 +717,6 @@ Label.prototype._setDateTimeCounterObjectText = function (objectElem, text) {
  @inheritDoc
  */
 Label.prototype.setObjectText = function (objectName, text) {
-  //alert("setObjectText:");
-  //alert(objectName);
-  //alert(text);
-  //alert("123\n456");
 
   let objectElem = this._getObjectByNameElement(objectName)
   let objectType = objectElem.tagName
@@ -725,33 +728,6 @@ Label.prototype.setObjectText = function (objectName, text) {
 
     case 'TextObject':
       this._setAddressObjectText(objectElem, text)
-      //get <StyledText>
-      /*
-      let styledTextElem = dymo.xml.getElement(objectElem, "StyledText");
-      let firstElem = dymo.xml.getElement(styledTextElem, "Element");
-      if (firstElem)
-      {
-          // remove all other children
-          dymo.xml.removeAllChildren(styledTextElem);
-
-          // replace string with supplied text
-          dymo.xml.setElementText(dymo.xml.getElement(firstElem, "String"), text);
-
-          //readd first elem with updated string
-          styledTextElem.appendChild(firstElem);
-      }
-      else
-      {
-          // the StyledText is empty - simple add <Element> with default font info
-          let defaultElem = '<Element><String>' + text + '</String>\
-              <Attributes>\
-                  <Font Family="Arial" Size="12" Bold="False" Italic="False" Underline="False" Strikeout="False" />\
-                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />\
-              </Attributes></Element>';
-
-          let d = dymo.xml.parse(defaultElem);
-          styledTextElem.appendChild(d.documentElement.cloneNode(true));
-      }*/
       break
 
     case 'QRCodeObject':
@@ -769,7 +745,7 @@ Label.prototype.setObjectText = function (objectName, text) {
     case 'CircularTextObject':
       this.isDCDLabel()
         ? this._setAddressObjectText(objectElem, text)
-        : dymo.xml.setElementText(dymo.xml.getElement(objectElem, 'Text'),
+        : xml.setElementText(xml.getElement(objectElem, 'Text'),
           text)
       break
 
@@ -793,15 +769,15 @@ Label.prototype.setLabelLength = function (newLength) {
   let lengthMode = (newLength == 0) ? 'Auto' : 'Fixed'
   let lengthValue = (newLength == 0) ? 7200 : newLength
 
-  dymo.xml.setElementText(dymo.xml.getElement(labelElm, 'LengthMode'),
+  xml.setElementText(xml.getElement(labelElm, 'LengthMode'),
     lengthMode)
-  dymo.xml.setElementText(dymo.xml.getElement(labelElm, 'LabelLength'),
+  xml.setElementText(xml.getElement(labelElm, 'LabelLength'),
     lengthValue)
 
-  let rootCellElm = dymo.xml.getElement(labelElm, 'RootCell')
-  dymo.xml.setElementText(dymo.xml.getElement(rootCellElm, 'Length'),
+  let rootCellElm = xml.getElement(labelElm, 'RootCell')
+  xml.setElementText(xml.getElement(rootCellElm, 'Length'),
     lengthValue)
-  dymo.xml.setElementText(dymo.xml.getElement(rootCellElm, 'LengthMode'),
+  xml.setElementText(xml.getElement(rootCellElm, 'LengthMode'),
     lengthMode)
 
   return this
@@ -813,3 +789,5 @@ Label.prototype.setLabelLength = function (newLength) {
 Label.prototype.toString = function () {
   return this.getLabelXml()
 }
+
+export default Label;

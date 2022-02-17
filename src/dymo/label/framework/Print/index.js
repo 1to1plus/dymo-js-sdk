@@ -61,6 +61,7 @@ PrintJob.prototype.getStatus = function (replyCallback) {
     this.getStatusForNetworkPrinter(replyCallback)
 }
 
+// noinspection JSCheckFunctionSignatures
 /**
  Gets a status of the print job
  @private
@@ -74,8 +75,8 @@ PrintJob.prototype.getStatusForNetworkPrinter = function (replyCallback) {
 
   // try to get data
   let printerUri = this._printerInfo.printerUri
-  let jsonp2 = new goog.net.Jsonp(
-    goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback')
+  // noinspection JSCheckFunctionSignatures
+  let jsonp2 = new goog.net.Jsonp(goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback')
   jsonp2.send(
     { 'jobId': jobId, 'printerName': this._printerInfo.originalPrinterName },
     function (pjs) {

@@ -1,3 +1,11 @@
+import getPrinters from '../getPrinters'
+import {isNil} from 'lodash';
+import { getSetting } from '../../../../settings'
+import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter'
+import _createFramework from '../createFramework'
+import PrintJob from '../PrintJob'
+import getPrintersAsync from '../getPrintersAsync'
+
 /** Prints a label and return a job id
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
  // printParamsXml - printing parameters, like number of copies, print quality, etc. See PrintParams.xsd
@@ -11,10 +19,10 @@
  @param {string} labelSetXml
  LabelSet to print. LabelSet is used to print multiple labels with same layout but different data, e.g. multiple addresses.
  Use LabelSetBuilder to create a LabelSet or construct xml manualy according to LabelSet.xsd
- @return {dymo.label.framework.PrintJob} print job
+ @return {PrintJob} print job
  @export
  */
-dymo.label.framework.printLabel2 = function (
+const printLabel2 = function (
   printerName, printParamsXml, labelXml, labelSetXml) {
   printParamsXml = printParamsXml || ''
   labelSetXml = labelSetXml || ''
@@ -27,15 +35,15 @@ dymo.label.framework.printLabel2 = function (
   if (typeof (labelXml) != 'string')
     labelXml = labelXml.toString()
 
-  var printers = dymo.label.framework.getPrinters()
-  var printerInfo = printers[printerName]
+  let printers = getPrinters()
+  let printerInfo = printers[printerName]
 
-  if (goog.isDefAndNotNull(printerInfo)) {
-    if (ASSUME_MOBILE || printerInfo.isNetworkPrinter())
+  if (!isNil(printerInfo)) {
+    if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter())
       return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
         labelSetXml)
     else
-      return new dymo.label.framework.PrintJob(
+      return new PrintJob(
         printerInfo,
         _createFramework().
           printLabel2(printerName, printParamsXml, labelXml, labelSetXml))
@@ -56,10 +64,10 @@ dymo.label.framework.printLabel2 = function (
  @param {string} labelSetXml
  LabelSet to print. LabelSet is used to print multiple labels with same layout but different data, e.g. multiple addresses.
  Use LabelSetBuilder to create a LabelSet or construct xml manualy according to LabelSet.xsd
- @return {goog.Promise} dymo.label.framework.PrintJob print job
+ @return {goog.Promise} PrintJob print job
  @export
  */
-dymo.label.framework.printLabel2Async = function (
+export const printLabel2Async = function (
   printerName, printParamsXml, labelXml, labelSetXml) {
 
   printParamsXml = printParamsXml || ''
@@ -74,19 +82,19 @@ dymo.label.framework.printLabel2Async = function (
   if (typeof (labelXml) != 'string')
     labelXml = labelXml.toString()
 
-  return dymo.label.framework.getPrintersAsync().then(function (printers) {
+  return getPrintersAsync().then(function (printers) {
 
-    var printerInfo = printers[printerName]
+    let printerInfo = printers[printerName]
 
-    if (goog.isDefAndNotNull(printerInfo)) {
-      if (ASSUME_MOBILE || printerInfo.isNetworkPrinter()) {
+    if (!isNil(printerInfo)) {
+      if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter()) {
         return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
           labelSetXml)
       } else {
         return _createFramework().
           printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml).
           then(function (result) {
-            return new dymo.label.framework.PrintJob(printerInfo, result)
+            return new PrintJob(printerInfo, result)
           })
       }
     } else
@@ -94,3 +102,5 @@ dymo.label.framework.printLabel2Async = function (
         'printLabel2Async(): unknown printer \'' + printerName + '\'')
   })
 }
+
+export default printLabel2;

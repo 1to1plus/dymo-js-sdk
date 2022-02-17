@@ -2,7 +2,7 @@
 
 // returns all printers supported by the DYMO Label Framework
 // printers are returned in array-like object that is an associative-array with printer name as a key as well
-// each printer object has following properties:
+// each printer object has the following properties:
 // printerType - either "LabelWriterPrinter" or "TapePrinter"
 // name - printer's name (print queue name on Mac)
 // modelName - printer model/driver name
@@ -14,6 +14,8 @@
 import { getSetting } from '../../../../settings'
 import createPrintersCollection from '../createPrintersCollection'
 import _createFramework from '../createFramework'
+import {getPrinters as onOffGetPrinters} from '../OneOffFunctions';
+import addNetworkPrintersToCollection from '../addNetworkPrintersToCollection'
 
 /**
  @export
@@ -29,7 +31,7 @@ const getPrinters = function()
     try
     {
       let printersXml = _createFramework().getPrinters();
-      result = getPrinters(printersXml);
+      result = onOffGetPrinters(printersXml);
     }
     catch(e) {}
   }

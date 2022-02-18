@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { getSetting, buildApiUrl, setSetting } from '../settings'
-import { isNumeric } from '../goog/string'
+import { isNumber } from 'lodash'
 
 export const GET = 'get'
 export const POST = 'post'
@@ -107,7 +107,7 @@ export const _findWebService = async (
     let found = false
 
     ports.forEach(port => {
-      if (!found && isNumeric(port)) {
+      if (!found && isNumber(port)) {
         found = true
         setCachedService(port, host)
         successFindWebService()

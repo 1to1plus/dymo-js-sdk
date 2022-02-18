@@ -1,4 +1,3 @@
-import ml from './xml';
 import xml from './xml';
 import uuid from './uuid';
 import PrinterInfo from './label/framework/PrinterInfo';
@@ -31,10 +30,7 @@ import {
 } from './label/framework/SpecialPrinterLogic';
 
 const dymo = {
-  xml: {
-    ml,
-    ...xml,
-  },
+  xml,
   uuid,
   label: {
     framework: {

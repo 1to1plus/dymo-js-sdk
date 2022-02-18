@@ -48,7 +48,17 @@
       "plugin:jest/recommended",
       "prettier"
     ],
-    "rules": {},
+    "rules": {
+      "no-underscore-dangle": "off",
+      "func-names": "off",
+      "no-console": "off",
+      "no-plusplus": "off",
+      "import/prefer-default-export": "off",
+      "no-param-reassign": "off",
+      "import/no-cycle": "off",
+      "no-throw-literal": "off",
+      "no-bitwise": "off"
+    },
     "env": {
       "jest/globals": true,
       "node": true,

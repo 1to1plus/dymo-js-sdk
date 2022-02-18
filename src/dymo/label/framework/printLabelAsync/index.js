@@ -1,6 +1,6 @@
-import { getSetting } from '../../../../settings'
-import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter'
-import { isNil } from 'lodash'
+import { isNil } from 'lodash';
+import { getSetting } from '../../../../settings';
+import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter';
 
 /** Prints a label
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -17,36 +17,32 @@ import { isNil } from 'lodash'
  @export
  */
 
-export const printLabelAsync = function (
-  printerName, printParamsXml, labelXml, labelSetXml) {
-  printParamsXml = printParamsXml || ''
-  labelSetXml = labelSetXml || ''
-  if (typeof (labelSetXml) != 'string')
-    labelSetXml = labelSetXml.toString()
+export const printLabelAsync = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  printParamsXml = printParamsXml || '';
+  labelSetXml = labelSetXml || '';
+  if (typeof labelSetXml !== 'string') labelSetXml = labelSetXml.toString();
 
-  if (typeof (labelXml) == 'undefined')
-    throw new Error(
-      'printLabelAsync(): labelXml parameter should be specified')
+  if (typeof labelXml === 'undefined')
+    throw new Error('printLabelAsync(): labelXml parameter should be specified');
 
-  if (typeof (labelXml) != 'string')
-    labelXml = labelXml.toString()
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
   return getPrintersAsync().then(function (printers) {
-    var printerInfo = printers[printerName]
+    const printerInfo = printers[printerName];
 
     if (!isNil(printerInfo)) {
       if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter()) {
-        return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
-          labelSetXml)
-      } else {
-        return _createFramework().
-          printLabelAsync(printerInfo['name'], printParamsXml, labelXml,
-            labelSetXml)
+        return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
       }
-    } else
-      throw new Error(
-        'printLabelAsync(): unknown printer \'' + printerName + '\'')
-  })
-}
+      return _createFramework().printLabelAsync(
+        printerInfo.name,
+        printParamsXml,
+        labelXml,
+        labelSetXml,
+      );
+    }
+    throw new Error(`printLabelAsync(): unknown printer '${printerName}'`);
+  });
+};
 
-export default printLabelAsync
+export default printLabelAsync;

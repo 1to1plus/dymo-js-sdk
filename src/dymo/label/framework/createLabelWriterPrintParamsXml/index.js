@@ -14,34 +14,27 @@ import xml from '../../../xml';
  @return {string}
  @export
  */
-const createLabelWriterPrintParamsXml = function(params)
-{
-  if (!params)
-    return "";
+const createLabelWriterPrintParamsXml = function (params) {
+  if (!params) return '';
 
-  let doc = xml.parse("<LabelWriterPrintParams/>");
-  let root = doc.documentElement;
+  const doc = xml.parse('<LabelWriterPrintParams/>');
+  const root = doc.documentElement;
 
-  if (params.copies)
-    xml.appendElement(root, "Copies", params.copies.toString());
+  if (params.copies) xml.appendElement(root, 'Copies', params.copies.toString());
 
-  if (params.jobTitle)
-    xml.appendElement(root, "JobTitle", params.jobTitle);
+  if (params.jobTitle) xml.appendElement(root, 'JobTitle', params.jobTitle);
 
-  if (params.flowDirection)
-    xml.appendElement(root, "FlowDirection", params.flowDirection);
+  if (params.flowDirection) xml.appendElement(root, 'FlowDirection', params.flowDirection);
 
-  if (params.printQuality)
-    xml.appendElement(root, "PrintQuality", params.printQuality);
+  if (params.printQuality) xml.appendElement(root, 'PrintQuality', params.printQuality);
 
-  if (params.twinTurboRoll)
-    xml.appendElement(root, "TwinTurboRoll", params.twinTurboRoll);
+  if (params.twinTurboRoll) xml.appendElement(root, 'TwinTurboRoll', params.twinTurboRoll);
 
-  //let result = Xml.serialize(doc);
-  //alert(result);
-  //return result;
+  // let result = Xml.serialize(doc);
+  // alert(result);
+  // return result;
 
   return xml.serialize(doc);
-}
+};
 
 export default createLabelWriterPrintParamsXml;

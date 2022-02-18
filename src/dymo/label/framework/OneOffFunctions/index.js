@@ -1,43 +1,38 @@
 // noinspection DuplicatedCode,UnnecessaryLocalVariableJS,JSUnusedLocalSymbols,JSValidateJSDoc
 
+import { isNil } from 'lodash';
 import xml from '../../../xml';
-import _createFramework from '../createFramework'
-import { addPrinterToCollection, getSetting } from '../../../../settings'
-import LabelWriterPrinterInfo from '../LabelWriterPrinterInfo'
-import Label from '../Label'
-import printLabel2, { printLabel2Async } from '../PrintLabel2'
-import { isNil } from 'lodash'
-import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter'
-import {default as DymoFrameworkGetPrinters} from '../getPrinters';
-import createPrintersCollection from '../createPrintersCollection'
-import TapePrinterInfo from '../TapePrinterInfo'
-import DZPrinterInfo from '../DZPrinterInfo'
-import getPrintersAsync from '../getPrintersAsync'
+import _createFramework from '../createFramework';
+import { addPrinterToCollection, getSetting } from '../../../../settings';
+import LabelWriterPrinterInfo from '../LabelWriterPrinterInfo';
+import Label from '../Label';
+import printLabel2, { printLabel2Async } from '../PrintLabel2';
+import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter';
+import { default as DymoFrameworkGetPrinters } from '../getPrinters';
+import createPrintersCollection from '../createPrintersCollection';
+import TapePrinterInfo from '../TapePrinterInfo';
+import DZPrinterInfo from '../DZPrinterInfo';
+import getPrintersAsync from '../getPrintersAsync';
 
 /** filters printers list by specified printer type
  @private
  @param {string} printerType
  @return {Array.<PrinterInfo>}
  */
-function getPrintersByType(printerType)
-{
-  let result = [];
+function getPrintersByType(printerType) {
+  const result = [];
   /** optionalProperty always contains an array or null
    * @type {?Array}
    */
   let printers = DymoFrameworkGetPrinters();
-  printers = printers['byIndex']; // access array safely
-  for (let i = 0; i < printers.length; i++)
-  {
-    let printer = printers[i];
-    if (!!printer.printerType && printer.printerType == printerType)
-      result.push(printer);
+  printers = printers.byIndex; // access array safely
+  for (let i = 0; i < printers.length; i++) {
+    const printer = printers[i];
+    if (!!printer.printerType && printer.printerType == printerType) result.push(printer);
   }
 
   return result;
 }
-
-
 
 /**
  Adds a network printer/proxy to the library.
@@ -57,58 +52,58 @@ function getPrintersByType(printerType)
 
  @return {undefined}
  */
-export const addPrinterUri = function(printerUri, opt_location, opt_successCallback, opt_errorCallback)
-{
+export const addPrinterUri = function (
+  printerUri,
+  opt_location,
+  opt_successCallback,
+  opt_errorCallback,
+) {
   // check location
   let location = opt_location || '';
-  if (!goog.isString(location))
-    location = location.toString();
+  if (!goog.isString(location)) location = location.toString();
 
-  let successCallback = function(printersXml)
-  {
-    let printerInfo = new NetworkPrinterInfo(printerUri, location, printersXml);
+  const successCallback = function (printersXml) {
+    const printerInfo = new NetworkPrinterInfo(printerUri, location, printersXml);
     _networkPrinters[printerUri] = printerInfo;
 
-    if (opt_successCallback)
-      opt_successCallback(printerUri);
-  }
+    if (opt_successCallback) opt_successCallback(printerUri);
+  };
 
   let errorCallback = null;
   if (opt_errorCallback)
-    errorCallback = function() {opt_errorCallback(printerUri);};
+    errorCallback = function () {
+      opt_errorCallback(printerUri);
+    };
 
-  let getPrintersUri = goog.uri.utils.appendPath(printerUri, 'getPrinters');
+  const getPrintersUri = goog.uri.utils.appendPath(printerUri, 'getPrinters');
 
   // noinspection JSCheckFunctionSignatures
-  let jsonp = new goog.net.Jsonp(getPrintersUri, 'callback');
+  const jsonp = new goog.net.Jsonp(getPrintersUri, 'callback');
   jsonp.send(null, successCallback, errorCallback);
-}
+};
 
 /**
  @export
  @param {string} printerUri
  @return {undefined}
  */
-export const removePrinterUri = function(printerUri)
-{
+export const removePrinterUri = function (printerUri) {
   delete _networkPrinters[printerUri];
-  //for (let i = _networkPrinters.length - 1; i >= 0; --i)
+  // for (let i = _networkPrinters.length - 1; i >= 0; --i)
   //    if (_networkPrinters[i].printerUri == printerUri)
   //        _networkPrinters.remove(i);
-}
+};
 
 /**
  @export
  @return {undefined}
  */
-export const removeAllPrinterUri = function()
-{
+export const removeAllPrinterUri = function () {
   const _networkPrinters = {};
-  //for (let i = _networkPrinters.length - 1; i >= 0; --i)
+  // for (let i = _networkPrinters.length - 1; i >= 0; --i)
   //    if (_networkPrinters[i].printerUri == printerUri)
   //        _networkPrinters.remove(i);
-}
-
+};
 
 /**
  parses printers xml and returns appropriate PrinterInfo
@@ -116,149 +111,159 @@ export const removeAllPrinterUri = function()
  @return {Array.<PrinterInfo>}
  */
 export const getPrinters = (printersXml) => {
-  //TODO: update to use functions from Xml namespace
-  //let getXmlText = function(elem) { return elem.firstChild.data; };
-  //let getChildText = function(elem, child) { return getXmlText(elem.getElementsByTagName(child)[0]); };
-  let getChildText = function(elem, child) { return xml.getElementText(xml.getElement(elem, child)); };
+  // TODO: update to use functions from Xml namespace
+  // let getXmlText = function(elem) { return elem.firstChild.data; };
+  // let getChildText = function(elem, child) { return getXmlText(elem.getElementsByTagName(child)[0]); };
+  const getChildText = function (elem, child) {
+    return xml.getElementText(xml.getElement(elem, child));
+  };
 
-  let xmldoc = xml.parse(printersXml);
-  let result = createPrintersCollection();
-  let i, name, modelName, isConnected, isLocal, isTwinTurbo, isAutoCutSupported;
+  const xmldoc = xml.parse(printersXml);
+  const result = createPrintersCollection();
+  let i;
+  let name;
+  let modelName;
+  let isConnected;
+  let isLocal;
+  let isTwinTurbo;
+  let isAutoCutSupported;
 
-  //TODO: update to use XPath
-  //let printers = xmldoc.getElementsByTagName("Printers")[0];
-  let printers = xml.getElement(xmldoc, "Printers");
-  //let labelWriterPrinters = printers.getElementsByTagName("LabelWriterPrinter");
-  let labelWriterPrinters = xml.getElements(printers, "LabelWriterPrinter");
-  for (i = 0; i < labelWriterPrinters.length; i++)
-  {
-    //let labelWriterPrinter = {};
-    //labelWriterPrinter.printerType = "LabelWriterPrinter";
-    name = getChildText(labelWriterPrinters[i], "Name");
-    modelName = getChildText(labelWriterPrinters[i], "ModelName");
-    isConnected = getChildText(labelWriterPrinters[i], "IsConnected") == "True";
-    isLocal = getChildText(labelWriterPrinters[i], "IsLocal") == "True";
-    isTwinTurbo = getChildText(labelWriterPrinters[i], "IsTwinTurbo") == "True";
+  // TODO: update to use XPath
+  // let printers = xmldoc.getElementsByTagName("Printers")[0];
+  const printers = xml.getElement(xmldoc, 'Printers');
+  // let labelWriterPrinters = printers.getElementsByTagName("LabelWriterPrinter");
+  const labelWriterPrinters = xml.getElements(printers, 'LabelWriterPrinter');
+  for (i = 0; i < labelWriterPrinters.length; i++) {
+    // let labelWriterPrinter = {};
+    // labelWriterPrinter.printerType = "LabelWriterPrinter";
+    name = getChildText(labelWriterPrinters[i], 'Name');
+    modelName = getChildText(labelWriterPrinters[i], 'ModelName');
+    isConnected = getChildText(labelWriterPrinters[i], 'IsConnected') == 'True';
+    isLocal = getChildText(labelWriterPrinters[i], 'IsLocal') == 'True';
+    isTwinTurbo = getChildText(labelWriterPrinters[i], 'IsTwinTurbo') == 'True';
 
-    let labelWriterPrinterInfo = new LabelWriterPrinterInfo(name, modelName, isConnected, isLocal, isTwinTurbo);
+    const labelWriterPrinterInfo = new LabelWriterPrinterInfo(
+      name,
+      modelName,
+      isConnected,
+      isLocal,
+      isTwinTurbo,
+    );
     addPrinterToCollection(labelWriterPrinterInfo, result);
   }
 
-  //let tapePrinters = printers.getElementsByTagName("TapePrinter");
-  let tapePrinters = xml.getElements(printers, "TapePrinter");
-  for (i = 0; i < tapePrinters.length; i++)
-  {
-    //let tapePrinter = {};
-    //tapePrinter.printerType = "TapePrinter";
-    name = getChildText(tapePrinters[i], "Name");
-    modelName = getChildText(tapePrinters[i], "ModelName");
-    isConnected = getChildText(tapePrinters[i], "IsConnected") == "True";
-    isLocal = getChildText(tapePrinters[i], "IsLocal") == "True";
-    isAutoCutSupported = getChildText(tapePrinters[i], "IsAutoCutSupported") == "True";
+  // let tapePrinters = printers.getElementsByTagName("TapePrinter");
+  const tapePrinters = xml.getElements(printers, 'TapePrinter');
+  for (i = 0; i < tapePrinters.length; i++) {
+    // let tapePrinter = {};
+    // tapePrinter.printerType = "TapePrinter";
+    name = getChildText(tapePrinters[i], 'Name');
+    modelName = getChildText(tapePrinters[i], 'ModelName');
+    isConnected = getChildText(tapePrinters[i], 'IsConnected') == 'True';
+    isLocal = getChildText(tapePrinters[i], 'IsLocal') == 'True';
+    isAutoCutSupported = getChildText(tapePrinters[i], 'IsAutoCutSupported') == 'True';
 
-    let tapePrinterInfo = new TapePrinterInfo(name, modelName, isConnected, isLocal, isAutoCutSupported);
+    const tapePrinterInfo = new TapePrinterInfo(
+      name,
+      modelName,
+      isConnected,
+      isLocal,
+      isAutoCutSupported,
+    );
     addPrinterToCollection(tapePrinterInfo, result);
   }
 
-  //let dzPrinters = printers.getElementsByTagName("DZPrinter");
-  let dzPrinters = xml.getElements(printers, "DZPrinter");
-  for (i = 0; i < dzPrinters.length; i++)
-  {
-    name = getChildText(dzPrinters[i], "Name");
-    modelName = getChildText(dzPrinters[i], "ModelName");
-    isConnected = getChildText(dzPrinters[i], "IsConnected") == "True";
-    isLocal = getChildText(dzPrinters[i], "IsLocal") == "True";
-    isAutoCutSupported = getChildText(dzPrinters[i], "IsAutoCutSupported") == "True";
+  // let dzPrinters = printers.getElementsByTagName("DZPrinter");
+  const dzPrinters = xml.getElements(printers, 'DZPrinter');
+  for (i = 0; i < dzPrinters.length; i++) {
+    name = getChildText(dzPrinters[i], 'Name');
+    modelName = getChildText(dzPrinters[i], 'ModelName');
+    isConnected = getChildText(dzPrinters[i], 'IsConnected') == 'True';
+    isLocal = getChildText(dzPrinters[i], 'IsLocal') == 'True';
+    isAutoCutSupported = getChildText(dzPrinters[i], 'IsAutoCutSupported') == 'True';
 
-    let dzPrinterInfo = new DZPrinterInfo(name, modelName, isConnected, isLocal, isAutoCutSupported);
+    const dzPrinterInfo = new DZPrinterInfo(
+      name,
+      modelName,
+      isConnected,
+      isLocal,
+      isAutoCutSupported,
+    );
     addPrinterToCollection(dzPrinterInfo, result);
   }
   return result;
-}
-
-
+};
 
 /** filters printers list by specified printer type
  @private
  @param {string} printerType
  @return {Array.<PrinterInfo>}
  */
-function getPrintersByTypeAsync(printerType)
-{
-  return getPrintersAsync().then(function(printers)
-  {
-    let result = [];
-    printers = printers['byIndex']; // access array safely
-    for (let i = 0; i < printers.length; i++)
-    {
-      let printer = printers[i];
-      if (!!printer.printerType && printer.printerType == printerType)
-        result.push(printer);
+function getPrintersByTypeAsync(printerType) {
+  return getPrintersAsync().then(function (printers) {
+    const result = [];
+    printers = printers.byIndex; // access array safely
+    for (let i = 0; i < printers.length; i++) {
+      const printer = printers[i];
+      if (!!printer.printerType && printer.printerType == printerType) result.push(printer);
     }
     return result;
   });
 }
 
-
 /** filters printers list, gets LabelWriter printers only
  @return {Array.<LabelWriterPrinterInfo>}
  @export
  */
-export const getLabelWriterPrinters = () =>
-{
+export const getLabelWriterPrinters = () => {
   // noinspection JSValidateTypes
-  return getPrintersByType("LabelWriterPrinter");
-}
+  return getPrintersByType('LabelWriterPrinter');
+};
 
 /** filters printers list, gets tape printers only
  @return {Array.<TapePrinterInfo>}
  @export
  */
-export const getTapePrinters = () =>
-{
+export const getTapePrinters = () => {
   // noinspection JSValidateTypes
-  return getPrintersByType("TapePrinter");
-}
+  return getPrintersByType('TapePrinter');
+};
 
 /** filters printers list, gets DZ printers only
  @return {Array.<DZPrinterInfo>}
  @export
  */
-export const getDZPrinters =  () => {
+export const getDZPrinters = () => {
   // noinspection JSValidateTypes
-  return getPrintersByType("DZPrinter");
-}
+  return getPrintersByType('DZPrinter');
+};
 
 /** filters printers list, gets LabelWriter printers only
  @return {Array.<LabelWriterPrinterInfo>}
  @export
  */
-export const getLabelWriterPrintersAsync = () =>
-{
+export const getLabelWriterPrintersAsync = () => {
   // noinspection JSValidateTypes
-  return getPrintersByTypeAsync("LabelWriterPrinter");
-}
+  return getPrintersByTypeAsync('LabelWriterPrinter');
+};
 
 /** filters printers list, gets tape printers only
  @return {Array.<TapePrinterInfo>}
  @export
  */
-export const getTapePrintersAsync = () =>
-{
+export const getTapePrintersAsync = () => {
   // noinspection JSValidateTypes
-  return getPrintersByTypeAsync("TapePrinter");
-}
+  return getPrintersByTypeAsync('TapePrinter');
+};
 
 /** filters printers list, gets DZ printers only
  @return {Array.<DZPrinterInfo>}
  @export
  */
-export const getDZPrintersAsync =  () =>
-{
+export const getDZPrintersAsync = () => {
   // noinspection JSValidateTypes
-  return getPrintersByTypeAsync("DZPrinter");
-}
-
+  return getPrintersByTypeAsync('DZPrinter');
+};
 
 /** loads label content from a file or URL
  There are some considerations should be taken into account before using this function.
@@ -276,23 +281,22 @@ export const getDZPrintersAsync =  () =>
  return {ILabel}
  @export
  */
-export const openLabelFile = (fileName) =>
-{
+export const openLabelFile = (fileName) => {
   return new Label(_createFramework().openLabelFile(fileName));
-}
+};
 
 /**
  @param {string} fileName
  return {ILabel}
  @export
  */
-export const openLabelFileAsync = (fileName) =>
-{
-  return _createFramework().openLabelFileAsync(fileName).then(function(labelXml)
-  {
-    return new Label(labelXml);
-  });
-}
+export const openLabelFileAsync = (fileName) => {
+  return _createFramework()
+    .openLabelFileAsync(fileName)
+    .then(function (labelXml) {
+      return new Label(labelXml);
+    });
+};
 
 /** loads label content from xml stream/string
  labelXml - label definition as xml string
@@ -303,19 +307,16 @@ export const openLabelFileAsync = (fileName) =>
  return {ILabel}
  @export
  */
-export const openLabelXml = (labelXml) =>
-{
-  //alert('openLabelXml: ' + labelXml);
-  //goog.debug.Logger.getLogger('dymo.label.framework').info('openLabelXml(): length ' + labelXml.length);
+export const openLabelXml = (labelXml) => {
+  // alert('openLabelXml: ' + labelXml);
+  // goog.debug.Logger.getLogger('dymo.label.framework').info('openLabelXml(): length ' + labelXml.length);
 
-  let logger = new goog.debug.Logger('dymo.label.framework');
+  const logger = new goog.debug.Logger('dymo.label.framework');
   logger.setLevel(goog.debug.Logger.Level.INFO);
   logger.info(labelXml);
 
   return new Label(labelXml);
-}
-
-
+};
 
 /** Prints a label
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -332,34 +333,27 @@ export const openLabelXml = (labelXml) =>
  @export
  */
 export const printLabel = (printerName, printParamsXml, labelXml, labelSetXml) => {
-  printParamsXml = printParamsXml || "";
-  labelSetXml = labelSetXml || "";
-  if (typeof(labelSetXml) != "string")
-    labelSetXml = labelSetXml.toString();
+  printParamsXml = printParamsXml || '';
+  labelSetXml = labelSetXml || '';
+  if (typeof labelSetXml !== 'string') labelSetXml = labelSetXml.toString();
 
-  if (typeof(labelXml) == "undefined")
-    throw new Error("printLabel(): labelXml parameter should be specified");
+  if (typeof labelXml === 'undefined')
+    throw new Error('printLabel(): labelXml parameter should be specified');
 
-  if (typeof(labelXml) != "string")
-    labelXml = labelXml.toString();
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
-  let printers = DymoFrameworkGetPrinters();
-  let printerInfo = printers[printerName];
+  const printers = DymoFrameworkGetPrinters();
+  const printerInfo = printers[printerName];
 
-  if (!isNil(printerInfo))
-  {
+  if (!isNil(printerInfo)) {
     // noinspection JSUnresolvedFunction
     if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter())
       printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
-    else
-      _createFramework().printLabel(printerInfo["name"], printParamsXml, labelXml, labelSetXml);
+    else _createFramework().printLabel(printerInfo.name, printParamsXml, labelXml, labelSetXml);
   }
 
-  throw new Error("printLabel(): unknown printer '" + printerName + "'");
-}
-
-
-
+  throw new Error(`printLabel(): unknown printer '${printerName}'`);
+};
 
 /** Prints a label and runs status checking in a loop
 
@@ -377,19 +371,23 @@ export const printLabel = (printerName, printParamsXml, labelXml, labelSetXml) =
  @return {PrintJob}
  @export
  */
-export const printLabelAndPollStatus = (printerName, printParamsXml, labelXml, labelSetXml, statusCallback, pollInterval) =>
-{
-  let printJob = printLabel2(printerName, printParamsXml, labelXml, labelSetXml);
+export const printLabelAndPollStatus = (
+  printerName,
+  printParamsXml,
+  labelXml,
+  labelSetXml,
+  statusCallback,
+  pollInterval,
+) => {
+  const printJob = printLabel2(printerName, printParamsXml, labelXml, labelSetXml);
 
-  let statusChecker  = function(pjs) {
+  const statusChecker = function (pjs) {
     // noinspection JSCheckFunctionSignatures
-    let callbackResult = statusCallback(printJob, pjs);
-    if (!callbackResult)
-      return;
+    const callbackResult = statusCallback(printJob, pjs);
+    if (!callbackResult) return;
 
     // schedule more status checking
-    let delay = new goog.async.Delay(function()
-    {
+    const delay = new goog.async.Delay(function () {
       printJob.getStatus(statusChecker);
       delay.dispose();
     }, pollInterval);
@@ -417,18 +415,23 @@ export const printLabelAndPollStatus = (printerName, printParamsXml, labelXml, l
  @return {goog.Promise} PrintJob print job
  @export
  */
-export const printLabelAndPollStatusAsync = (printerName, printParamsXml, labelXml, labelSetXml, statusCallback, pollInterval) =>
-{
-  return printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml).then(function(printJob){
-
-    const statusChecker  = function(pjs) {
-      let callbackResult = statusCallback(printJob, pjs);
-      if (!callbackResult)
-        return;
+export const printLabelAndPollStatusAsync = (
+  printerName,
+  printParamsXml,
+  labelXml,
+  labelSetXml,
+  statusCallback,
+  pollInterval,
+) => {
+  return printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml).then(function (
+    printJob,
+  ) {
+    const statusChecker = function (pjs) {
+      const callbackResult = statusCallback(printJob, pjs);
+      if (!callbackResult) return;
 
       // schedule more status checking
-      let delay = new goog.async.Delay(function()
-      {
+      const delay = new goog.async.Delay(function () {
         printJob.getStatus(statusChecker);
         delay.dispose();
       }, pollInterval);
@@ -440,8 +443,6 @@ export const printLabelAndPollStatusAsync = (printerName, printParamsXml, labelX
     return printJob;
   });
 };
-
-
 
 /** Creates a label bitmap image can be used for label previewing
  Params:
@@ -458,16 +459,14 @@ export const printLabelAndPollStatusAsync = (printerName, printParamsXml, labelX
  @return {string}
  @export
  */
-export const renderLabel = (labelXml, renderParamsXml, printerName) =>
-{
-  if (typeof(labelXml) == "undefined")
-    throw new Error("renderLabel(): labelXml parameter should be specified");
+export const renderLabel = (labelXml, renderParamsXml, printerName) => {
+  if (typeof labelXml === 'undefined')
+    throw new Error('renderLabel(): labelXml parameter should be specified');
 
-  if (typeof(labelXml) != "string")
-    labelXml = labelXml.toString();
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
-  renderParamsXml = renderParamsXml || "";
-  printerName = printerName || "";
+  renderParamsXml = renderParamsXml || '';
+  printerName = printerName || '';
 
   return _createFramework().renderLabel(labelXml, renderParamsXml, printerName);
 };
@@ -487,22 +486,18 @@ export const renderLabel = (labelXml, renderParamsXml, printerName) =>
  @return {string}
  @export
  */
-export const renderLabelAsync = (labelXml, renderParamsXml, printerName) =>
-{
-
-  if (typeof(labelXml) == "undefined"){
-    throw new Error("renderLabelAsync(): labelXml parameter should be specified");
+export const renderLabelAsync = (labelXml, renderParamsXml, printerName) => {
+  if (typeof labelXml === 'undefined') {
+    throw new Error('renderLabelAsync(): labelXml parameter should be specified');
   }
 
-  if (typeof(labelXml) != "string")
-    labelXml = labelXml.toString();
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
-  renderParamsXml = renderParamsXml || "";
-  printerName = printerName || "";
+  renderParamsXml = renderParamsXml || '';
+  printerName = printerName || '';
 
   return _createFramework().renderLabelAsync(labelXml, renderParamsXml, printerName);
 };
-
 
 /** Utility function to create a render label request object
  @param {string} requestId
@@ -513,14 +508,14 @@ export const renderLabelAsync = (labelXml, renderParamsXml, printerName) =>
  @return {Object}
  */
 export const createRenderLabelRequest = (requestId, statusId, statusMessage, imageData) => {
-  let result = {};
-  result['requestId'] = requestId;
-  result['imageData'] = imageData;
-  result['statusId'] = statusId;
-  result['statusMessage'] = statusMessage;
+  const result = {};
+  result.requestId = requestId;
+  result.imageData = imageData;
+  result.statusId = statusId;
+  result.statusMessage = statusMessage;
 
   return result;
-}
+};
 
 /** Creates a xml stream suitable to pass to printLabel() function as printParamsXml parameter
  // Created printing parameters are for printing on Tape printers
@@ -537,13 +532,11 @@ export const createRenderLabelRequest = (requestId, statusId, statusMessage, ima
  @export
 
  */
-export const createTapePrintParamsXml = (params) =>
-{
-  if (!params)
-    return "";
+export const createTapePrintParamsXml = (params) => {
+  if (!params) return '';
 
-  let doc = xml.parse("<TapePrintParams/>");
-  let root = doc.documentElement;
+  const doc = xml.parse('<TapePrintParams/>');
+  const root = doc.documentElement;
 
   const {
     copies = false,
@@ -553,25 +546,25 @@ export const createTapePrintParamsXml = (params) =>
     cutMode = false,
   } = params || {};
 
-  if (copies){
-    xml.appendElement(root, "Copies", copies.toString());
+  if (copies) {
+    xml.appendElement(root, 'Copies', copies.toString());
   }
 
-  if (jobTitle){
-    xml.appendElement(root, "JobTitle", jobTitle);
+  if (jobTitle) {
+    xml.appendElement(root, 'JobTitle', jobTitle);
   }
 
-  if (flowDirection){
-    xml.appendElement(root, "FlowDirection", flowDirection);
+  if (flowDirection) {
+    xml.appendElement(root, 'FlowDirection', flowDirection);
   }
 
-  if (alignment){
-    xml.appendElement(root, "Alignment", alignment);
+  if (alignment) {
+    xml.appendElement(root, 'Alignment', alignment);
   }
 
-  if (cutMode){
-    xml.appendElement(root, "CutMode", cutMode);
+  if (cutMode) {
+    xml.appendElement(root, 'CutMode', cutMode);
   }
 
   return xml.serialize(doc);
-}
+};

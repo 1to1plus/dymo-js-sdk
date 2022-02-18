@@ -1,34 +1,34 @@
-import ml from './xml'
-import uuid from './uuid'
-import PrinterInfo from './label/framework/PrinterInfo'
-import currentFramework from './label/framework/currentFramework'
-import AddressBarcodePosition from './label/framework/AddressBarcodePosition'
-import TapeCutMode from './label/framework/TapeCutMode'
-import TapePrinterInfo from './label/framework/TapePrinterInfo'
-import PrintJob from './label/framework/PrintJob'
-import Label from './label/framework/Label'
-import FlowDirection from './label/framework/FlowDirection'
-import PrintJobStatusInfo from './label/framework/PrintJobStatusInfo'
-import LabelWriterPrintQuality from './label/framework/LabelWriterPrintQuality'
-import LabelWriterPrinterInfo from './label/framework/LabelWriterPrinterInfo'
-import ILabelSetRecord from './label/framework/ILabelSetRecord'
-import ILabel from './label/framework/ILabel'
-import LabelSetBuilder from './label/framework/LabelSetBuilder'
-import NetworkPrinter from './label/framework/NetworkPrinter'
-import DZPrinterInfo from './label/framework/DZPrinterInfo'
-import LabelSetRecord from './label/framework/LabelSetRecord'
-import TapeAlignment from './label/framework/TapeAlignment'
-import TwinTurboRoll from './label/framework/TwinTurboRoll'
-import CheckEnvironmentResult from './label/framework/CheckEnvironmentResult'
-import createLabelWriterPrintParamsXml from './label/framework/createLabelWriterPrintParamsXml'
-import NetworkPrinterName from './label/framework/NetworkPrinterName'
+import ml from './xml';
+import xml from './xml';
+import uuid from './uuid';
+import PrinterInfo from './label/framework/PrinterInfo';
+import currentFramework from './label/framework/currentFramework';
+import AddressBarcodePosition from './label/framework/AddressBarcodePosition';
+import TapeCutMode from './label/framework/TapeCutMode';
+import TapePrinterInfo from './label/framework/TapePrinterInfo';
+import PrintJob from './label/framework/PrintJob';
+import Label from './label/framework/Label';
+import FlowDirection from './label/framework/FlowDirection';
+import PrintJobStatusInfo from './label/framework/PrintJobStatusInfo';
+import LabelWriterPrintQuality from './label/framework/LabelWriterPrintQuality';
+import LabelWriterPrinterInfo from './label/framework/LabelWriterPrinterInfo';
+import ILabelSetRecord from './label/framework/ILabelSetRecord';
+import ILabel from './label/framework/ILabel';
+import LabelSetBuilder from './label/framework/LabelSetBuilder';
+import NetworkPrinter from './label/framework/NetworkPrinter';
+import DZPrinterInfo from './label/framework/DZPrinterInfo';
+import LabelSetRecord from './label/framework/LabelSetRecord';
+import TapeAlignment from './label/framework/TapeAlignment';
+import TwinTurboRoll from './label/framework/TwinTurboRoll';
+import CheckEnvironmentResult from './label/framework/CheckEnvironmentResult';
+import createLabelWriterPrintParamsXml from './label/framework/createLabelWriterPrintParamsXml';
+import NetworkPrinterName from './label/framework/NetworkPrinterName';
 import {
   is550Printer,
   is550PrinterAsync,
   getConsumableInfoIn550Printer,
   getConsumableInfoIn550PrinterAsync,
-} from './label/framework/SpecialPrinterLogic'
-import xml from './xml'
+} from './label/framework/SpecialPrinterLogic';
 
 const dymo = {
   xml: {
@@ -69,6 +69,6 @@ const dymo = {
       getConsumableInfoIn550PrinterAsync,
     },
   },
-}
+};
 
-export default dymo
+export default dymo;

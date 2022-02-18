@@ -1,4 +1,4 @@
-import xml from '../../../xml'
+import xml from '../../../xml';
 
 /** Creates an xml stream suatable to pass to printLabel() function as printParamsXml parameter
  // Created printing parameters are for printing on DZ printers
@@ -15,28 +15,22 @@ import xml from '../../../xml'
  @export
  */
 const createDZPrintParamsXml = function (params) {
-  if (!params)
-    return "";
+  if (!params) return '';
 
-  let doc = xml.parse("<DZPrintParams/>");
-  let root = doc.documentElement;
+  const doc = xml.parse('<DZPrintParams/>');
+  const root = doc.documentElement;
 
-  if (params.copies)
-    xml.appendElement(root, "Copies", params.copies.toString());
+  if (params.copies) xml.appendElement(root, 'Copies', params.copies.toString());
 
-  if (params.jobTitle)
-    xml.appendElement(root, "JobTitle", params.jobTitle);
+  if (params.jobTitle) xml.appendElement(root, 'JobTitle', params.jobTitle);
 
-  if (params.flowDirection)
-    xml.appendElement(root, "FlowDirection", params.flowDirection);
+  if (params.flowDirection) xml.appendElement(root, 'FlowDirection', params.flowDirection);
 
-  if (params.alignment)
-    xml.appendElement(root, "Alignment", params.alignment);
+  if (params.alignment) xml.appendElement(root, 'Alignment', params.alignment);
 
-  if (params.cutMode)
-    xml.appendElement(root, "CutMode", params.cutMode);
+  if (params.cutMode) xml.appendElement(root, 'CutMode', params.cutMode);
 
   return xml.serialize(doc);
-}
+};
 
 export default createDZPrintParamsXml;

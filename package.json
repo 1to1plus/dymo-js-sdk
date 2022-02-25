@@ -4,6 +4,7 @@
   "homepage": "https://github.com/dymosoftware/dymo-connect-framework",
   "description": "Node project for js dymo node communications",
   "private": false,
+  "license": "None",
   "author": {
     "name": "Zach Robichaud",
     "company": "https://onetooneplus.com/",
@@ -16,7 +17,8 @@
     "serve": "node dist/index.js",
     "start": "nodemon src/demo/index.js --exec babel-node",
     "dev": "yarn start",
-    "test": "jest --runInBand --verbose",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
@@ -80,6 +82,7 @@
     "@babel/core": "^7.17.4",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "axios-mock-adapter": "^1.20.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -89,6 +92,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "jest-cli": "^27.5.1",
+    "jest-mock-axios": "^4.5.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
@@ -99,6 +103,7 @@
     "fast-xml-parser": "^4.0.3",
     "google-closure-library": "^20220104.0.0",
     "jsonxml": "^1.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "xml2json": "^0.12.0"
   }
 }

@@ -1,17 +1,18 @@
 // noinspection ExceptionCaughtLocallyJS
 
-import axios from 'axios';
-import { isNumber } from 'lodash';
-import goog from 'google-closure-library';
-import dymo from '../dymo';
-import { getSetting, buildApiUrl, setSetting } from '../settings';
+import axios from 'axios'
+import { isNumber } from 'lodash'
+import goog from 'google-closure-library'
+import { getSetting, buildApiUrl, setSetting } from '../settings'
+import printLabel2 from '../dymo/label/framework/PrintLabel2'
+import { xmlToJson } from '../dymo/xml'
 
-export const GET = 'get';
-export const POST = 'post';
-export const PUT = 'put';
-export const DELETE = 'delete';
+export const GET = 'get'
+export const POST = 'post'
+export const PUT = 'put'
+export const DELETE = 'delete'
 
-const apiService = ({
+const apiService = async ({
   url,
   method = GET,
   params = undefined,
@@ -21,7 +22,7 @@ const apiService = ({
 }) => {
   const writer = (output, force = debug) => {
     if (force) {
-      console.log('apiService.writer', output);
+      console.log('apiService.writer', output)
     }
   };
 
@@ -33,9 +34,17 @@ const apiService = ({
       headers,
       rejectUnauthorized: false,
       timeout,
-    };
+    }
 
-    return axios(config);
+    const { data = undefined, ...others } = await axios(config)
+
+    // if data is a string and starts with < it's probably xml
+    if (data && (typeof data == 'string') && data.charAt(0) == '<') {
+      const xmlResponse = xmlToJson(data, {})
+      return JSON.parse(xmlResponse)
+    }
+
+    return data
   } catch (e) {
     writer(e);
 
@@ -100,7 +109,7 @@ export const _findWebService = async (host, successFindWebService, errorFindWebS
   // So 'thenCatch' is called in case of success, and 'then' handler is called in case of failure (no ports found).
   try {
     const ports = await Promise.all(ajaxPromises).catch(() => false);
-    errorFindWebService();
+    errorFindWebService && errorFindWebService()
 
     let found = false;
 
@@ -113,26 +122,28 @@ export const _findWebService = async (host, successFindWebService, errorFindWebS
     });
 
     if (!found) {
-      throw 'Could not find dymo port';
+      throw 'Could not find dymo port'
     }
   } catch (e) {
-    errorFindWebService(e);
+    errorFindWebService && errorFindWebService(e)
   }
 };
 
 // Aliases that used to do basically the same thing.
-export const asyncFindWebService = _findWebService;
-export const syncCheckWebService = _findWebService;
+export const asyncFindWebService = (onSuccess, onError) => _findWebService(
+  undefined, onSuccess, onError)
+export const syncCheckWebService = (onSuccess, onError) => _findWebService(
+  undefined, onSuccess, onError)
 
 export const invokeWsCommandAsync = (method, command, params) => {
-  const url = buildApiUrl(command);
+  const url = buildApiUrl(command)
 
   return apiService({
     url,
     method,
     params,
-  });
-};
+  })
+}
 
 export const printLabelAndPollStatus = (
   printerName,
@@ -142,12 +153,12 @@ export const printLabelAndPollStatus = (
   statusCallback,
   pollInterval,
 ) => {
-  const printJob = dymo.label.framework.printLabel2(
+  const printJob = printLabel2(
     printerName,
     printParamsXml,
     labelXml,
     labelSetXml,
-  );
+  )
 
   const statusChecker = function (pjs) {
     const callbackResult = statusCallback(printJob, pjs);
@@ -158,6 +169,7 @@ export const printLabelAndPollStatus = (
       printJob.getStatus(statusChecker);
       delay.dispose();
     }, pollInterval);
+
     delay.start();
   };
 

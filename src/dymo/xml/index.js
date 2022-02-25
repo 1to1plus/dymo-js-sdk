@@ -1,4 +1,5 @@
 import goog from 'google-closure-library'
+import { toJson } from 'xml2json'
 
 const xml = {}
 
@@ -110,5 +111,8 @@ xml.removeAllChildren = function (node) {
   while (node.firstChild)
     node.removeChild(node.firstChild)
 }
+
+export const xmlToJson = toJson
+xml.xmlToJson = xmlToJson
 
 export default xml

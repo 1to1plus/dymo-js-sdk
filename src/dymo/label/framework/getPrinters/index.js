@@ -9,25 +9,27 @@
 // isTwinTurbo - is printer "LabelWriter Twin Turbo" (has two rolls). Note: the property only defined if printerType is "LabelWriterPrinter"
 // isAutoCutSupported - is Auto-Cut feature supported by the printer. Note: the property only defined if printerType is "TapePrinter"
 
-import { getSetting } from '../../../../settings';
-import createPrintersCollection from '../createPrintersCollection';
-import _createFramework from '../createFramework';
-import { getPrinters as onOffGetPrinters } from '../OneOffFunctions';
-import addNetworkPrintersToCollection from '../addNetworkPrintersToCollection';
+import { getSetting } from '../../../../settings'
+import createPrintersCollection from '../createPrintersCollection'
+import { createFramework } from '../createFramework'
+import { getPrinters as onOffGetPrinters } from '../OneOffFunctions'
+import addNetworkPrintersToCollection from '../addNetworkPrintersToCollection'
 
 /**
  @export
  @return {Array.<dymo.label.framework.PrinterInfo>}
  */
-const getPrinters = function () {
-  let result = createPrintersCollection();
+const getPrinters = async () => {
+  let result = createPrintersCollection()
 
   if (!getSetting('ASSUME_MOBILE')) {
     // get 'local' printers, if we can
     try {
-      const printersXml = _createFramework().getPrinters();
-      result = onOffGetPrinters(printersXml);
-    } catch (e) {}
+      const printersXml = await createFramework().getPrinters()
+      result = onOffGetPrinters(printersXml)
+    } catch (e) {
+      console.log({ e })
+    }
   }
 
   addNetworkPrintersToCollection(result);

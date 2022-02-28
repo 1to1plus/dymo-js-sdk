@@ -9,8 +9,10 @@ import { xmlToJson } from '../dymo/xml'
 
 export const GET = 'get'
 export const POST = 'post'
+export const PATCH = 'patch'
 export const PUT = 'put'
 export const DELETE = 'delete'
+export const OPTIONS = 'options'
 
 const apiService = async ({
   url,
@@ -86,6 +88,7 @@ export const ajaxSync = (url, data, method, defaultData = undefined) => {
 };
 
 export const getAjaxPromise = (currentPort, host) => {
+  const stop = 'here';
   const url = buildApiUrl(getSetting('WS_CMD_STATUS'), {
     currentPort,
     host,
@@ -98,9 +101,11 @@ export const getAjaxPromise = (currentPort, host) => {
 };
 
 export const _findWebService = async (host, successFindWebService, errorFindWebService) => {
+  const startPort = getSetting('WS_START_PORT');
+  const endPort = getSetting('WS_END_PORT');
   const ajaxPromises = [];
 
-  for (let i = getSetting('WS_START_PORT'); i <= getSetting('WS_END_PORT'); ++i) {
+  for (let i = startPort; i <= endPort; ++i) {
     ajaxPromises.push(getAjaxPromise(i, host));
   }
 

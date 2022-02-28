@@ -157,9 +157,13 @@ export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
  * @param {string} key - path in the settings object
  * @param {any} [defaultValue = undefined]
  * @param {boolean} [strict]
- * @return {Exclude<{WS_CMD_GET_PRINTERS: string, WS_CMD_LOAD_IMAGE: string, WS_CMD_OPEN_LABEL: string, WS_CMD_STATUS: string, WS_CMD_RENDER_LABEL: string, WS_CMD_GET_JOB_STATUS: string, WS_CMD_PRINT_LABEL: string, WS_CMD_IS_550_PRINTER: string, WS_CMD_PRINT_LABEL2: string, WS_CMD_GET_CONSUMABLE_INFO_IN_550_PRINTER: string}[keyof {WS_CMD_GET_PRINTERS: string, WS_CMD_LOAD_IMAGE: string, WS_CMD_OPEN_LABEL: string, WS_CMD_STATUS: string, WS_CMD_RENDER_LABEL: string, WS_CMD_GET_JOB_STATUS: string, WS_CMD_PRINT_LABEL: string, WS_CMD_IS_550_PRINTER: string, WS_CMD_PRINT_LABEL2: string, WS_CMD_GET_CONSUMABLE_INFO_IN_550_PRINTER: string}], undefined>|Exclude<{DETECT_DOUBLE_ESCAPING: boolean, TRUSTED_SITE: boolean, var: string, FORCE_NON_DOM_HTML_UNESCAPING: boolean}[keyof {DETECT_DOUBLE_ESCAPING: boolean, TRUSTED_SITE: boolean, var: string, FORCE_NON_DOM_HTML_UNESCAPING: boolean}], undefined>}
+ * @return {{DETECT_DOUBLE_ESCAPING: boolean, WS_PROTOCOL: string, WS_START_PORT: number, WS_END_PORT: number, Port: number, Host: string, ASSUME_MOBILE: boolean, DEBUG: boolean, WS_COMMAND_TIMEOUT: number, WS_SVC_HOST: string, TRUSTED_SITE: boolean, dymo: {label: {framework: {trace: boolean, currentFramework: number}}}, WS_SVC_PATH: string, BASE_URL: undefined, FORCE_NON_DOM_HTML_UNESCAPING: boolean, WS_CHECK_TIMEOUT: number, WS_SVC_HOST_LEGACY: string}}
  */
-export const getSetting = (key, defaultValue = undefined, strict = false) => {
+export const getSetting = (key = undefined, defaultValue = undefined, strict = false) => {
+  if(!key){
+    return settings;
+  }
+
   const foundSetting = get(settings, key, undefined);
 
   if (foundSetting === undefined && !strict) {

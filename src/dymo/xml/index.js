@@ -1,14 +1,26 @@
 import goog from 'google-closure-library'
-import { toJson } from 'xml2json'
+import { parseString } from 'xml2js'
 
 const xml = {}
+
+
+export const xmlToJson = (xmlData) => {
+  let newJson;
+
+  parseString(xmlData, function (err, results) {
+    // parsing to json
+    newJson = JSON.stringify(results);
+  }, undefined);
+
+  return newJson;
+}
 
 /**
  @param {string} text
  @return {Document}
  */
 xml.parse = function (text) {
-  return goog.dom.xml.loadXml(text)
+  return xmlToJson(text)
 }
 
 /**
@@ -21,17 +33,16 @@ xml.serialize = function (node) {
     return node.replaceAll(/<Color (.+)\/>/g, '<Color $1> </Color>')
   }
 
-  return fix(goog.dom.xml.serialize(node))
 
-  /*
-  if (typeof XMLSerializer != "undefined")
-      return (new XMLSerializer()).serializeToString(node);
-  else if (node.xml)
-      return node.xml;
-  else
-      throw new Error("XML.serialize is not supported or can't serialize " + node);
-*/
+
+  const serializer = new XMLSerializer();
+  const xmlStr = serializer.serializeToString(node);
+  console.log({xmlStr});
+
+  return fix(xmlStr)
 }
+
+export const xmlSerialize = xml.serialize;
 
 // appends a new element to DOM tree as child of parent and set it content to text
 // parent - parent Element
@@ -112,7 +123,6 @@ xml.removeAllChildren = function (node) {
     node.removeChild(node.firstChild)
 }
 
-export const xmlToJson = toJson
 xml.xmlToJson = xmlToJson
 
 export default xml

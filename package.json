@@ -104,6 +104,7 @@
     "google-closure-library": "^20220104.0.0",
     "jsonxml": "^1.0.0",
     "lodash": "^4.17.21",
-    "xml2json": "^0.12.0"
+    "w3c-xmlserializer": "^3.0.0",
+    "xml2js": "^0.4.23"
   }
 }

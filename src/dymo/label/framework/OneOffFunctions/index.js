@@ -13,6 +13,8 @@ import createPrintersCollection from '../createPrintersCollection'
 import TapePrinterInfo from '../TapePrinterInfo'
 import DZPrinterInfo from '../DZPrinterInfo'
 import getPrintersAsync from '../getPrintersAsync'
+import goog from 'google-closure-library';
+import { traceMsg } from '../../../../helpers/debug'
 
 /** filters printers list by specified printer type
  @private
@@ -310,12 +312,7 @@ export const openLabelFileAsync = (fileName) => {
  @export
  */
 export const openLabelXml = (labelXml) => {
-  // alert('openLabelXml: ' + labelXml);
-  // goog.debug.Logger.getLogger('dymo.label.framework').info('openLabelXml(): length ' + labelXml.length);
-
-  const logger = new goog.debug.Logger('dymo.label.framework')
-  logger.setLevel(goog.debug.Logger.Level.INFO)
-  logger.info(labelXml)
+  traceMsg(labelXml, {key: 'dymo.label.framework'})
 
   return new Label(labelXml)
 }

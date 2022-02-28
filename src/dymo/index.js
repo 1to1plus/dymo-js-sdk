@@ -1,7 +1,6 @@
 import xml from './xml';
 import uuid from './uuid';
 import PrinterInfo from './label/framework/PrinterInfo';
-import currentFramework from './label/framework/currentFramework';
 import AddressBarcodePosition from './label/framework/AddressBarcodePosition';
 import TapeCutMode from './label/framework/TapeCutMode';
 import TapePrinterInfo from './label/framework/TapePrinterInfo';
@@ -37,7 +36,6 @@ const dymo = {
       trace: false,
 
       PrinterInfo,
-      currentFramework,
       AddressBarcodePosition,
       TapeCutMode,
       TapePrinterInfo,

@@ -4,23 +4,45 @@ import mockAxios from 'jest-mock-axios'
 import MockAdapter from 'axios-mock-adapter'
 import { createFaultyFramework, createFramework } from '../index'
 import axios from 'axios'
-
-afterEach(() => {
-  // cleaning up the mess left behind the previous test
-  mockAxios.reset()
-})
+import { getSetting } from '../../../../../settings'
+import apiService, { GET, OPTIONS, PATCH } from '../../../../../helpers/ajax'
+import { sampleSingleLabel } from './data/singleLabel'
+import { openLabelXml } from '../../OneOffFunctions'
+import LabelSetBuilder from '../../LabelSetBuilder'
+import {forEach} from 'lodash';
+import xml, { xmlSerialize } from '../../../../xml'
 
 describe('getPrinters', () => {
-  let mock
+  let mock;
+  let catchFn = jest.fn()
+  let thenFn = jest.fn()
+  const serviceHost = '127.0.0.1';
+  const servicePort = 41951;
+  const serviceUrl = `https://${serviceHost}:${servicePort}`
 
   beforeEach(() => {
     mock = new MockAdapter(axios)
+
+    /**
+     * StatusConnected should only reply one time the rest of the StatusConnected calls should fail
+     */
+    mock
+      .onOptions(`${serviceUrl}/.*`)
+      .timeout()
+      .onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`)
+      .replyOnce(200, 'true')
+      .onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`)
+      .timeout()
+      .onGet(`${serviceUrl}/DYMO/DLS/Printing/GetPrinters`)
+      .reply(200, '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo<\/Name><ModelName>DYMO LabelWriter 450 Turbo<\/ModelName><IsConnected>False<\/IsConnected><IsLocal>True<\/IsLocal><IsTwinTurbo>False<\/IsTwinTurbo><\/LabelWriterPrinter><\/Printers>')
+  })
+
+  afterEach(() => {
+    // cleaning up the mess left behind the previous test
+    mockAxios.reset()
   })
 
   test(`All should fail`, async () => {
-    let catchFn = jest.fn()
-    let thenFn = jest.fn()
-
     try {
       const response = await createFaultyFramework().getPrinters()
     } catch (e) {
@@ -33,35 +55,78 @@ describe('getPrinters', () => {
         'DYMO Label Framework Plugin or WebService are not installed')
   })
 
-  test(`Should be able to call getPrinters`, async () => {
-    let catchFn = jest.fn()
-    let thenFn = jest.fn()
-
-    mock.onGet('/*').
-      reply(200, {
-        testing: 'this is working',
-      }).
-      onGet('https://127.0.0.1:41951/DYMO/DLS/Printing/StatusConnected').
-      reply(200, 'true').
-      onGet('https://127.0.0.1:41951/DYMO/DLS/Printing/GetPrinters').
-      reply(200,
-        '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo<\/Name><ModelName>DYMO LabelWriter 450 Turbo<\/ModelName><IsConnected>False<\/IsConnected><IsLocal>True<\/IsLocal><IsTwinTurbo>False<\/IsTwinTurbo><\/LabelWriterPrinter><\/Printers>')
-
-
+  test(`Should be able to call StatusConnected`, async () => {
     try {
-      // const framework =  await _createFramework();
-      //
-      // expect(framework).toEqual('1');
-
       const createdFramework = await createFramework(undefined, true)
       const response = await createdFramework.getPrinters()
       thenFn(response)
     } catch (e) {
-      console.log(JSON.stringify(e, null, 2))
       catchFn(e.message)
     }
 
     expect(catchFn).not.toBeCalled()
     expect(thenFn).toBeCalled()
+  })
+
+  test(`Get list of printers as json`, async () => {
+    let catchFn = jest.fn()
+    let thenFn = jest.fn()
+
+    try {
+      const createdFramework = await createFramework(undefined, true)
+      const response = await createdFramework.getPrinters()
+      thenFn(response)
+    } catch (e) {
+      catchFn(e.message)
+    }
+
+    expect(catchFn).not.toBeCalled()
+    expect(thenFn).toBeCalled()
+    expect(getSetting('Port')).toEqual(41951) // make sure found the right service port and set the config value
+  })
+
+  test('Should be able to print a label', async () => {
+    const printerToUse = 'DYMO LabelWriter 450 Turbo';
+
+    mock
+      .onPost(`${serviceUrl}/DYMO/DLS/Printing/PrintLabel`)
+      .reply(200, sampleSingleLabel)
+
+    try {
+      const createdFramework = await createFramework(undefined, true)
+
+      const labelTemplate = openLabelXml(sampleSingleLabel)
+      let singleLabelSet = {
+        asset: {
+          label: null,
+          labelSet: null,
+        }
+      }
+
+      const labelSet = new LabelSetBuilder()
+      const record = labelSet.addRecord();
+      record.setText('Line1', 'This is a test label');
+      record.setText('Line2', 'This is another test');
+
+      singleLabelSet.asset.label = labelTemplate;
+      singleLabelSet.asset.labelSet = labelSet;
+
+      console.log(singleLabelSet);
+      console.log(labelSet);
+
+      const firstLabel = labelSet[0];
+
+      const {DesktopLabel} = await createdFramework.printLabel(printerToUse, '', labelTemplate, firstLabel);
+      console.log(xmlSerialize(DesktopLabel));
+      const testing1= 'here';
+      // console.log(DesktopLabel + '');
+      // const createdFramework = await createFramework(undefined, true)
+      // const response = await createdFramework.printLabel(printerToUse, labelXml)
+
+      // thenFn(response)
+    } catch (e) {
+      console.log(e);
+      catchFn(e.message)
+    }
   })
 })

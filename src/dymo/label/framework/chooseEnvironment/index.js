@@ -26,10 +26,10 @@ const chooseEnvironment = function (envCheckResult) {
       return svc.openLabelFile(fileName);
     };
     _framework.printLabel = function (printerName, printParamsXml, labelXml, labelSetXml) {
-      svc.printLabel(printerName, printParamsXml, labelXml, labelSetXml);
+      return svc.printLabel(printerName, printParamsXml, labelXml, labelSetXml);
     };
     _framework.printLabel2 = function (printerName, printParamsXml, labelXml, labelSetXml) {
-      svc.printLabel2(printerName, printParamsXml, labelXml, labelSetXml);
+      return svc.printLabel2(printerName, printParamsXml, labelXml, labelSetXml);
     };
     _framework.renderLabel = function (labelXml, renderParamsXml, printerName) {
       return svc.renderLabel(labelXml, renderParamsXml, printerName);

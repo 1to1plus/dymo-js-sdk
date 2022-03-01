@@ -1,6 +1,6 @@
 {
   "name": "dymo-js-sdk",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "homepage": "https://github.com/1to1plus/dymo-js-sdk",
   "description": "Node project for js dymo node communications",
   "keywords": [

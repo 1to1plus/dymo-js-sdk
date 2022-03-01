@@ -41,9 +41,8 @@
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
-    "publish": "npm publish",
     "push:all": "git push && git push --tags",
-    "release": "npm version patch && yarn push:all && yarn publish"
+    "release": "npm version patch && yarn push:all"
   },
   "babel": {
     "presets": [

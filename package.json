@@ -1,15 +1,36 @@
 {
   "name": "dymo-js-sdk",
   "version": "3.0.3",
-  "homepage": "https://github.com/dymosoftware/dymo-connect-framework",
+  "homepage": "https://github.com/1to1plus/dymo-js-sdk",
   "description": "Node project for js dymo node communications",
+  "keywords": [
+    "dymo",
+    "communications",
+    "api-interaction",
+    "printer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1to1plus/dymo-js-sdk"
+  },
   "private": false,
   "license": "MIT",
-  "author": {
-    "name": "Zach Robichaud",
-    "company": "https://onetooneplus.com/",
-    "email": "zach2825@gmail.com"
-  },
+  "files": [
+    "./src/DlsWebService",
+    "./src/helpers",
+    "./src/dymo",
+    "./src/settings",
+    "./src/LICENSE",
+    "./src/README.md",
+    "./src/package.json"
+  ],
+  "contributors": [
+    {
+      "name": "Zach Robichaud",
+      "company": "https://onetooneplus.com/",
+      "email": "zach2825@gmail.com"
+    }
+  ],
   "scripts": {
     "build": "babel src -d dist --source-maps",
     "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
@@ -20,7 +41,9 @@
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
-    "release": "npm version patch && git push && git push --tags"
+    "publish": "npm publish",
+    "push:all": "git push && git push --tags",
+    "release": "npm version patch && yarn push:all && yarn publish"
   },
   "babel": {
     "presets": [
@@ -35,7 +58,8 @@
     ]
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=10",
+    "yarn": ">=1.22.4"
   },
   "eslintConfig": {
     "plugins": [
@@ -99,9 +123,7 @@
     "axios": "^0.26.0",
     "dot-object": "^2.1.4",
     "dotenv": "^16.0.0",
-    "fast-xml-parser": "^4.0.3",
     "google-closure-library": "^20220104.0.0",
-    "jsonxml": "^1.0.0",
     "lodash": "^4.17.21",
     "qs": "^6.10.3",
     "xml-js": "^1.6.11",

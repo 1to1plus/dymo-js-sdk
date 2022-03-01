@@ -1,32 +1,24 @@
 <template>
   <div id="app">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <!--      | <router-link to="/about">About</router-link>-->
+    <div id="nav-bootstrap">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <router-link aria-current="page" class="navbar-brand" to="/">Dymo sample project</router-link>
+          <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <router-link active aria-current="page" class="nav-link active" to="/">Home</router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
-    <router-view />
+    <div class="mt-5">
+      <router-view />
+    </div>
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>

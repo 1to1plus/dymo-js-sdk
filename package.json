@@ -12,9 +12,6 @@
   },
   "scripts": {
     "build": "babel src -d dist --source-maps",
-    "clean": "rm -rf dist",
-    "debug": "nodemon --exec babel-node --inspect-brk src/index.js ",
-    "serve": "node dist/index.js",
     "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
     "test": "jest",

@@ -21,16 +21,13 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
 import { createFramework } from '../../../../../dymo/label/framework/createFramework'
 import { sampleSingleLabel } from '../../../../../dymo/label/framework/createFramework/__tests__/data/singleLabel'
 import LabelSetBuilder from '../../../../../dymo/label/framework/LabelSetBuilder'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld,
-  },
   data () {
     return {
       labelSet: '',

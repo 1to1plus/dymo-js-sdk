@@ -7,7 +7,11 @@
  @param {string} statusMessage
  */
 const PrintJobStatusInfo = function (
-  printerName, jobId, status, statusMessage) {
+  printerName,
+  jobId,
+  status,
+  statusMessage,
+) {
   this['printerName'] = printerName
   this['jobId'] = jobId
   this['status'] = status
@@ -24,8 +28,9 @@ PrintJobStatusInfo.parse = function (statusStr) {
   let result = {}
   let a = statusStr.split(' ')
 
-  if (a.length >= 1)
+  if (a.length >= 1) {
     result.status = parseInt(a[0], 10)
+  }
 
   result.statusMessage = a.slice(1).join(' ')
 

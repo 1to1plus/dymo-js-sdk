@@ -9,11 +9,17 @@ export const DlsWebService = function () {
     return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
   }
 
-  this.openLabelFile = function (fileName) {
-    return invokeWsCommandAsync(GET, getSetting('WS_CMD_OPEN_LABEL'), { fileName });
-  };
+  this.getJobStatus = function () {
+    return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_JOB_STATUS'))
+  }
 
-  this.printLabel = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  this.openLabelFile = function (fileName) {
+    return invokeWsCommandAsync(GET, getSetting('WS_CMD_OPEN_LABEL'),
+      { fileName })
+  }
+
+  this.printLabel = function (
+    printerName, printParamsXml, labelXml, labelSetXml) {
     const stop = 'here'
     return invokeWsCommandAsync(POST, getSetting('WS_CMD_PRINT_LABEL'), {
       printerName,

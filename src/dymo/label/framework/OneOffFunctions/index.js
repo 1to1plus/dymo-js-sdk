@@ -2,7 +2,6 @@
 
 import { isNil } from 'lodash'
 import xml from '../../../xml'
-import _createFramework from '../createFramework'
 import { addPrinterToCollection, getSetting } from '../../../../settings'
 import LabelWriterPrinterInfo from '../LabelWriterPrinterInfo'
 import Label from '../Label'
@@ -13,8 +12,9 @@ import createPrintersCollection from '../createPrintersCollection'
 import TapePrinterInfo from '../TapePrinterInfo'
 import DZPrinterInfo from '../DZPrinterInfo'
 import getPrintersAsync from '../getPrintersAsync'
-import goog from 'google-closure-library';
 import { traceMsg } from '../../../../helpers/debug'
+import { createFramework } from '../createFramework'
+import { isString, appendUrlPath } from '../../../../helpers/string'
 
 /** filters printers list by specified printer type
  @private
@@ -63,7 +63,7 @@ export const addPrinterUri = function (
 ) {
   // check location
   let location = opt_location || ''
-  if (!goog.isString(location)) location = location.toString()
+  if (!isString(location)) location = location.toString()
 
   const successCallback = function (printersXml) {
     const printerInfo = new NetworkPrinterInfo(printerUri, location,
@@ -79,11 +79,12 @@ export const addPrinterUri = function (
       opt_errorCallback(printerUri)
     }
 
-  const getPrintersUri = goog.uri.utils.appendPath(printerUri, 'getPrinters')
+  const getPrintersUri = appendUrlPath(printerUri, 'getPrinters')
 
   // noinspection JSCheckFunctionSignatures
-  const jsonp = new goog.net.Jsonp(getPrintersUri, 'callback')
-  jsonp.send(null, successCallback, errorCallback)
+  // TODO :: refactor this to remove goog
+  // const jsonp = new goog.net.Jsonp(getPrintersUri, 'callback')
+  // jsonp.send(null, successCallback, errorCallback)
 }
 
 /**
@@ -286,7 +287,7 @@ export const getDZPrintersAsync = () => {
  @export
  */
 export const openLabelFile = (fileName) => {
-  return new Label(_createFramework().openLabelFile(fileName))
+  return new Label(createFramework().openLabelFile(fileName))
 }
 
 /**
@@ -295,7 +296,7 @@ export const openLabelFile = (fileName) => {
  @export
  */
 export const openLabelFileAsync = (fileName) => {
-  return _createFramework().
+  return createFramework().
     openLabelFileAsync(fileName).
     then(function (labelXml) {
       return new Label(labelXml)
@@ -350,7 +351,7 @@ export const printLabel = (
     if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter())
       printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
         labelSetXml)
-    else _createFramework().
+    else createFramework().
       printLabel(printerInfo.name, printParamsXml, labelXml, labelSetXml)
   }
 
@@ -384,17 +385,17 @@ export const printLabelAndPollStatus = (
   const printJob = printLabel2(printerName, printParamsXml, labelXml,
     labelSetXml)
 
-  const statusChecker = function (pjs) {
+  const statusChecker = async function (pjs) {
     // noinspection JSCheckFunctionSignatures
     const callbackResult = statusCallback(printJob, pjs)
     if (!callbackResult) return
 
     // schedule more status checking
-    const delay = new goog.async.Delay(function () {
-      printJob.getStatus(statusChecker)
-      delay.dispose()
-    }, pollInterval)
-    delay.start()
+    await new Promise(resolve => {
+      setTimeout(resolve, pollInterval)
+    })
+
+    printJob.getStatus(statusChecker)
   }
 
   printJob.getStatus(statusChecker)
@@ -430,16 +431,16 @@ export const printLabelAndPollStatusAsync = (
     then(function (
       printJob,
     ) {
-      const statusChecker = function (pjs) {
+      const statusChecker = async function (pjs) {
         const callbackResult = statusCallback(printJob, pjs)
         if (!callbackResult) return
 
         // schedule more status checking
-        const delay = new goog.async.Delay(function () {
-          printJob.getStatus(statusChecker)
-          delay.dispose()
-        }, pollInterval)
-        delay.start()
+        await new Promise(resolve => {
+          setTimeout(resolve, pollInterval)
+        })
+
+        printJob.getStatus(statusChecker)
       }
 
       printJob.getStatus(statusChecker)
@@ -472,7 +473,7 @@ export const renderLabel = (labelXml, renderParamsXml, printerName) => {
   renderParamsXml = renderParamsXml || ''
   printerName = printerName || ''
 
-  return _createFramework().renderLabel(labelXml, renderParamsXml, printerName)
+  return createFramework().renderLabel(labelXml, renderParamsXml, printerName)
 }
 
 /** Creates a label bitmap image can be used for label previewing
@@ -501,7 +502,7 @@ export const renderLabelAsync = (labelXml, renderParamsXml, printerName) => {
   renderParamsXml = renderParamsXml || ''
   printerName = printerName || ''
 
-  return _createFramework().
+  return createFramework().
     renderLabelAsync(labelXml, renderParamsXml, printerName)
 }
 

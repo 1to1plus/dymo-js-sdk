@@ -1,19 +1,20 @@
-import { invokeWsCommandAsync, GET, POST } from '../helpers/ajax';
-import { getSetting } from '../settings';
+import { invokeWsCommandAsync, GET, POST } from '../helpers/ajax'
+import { getSetting } from '../settings'
 
 /**
  * @constructor
  */
 export const DlsWebService = function () {
   this.getPrinters = function () {
-    return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'));
-  };
+    return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
+  }
 
   this.openLabelFile = function (fileName) {
     return invokeWsCommandAsync(GET, getSetting('WS_CMD_OPEN_LABEL'), { fileName });
   };
 
   this.printLabel = function (printerName, printParamsXml, labelXml, labelSetXml) {
+    const stop = 'here'
     return invokeWsCommandAsync(POST, getSetting('WS_CMD_PRINT_LABEL'), {
       printerName,
       printParamsXml,

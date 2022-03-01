@@ -5,12 +5,9 @@ import MockAdapter from 'axios-mock-adapter'
 import { createFaultyFramework, createFramework } from '../index'
 import axios from 'axios'
 import { getSetting } from '../../../../../settings'
-import apiService, { GET, OPTIONS, PATCH } from '../../../../../helpers/ajax'
 import { sampleSingleLabel } from './data/singleLabel'
 import { openLabelXml } from '../../OneOffFunctions'
 import LabelSetBuilder from '../../LabelSetBuilder'
-import {forEach} from 'lodash';
-import xml, { xmlSerialize } from '../../../../xml'
 
 describe('getPrinters', () => {
   let mock;
@@ -26,15 +23,17 @@ describe('getPrinters', () => {
     /**
      * StatusConnected should only reply one time the rest of the StatusConnected calls should fail
      */
-    mock
-      .onOptions(`${serviceUrl}/.*`)
-      .timeout()
-      .onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`)
-      .replyOnce(200, 'true')
-      .onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`)
-      .timeout()
-      .onGet(`${serviceUrl}/DYMO/DLS/Printing/GetPrinters`)
-      .reply(200, '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo<\/Name><ModelName>DYMO LabelWriter 450 Turbo<\/ModelName><IsConnected>False<\/IsConnected><IsLocal>True<\/IsLocal><IsTwinTurbo>False<\/IsTwinTurbo><\/LabelWriterPrinter><\/Printers>')
+    mock.onOptions(`${serviceUrl}/.*`).
+      timeout().
+      onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`).
+      replyOnce(200, 'true').
+      onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`).
+      timeout().
+      onGet(`${serviceUrl}/DYMO/DLS/Printing/GetPrinters`).
+      reply(200,
+        '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo<\/Name><ModelName>DYMO LabelWriter 450 Turbo<\/ModelName><IsConnected>False<\/IsConnected><IsLocal>True<\/IsLocal><IsTwinTurbo>False<\/IsTwinTurbo><\/LabelWriterPrinter><\/Printers>').
+      onPost(`${serviceUrl}/DYMO/DLS/Printing/PrintLabel`).
+      reply(200, sampleSingleLabel)
   })
 
   afterEach(() => {
@@ -88,10 +87,6 @@ describe('getPrinters', () => {
   test('Should be able to print a label', async () => {
     const printerToUse = 'DYMO LabelWriter 450 Turbo';
 
-    mock
-      .onPost(`${serviceUrl}/DYMO/DLS/Printing/PrintLabel`)
-      .reply(200, sampleSingleLabel)
-
     try {
       const createdFramework = await createFramework(undefined, true)
 
@@ -104,21 +99,21 @@ describe('getPrinters', () => {
       }
 
       const labelSet = new LabelSetBuilder()
-      const record = labelSet.addRecord();
-      record.setText('Line1', 'This is a test label');
-      record.setText('Line2', 'This is another test');
+      const record = labelSet.addRecord()
+      record.setText('Line1', 'This is a test label')
+      record.setText('Line2', 'This is another test')
 
-      singleLabelSet.asset.label = labelTemplate;
-      singleLabelSet.asset.labelSet = labelSet;
+      singleLabelSet.asset.label = labelTemplate
+      singleLabelSet.asset.labelSet = labelSet
 
-      console.log(singleLabelSet);
-      console.log(labelSet);
+      console.log(singleLabelSet)
+      console.log(labelSet)
 
-      const firstLabel = labelSet[0];
+      const response = await createdFramework.printLabel(printerToUse, '',
+        sampleSingleLabel, labelSet + '')
+      console.log({ response })
 
-      const {DesktopLabel} = await createdFramework.printLabel(printerToUse, '', labelTemplate, firstLabel);
-      console.log(xmlSerialize(DesktopLabel));
-      const testing1= 'here';
+      // const testing1= 'here';
       // console.log(DesktopLabel + '');
       // const createdFramework = await createFramework(undefined, true)
       // const response = await createdFramework.printLabel(printerToUse, labelXml)

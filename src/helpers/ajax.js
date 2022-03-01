@@ -2,10 +2,10 @@
 
 import axios from 'axios'
 import { isNumber } from 'lodash'
-import goog from 'google-closure-library'
 import { getSetting, buildApiUrl, setSetting } from '../settings'
 import printLabel2 from '../dymo/label/framework/PrintLabel2'
 import { xmlToJson } from '../dymo/xml'
+import qs from 'qs'
 
 export const GET = 'get'
 export const POST = 'post'
@@ -32,7 +32,7 @@ const apiService = async ({
     const config = {
       method,
       url,
-      [method === GET ? 'data' : 'params']: params,
+      [method === GET ? 'params' : 'data']: params,
       headers,
       rejectUnauthorized: false,
       timeout,
@@ -146,7 +146,11 @@ export const invokeWsCommandAsync = (method, command, params) => {
   return apiService({
     url,
     method,
-    params,
+    params: params ? qs.stringify(params) : undefined,
+    withCredentials: false,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+    },
   })
 }
 
@@ -165,18 +169,17 @@ export const printLabelAndPollStatus = (
     labelSetXml,
   )
 
-  const statusChecker = function (pjs) {
-    const callbackResult = statusCallback(printJob, pjs);
-    if (!callbackResult) return;
+  const statusChecker = async function (pjs) {
+    const callbackResult = statusCallback(printJob, pjs)
+    if (!callbackResult) return
 
     // schedule more status checking
-    const delay = new goog.async.Delay(function () {
-      printJob.getStatus(statusChecker);
-      delay.dispose();
-    }, pollInterval);
+    await new Promise(resolve => {
+      setTimeout(resolve, pollInterval)
+    })
 
-    delay.start();
-  };
+    printJob.getStatus(statusChecker)
+  }
 
   printJob.getStatus(statusChecker);
 

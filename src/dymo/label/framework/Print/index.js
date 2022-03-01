@@ -1,7 +1,6 @@
-import goog from 'google-closure-library';
-import PrintJobStatus from '../PrintJobStatus';
-import _createFramework from '../createFramework';
-import PrintJobStatusInfo from '../PrintJobStatusInfo';
+import PrintJobStatus from '../PrintJobStatus'
+import { createFramework } from '../createFramework'
+import PrintJobStatusInfo from '../PrintJobStatusInfo'
 
 /**
  Provides 'print job' abstraction
@@ -49,7 +48,8 @@ PrintJob.prototype.getStatus = function (replyCallback) {
   if (!this._printerInfo.isNetworkPrinter()) {
     let statusInfo;
     try {
-      statusInfo = _createFramework().getJobStatus(this._printerInfo.name, this._jobId);
+      statusInfo = createFramework().
+        getJobStatus(this._printerInfo.name, this._jobId)
     } catch (e) {
       statusInfo = new PrintJobStatusInfo(
         this.getPrinterName(),
@@ -70,38 +70,39 @@ PrintJob.prototype.getStatus = function (replyCallback) {
  @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
  */
 PrintJob.prototype.getStatusForNetworkPrinter = function (replyCallback) {
-  const printerName = this.getPrinterName();
-  const jobId = this._jobId;
+  const printerName = this.getPrinterName()
+  const jobId = this._jobId
 
   // let networkPrinterName = splitNetworkPrinterName(printerName);
 
   // try to get data
-  const { printerUri } = this._printerInfo;
+  const { printerUri } = this._printerInfo
   // noinspection JSCheckFunctionSignatures
-  const jsonp2 = new goog.net.Jsonp(goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback');
-  jsonp2.send(
-    { jobId, printerName: this._printerInfo.originalPrinterName },
-    function (pjs) {
-      const jobStatusInfo = new PrintJobStatusInfo(
-        printerName,
-        jobId,
-        pjs.status,
-        pjs.statusMessage,
-      );
-
-      replyCallback(jobStatusInfo);
-    },
-    function () {
-      const jobStatusInfo = new PrintJobStatusInfo(
-        printerName,
-        jobId,
-        PrintJobStatus.ProcessingError,
-        `Error processing getPrintJobStatus(): Unable to contact "${printerUri}"`,
-      );
-
-      replyCallback(jobStatusInfo);
-    },
-  );
+  //TODO :: factor out goog
+  // const jsonp2 = new goog.net.Jsonp(goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback');
+  // jsonp2.send(
+  //   { jobId, printerName: this._printerInfo.originalPrinterName },
+  //   function (pjs) {
+  //     const jobStatusInfo = new PrintJobStatusInfo(
+  //       printerName,
+  //       jobId,
+  //       pjs.status,
+  //       pjs.statusMessage,
+  //     );
+  //
+  //     replyCallback(jobStatusInfo);
+  //   },
+  //   function () {
+  //     const jobStatusInfo = new PrintJobStatusInfo(
+  //       printerName,
+  //       jobId,
+  //       PrintJobStatus.ProcessingError,
+  //       `Error processing getPrintJobStatus(): Unable to contact "${printerUri}"`,
+  //     );
+  //
+  //     replyCallback(jobStatusInfo);
+  //   },
+  // );
 };
 
 export default PrintJob;

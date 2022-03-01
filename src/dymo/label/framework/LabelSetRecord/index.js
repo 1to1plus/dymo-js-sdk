@@ -1,4 +1,4 @@
-import { TextMarkupTag, TextMarkupClosedTag } from '../../../../settings';
+import { TextMarkupTag, TextMarkupClosedTag } from '../../../../settings'
 
 /** LabelSetRecord class
  Holds data of one label-set records and provides methods to add data to the record

@@ -4,7 +4,7 @@
   "homepage": "https://github.com/dymosoftware/dymo-connect-framework",
   "description": "Node project for js dymo node communications",
   "private": false,
-  "license": "None",
+  "license": "MIT",
   "author": {
     "name": "Zach Robichaud",
     "company": "https://onetooneplus.com/",
@@ -15,10 +15,11 @@
     "clean": "rm -rf dist",
     "debug": "nodemon --exec babel-node --inspect-brk src/index.js ",
     "serve": "node dist/index.js",
-    "start": "nodemon src/demo/index.js --exec babel-node",
+    "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
     "test": "jest",
     "test:watch": "jest --watch",
+    "demo": "node ./src/demo/test-label.js",
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
@@ -97,6 +98,7 @@
     "prettier": "^2.5.1"
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.8.1",
     "axios": "^0.26.0",
     "dot-object": "^2.1.4",
     "dotenv": "^16.0.0",
@@ -104,7 +106,8 @@
     "google-closure-library": "^20220104.0.0",
     "jsonxml": "^1.0.0",
     "lodash": "^4.17.21",
-    "w3c-xmlserializer": "^3.0.0",
+    "qs": "^6.10.3",
+    "xml-js": "^1.6.11",
     "xml2js": "^0.4.23"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "dymo-js-sdk",
+  "name": "@1to1plus/dymo-js-sdk",
   "version": "3.0.2",
   "homepage": "https://github.com/dymosoftware/dymo-connect-framework",
   "description": "Node project for js dymo node communications",

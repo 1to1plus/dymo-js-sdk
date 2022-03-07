@@ -19,14 +19,9 @@ export const initApp = (config = {}, callback) => {
   return new initFramework(callback)
 }
 
-const dymoJsSdk = initApp()
-
-dymoJsSdk.prototype.LabelSetBuilder = _LabelSetBuilder;
-dymoJsSdk.prototype.sampleSingleLabel = sampleLabel;
-dymoJsSdk.createFramework.sampleSingleLabel = createFramework;
-
-export const createFramework = initFramework;
-export const sampleSingleLabel = sampleLabel;
-export const LabelSetBuilder = _LabelSetBuilder;
-
-export default dymoJsSdk
+module.exports = {
+  default: initApp(),
+  createFramework: initFramework,
+  sampleSingleLabel: sampleLabel,
+  LabelSetBuilder: _LabelSetBuilder,
+}

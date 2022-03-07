@@ -5,9 +5,6 @@ var $02FXs$xml2js = require("xml2js");
 var $02FXs$xmldomxmldom = require("@xmldom/xmldom");
 var $02FXs$xmljs = require("xml-js");
 
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
-}
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
@@ -15,13 +12,7 @@ function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
 
-$parcel$defineInteropFlag(module.exports);
-
-$parcel$export(module.exports, "initApp", () => $98024307a5d0726a$export$bec0ec21ab4579a);
-$parcel$export(module.exports, "createFramework", () => $98024307a5d0726a$export$118613715be2faef);
-$parcel$export(module.exports, "sampleSingleLabel", () => $98024307a5d0726a$export$f71ef76cc1435eaa);
-$parcel$export(module.exports, "LabelSetBuilder", () => $98024307a5d0726a$export$3e1928330f93828b);
-$parcel$export(module.exports, "default", () => $98024307a5d0726a$export$2e2bcd8739ae039);
+$parcel$export(module.exports, "initApp", () => $98024307a5d0726a$export$bec0ec21ab4579a, (v) => $98024307a5d0726a$export$bec0ec21ab4579a = v);
 
 const $87a73fe4e23c61da$export$a5a6e0b888b2c992 = {
     DEBUG: false,
@@ -3004,14 +2995,12 @@ const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
     });
     return new $357bab5e353b9a9d$export$118613715be2faef(callback);
 };
-const $98024307a5d0726a$var$dymoJsSdk = $98024307a5d0726a$export$bec0ec21ab4579a();
-$98024307a5d0726a$var$dymoJsSdk.prototype.LabelSetBuilder = $dd6befa10a7b6c73$export$2e2bcd8739ae039;
-$98024307a5d0726a$var$dymoJsSdk.prototype.sampleSingleLabel = $8dade80d0b9d9e5d$export$f71ef76cc1435eaa;
-$98024307a5d0726a$var$dymoJsSdk.createFramework.sampleSingleLabel = $98024307a5d0726a$export$118613715be2faef;
-const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$118613715be2faef;
-const $98024307a5d0726a$export$f71ef76cc1435eaa = $8dade80d0b9d9e5d$export$f71ef76cc1435eaa;
-const $98024307a5d0726a$export$3e1928330f93828b = $dd6befa10a7b6c73$export$2e2bcd8739ae039;
-var $98024307a5d0726a$export$2e2bcd8739ae039 = $98024307a5d0726a$var$dymoJsSdk;
+module.exports = {
+    default: $98024307a5d0726a$export$bec0ec21ab4579a(),
+    createFramework: $357bab5e353b9a9d$export$118613715be2faef,
+    sampleSingleLabel: $8dade80d0b9d9e5d$export$f71ef76cc1435eaa,
+    LabelSetBuilder: $dd6befa10a7b6c73$export$2e2bcd8739ae039
+};
 
 
 //# sourceMappingURL=dymo-js-sdk.js.map

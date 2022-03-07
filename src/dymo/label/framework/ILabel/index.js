@@ -28,7 +28,7 @@ ILabel.prototype.getLabelXml = function () {}
  @param {string} printerName
  @return {string}
  */
-ILabel.prototype.render = function (renderParamsXml, printerName) {}
+ILabel.prototype.render = function (renderParamsXml, printerName) {};
 
 /** Creates the label bitmap image can be used for label previewing. Similar to renderLabel()
  // Parameters:
@@ -45,7 +45,7 @@ ILabel.prototype.render = function (renderParamsXml, printerName) {}
  @param {string} printerName
  @return {string}
  */
-ILabel.prototype.renderAsync = function (renderParamsXml, printerName) {}
+ILabel.prototype.renderAsync = function (renderParamsXml, printerName) {};
 
 /**
  // Prints the label. Similar to printLabel()
@@ -62,7 +62,7 @@ ILabel.prototype.renderAsync = function (renderParamsXml, printerName) {}
  @return {void}
 
  */
-ILabel.prototype.print = function (printerName, printParamsXml, labelSetXml) {}
+ILabel.prototype.print = function (printerName, printParamsXml, labelSetXml) {};
 
 /**
  // Prints the label. Similar to printLabel()
@@ -80,7 +80,7 @@ ILabel.prototype.print = function (printerName, printParamsXml, labelSetXml) {}
 
  */
 ILabel.prototype.printAsync = function (
-  printerName, printParamsXml, labelSetXml) {}
+  printerName, printParamsXml, labelSetXml) {};
 
 /**
  // Prints the label. Similar to printLabel()
@@ -98,7 +98,7 @@ ILabel.prototype.printAsync = function (
 
  */
 ILabel.prototype.print2 = function (
-  printerName, printParamsXml, labelSetXml) {}
+  printerName, printParamsXml, labelSetXml) {};
 
 /**
  // Prints the label. Similar to printLabel()
@@ -116,7 +116,7 @@ ILabel.prototype.print2 = function (
 
  */
 ILabel.prototype.print2Async = function (
-  printerName, printParamsXml, labelSetXml) {}
+  printerName, printParamsXml, labelSetXml) {};
 
 /** Prints a label and runs status checking in a loop
 
@@ -134,7 +134,12 @@ ILabel.prototype.print2Async = function (
  @return {PrintJob} print job
  */
 ILabel.prototype.printAndPollStatus = function (
-  printerName, printParamsXml, labelSetXml, statusCallback, pollInterval) {}
+  printerName,
+  printParamsXml,
+  labelSetXml,
+  statusCallback,
+  pollInterval,
+) {};
 
 /** Prints a label and runs status checking in a loop
 
@@ -152,7 +157,12 @@ ILabel.prototype.printAndPollStatus = function (
  @return {goog.Promise}
  */
 ILabel.prototype.printAndPollStatusAsync = function (
-  printerName, printParamsXml, labelSetXml, statusCallback, pollInterval) {}
+  printerName,
+  printParamsXml,
+  labelSetXml,
+  statusCallback,
+  pollInterval,
+) {};
 
 /**
  returns an array of object names on the label
@@ -191,7 +201,7 @@ ILabel.prototype.getAddressBarcodePosition = function (addressIndex) {}
  @return {ILabel}
  */
 ILabel.prototype.setAddressBarcodePosition = function (
-  addressIndex, barcodePosition) {}
+  addressIndex, barcodePosition) {};
 
 /** Returns text content of an Address object
  // Parameters:
@@ -242,7 +252,7 @@ ILabel.prototype.isValidLabel = function () {}
  @param {string} objectName
  @return {string}
  */
-ILabel.prototype.getObjectText = function (objectName) {}
+ILabel.prototype.getObjectText = function (objectName) {};
 
 /** sets text content for an object. Depends on object's type the content and/or text formatitng are set differently:
  //  - for Address the formatting is applied on line-by-line basis using <LineFonts> list
@@ -261,7 +271,7 @@ ILabel.prototype.getObjectText = function (objectName) {}
  @param {string} text
  @return {ILabel}
  */
-ILabel.prototype.setObjectText = function (objectName, text) {}
+ILabel.prototype.setObjectText = function (objectName, text) {};
 
 /** sets length of the continuous label in units of the label (that is, if label units are twips, the length will be assumed as twips value as well)
  // Parameters:

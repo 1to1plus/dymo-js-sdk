@@ -1,10 +1,10 @@
-import _createFramework from '../createFramework'
+import { createFramework } from '../createFramework'
 
 /**
  @export
  */
 const init = function (callBack) {
-  _createFramework(callBack, true)
+  createFramework(callBack, true)
 }
 
 export default init

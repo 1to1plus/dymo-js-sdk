@@ -1,4 +1,3 @@
-
 export const sampleSingleLabel = `<?xml version="1.0" encoding="utf-8"?>
 <DesktopLabel Version="1">
     <DYMOLabel Version="3">

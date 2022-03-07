@@ -7,13 +7,17 @@ const xml = {}
 export const xmlToJson = (xmlData) => {
   let newJson
 
-  parseString(xmlData, function (err, results) {
-    // parsing to json
-    newJson = JSON.stringify(results)
-  }, undefined);
+  parseString(
+    xmlData,
+    function (err, results) {
+      // parsing to json
+      newJson = JSON.stringify(results)
+    },
+    undefined,
+  )
 
-  return newJson;
-}
+  return newJson
+};
 
 /**
  @param {string} text
@@ -33,9 +37,7 @@ xml.serialize = function (node) {
   function fix (node) {
     try {
       return node.replaceAll(/<Color (.+)\/>/g, '<Color $1> </Color>')
-    } catch (e) {
-
-    }
+    } catch (e) {}
 
     return node
   }
@@ -44,7 +46,7 @@ xml.serialize = function (node) {
   console.log({ test })
 
   return fix(test)
-}
+};
 
 export const xmlSerialize = xml.serialize;
 
@@ -61,20 +63,19 @@ export const xmlSerialize = xml.serialize;
  @param {*=} attributes
  */
 xml.appendElement = function (parentElement, tagName, text, attributes) {
-  let result = parentElement.ownerDocument.createElement(tagName)
+  const result = parentElement.ownerDocument.createElement(tagName)
 
-  if (text)
-    result.appendChild(parentElement.ownerDocument.createTextNode(text))
+  if (text) result.appendChild(
+    parentElement.ownerDocument.createTextNode(text))
 
   if (attributes) {
-    for (let a in attributes)
-      result.setAttribute(a, attributes[a])
+    for (const a in attributes) result.setAttribute(a, attributes[a])
   }
 
   parentElement.appendChild(result)
 
   return result
-}
+};
 
 // returns text content of the element, e.g. for tag <Name>address123</Name>, 'address123' will be returned
 /**
@@ -86,17 +87,17 @@ xml.getElementText = function (elem, defaultValue = '') {
 
   let result = ''
   for (let i = 0; i < elem.childNodes.length; i++)
-    if (elem.childNodes[i].nodeType == 3) //TEXT_NODE
-      result = result + elem.childNodes[i].data
+    if (elem.childNodes[i].nodeType == 3)
+      // TEXT_NODE
+      result += elem.childNodes[i].data
 
   return result
-}
+};
 
 // returns child element of parent with tag name "elemName"
 xml.getElement = function (parent, elemName) {
-  let children = parent.getElementsByTagName(elemName)
-  if (children.length > 0)
-    return children[0]
+  const children = parent.getElementsByTagName(elemName)
+  if (children.length > 0) return children[0]
 
   return undefined
 }
@@ -120,14 +121,13 @@ xml.setElementText = function (element, text) {
 
 // removes all children nodes of the specified node
 xml.removeAllChildren = function (node) {
-  while (node.firstChild)
-    node.removeChild(node.firstChild)
+  while (node.firstChild) node.removeChild(node.firstChild)
 }
 
 xml.xmlToJson = xmlToJson
 
 export const convertJsonToXml = async (json) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     let convert
 
     convert = xml2json(json, { compact: true })

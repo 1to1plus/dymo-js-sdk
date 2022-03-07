@@ -52,13 +52,14 @@ const chooseEnvironment = function (envCheckResult) {
     };
 
     _framework.getJobStatus = function (printerName, jobId) {
-      let status = typeof svc.getJobStatus == 'function' ?
-        PrintJobStatusInfo.parse(
-          svc.getJobStatus(printerName, parseInt(jobId, 10))) :
-        {
-          status: PrintJobStatus.Unknown,
-          statusMessage: 'not implemented',
-        }
+      const status =
+        typeof svc.getJobStatus === 'function'
+          ? PrintJobStatusInfo.parse(
+            svc.getJobStatus(printerName, parseInt(jobId, 10)))
+          : {
+            status: PrintJobStatus.Unknown,
+            statusMessage: 'not implemented',
+          }
 
       return new PrintJobStatusInfo(printerName, jobId, status.status,
         status.statusMessage)

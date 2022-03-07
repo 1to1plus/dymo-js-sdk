@@ -2,19 +2,19 @@
 
 import mockAxios from 'jest-mock-axios'
 import MockAdapter from 'axios-mock-adapter'
-import { createFaultyFramework, createFramework } from '../index'
 import axios from 'axios'
+import { createFaultyFramework, createFramework } from '../index'
 import { getSetting } from '../../../../../settings'
 import { sampleSingleLabel } from './data/singleLabel'
 import { openLabelXml } from '../../OneOffFunctions'
 import LabelSetBuilder from '../../LabelSetBuilder'
 
 describe('getPrinters', () => {
-  let mock;
-  let catchFn = jest.fn()
-  let thenFn = jest.fn()
-  const serviceHost = '127.0.0.1';
-  const servicePort = 41951;
+  let mock
+  const catchFn = jest.fn()
+  const thenFn = jest.fn()
+  const serviceHost = '127.0.0.1'
+  const servicePort = 41951
   const serviceUrl = `https://${serviceHost}:${servicePort}`
 
   beforeEach(() => {
@@ -30,8 +30,10 @@ describe('getPrinters', () => {
       onGet(`${serviceUrl}/DYMO/DLS/Printing/StatusConnected`).
       timeout().
       onGet(`${serviceUrl}/DYMO/DLS/Printing/GetPrinters`).
-      reply(200,
-        '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo<\/Name><ModelName>DYMO LabelWriter 450 Turbo<\/ModelName><IsConnected>False<\/IsConnected><IsLocal>True<\/IsLocal><IsTwinTurbo>False<\/IsTwinTurbo><\/LabelWriterPrinter><\/Printers>').
+      reply(
+        200,
+        '<Printers><LabelWriterPrinter><Name>DYMO LabelWriter 450 Turbo</Name><ModelName>DYMO LabelWriter 450 Turbo</ModelName><IsConnected>False</IsConnected><IsLocal>True</IsLocal><IsTwinTurbo>False</IsTwinTurbo></LabelWriterPrinter></Printers>',
+      ).
       onPost(`${serviceUrl}/DYMO/DLS/Printing/PrintLabel`).
       reply(200, sampleSingleLabel)
   })
@@ -68,8 +70,8 @@ describe('getPrinters', () => {
   })
 
   test(`Get list of printers as json`, async () => {
-    let catchFn = jest.fn()
-    let thenFn = jest.fn()
+    const catchFn = jest.fn()
+    const thenFn = jest.fn()
 
     try {
       const createdFramework = await createFramework(undefined, true)
@@ -82,7 +84,7 @@ describe('getPrinters', () => {
     expect(catchFn).not.toBeCalled()
     expect(thenFn).toBeCalled()
     expect(getSetting('Port')).toEqual(41951) // make sure found the right service port and set the config value
-  })
+  });
 
   test('Should be able to print a label', async () => {
     const printerToUse = 'DYMO LabelWriter 450 Turbo';
@@ -91,11 +93,11 @@ describe('getPrinters', () => {
       const createdFramework = await createFramework(undefined, true)
 
       const labelTemplate = openLabelXml(sampleSingleLabel)
-      let singleLabelSet = {
+      const singleLabelSet = {
         asset: {
           label: null,
           labelSet: null,
-        }
+        },
       }
 
       const labelSet = new LabelSetBuilder()
@@ -109,8 +111,12 @@ describe('getPrinters', () => {
       console.log(singleLabelSet)
       console.log(labelSet)
 
-      const response = await createdFramework.printLabel(printerToUse, '',
-        sampleSingleLabel, labelSet + '')
+      const response = await createdFramework.printLabel(
+        printerToUse,
+        '',
+        sampleSingleLabel,
+        `${labelSet}`,
+      )
       console.log({ response })
 
       // const testing1= 'here';
@@ -120,8 +126,8 @@ describe('getPrinters', () => {
 
       // thenFn(response)
     } catch (e) {
-      console.log(e);
+      console.log(e)
       catchFn(e.message)
     }
-  })
-})
+  });
+});

@@ -1,4 +1,4 @@
-import { get, set } from 'lodash';
+import { get, set } from 'lodash'
 
 export const settings = {
   DEBUG: false,
@@ -160,8 +160,8 @@ export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
  * @return {{DETECT_DOUBLE_ESCAPING: boolean, WS_PROTOCOL: string, WS_START_PORT: number, WS_END_PORT: number, Port: number, Host: string, ASSUME_MOBILE: boolean, DEBUG: boolean, WS_COMMAND_TIMEOUT: number, WS_SVC_HOST: string, TRUSTED_SITE: boolean, dymo: {label: {framework: {trace: boolean, currentFramework: number}}}, WS_SVC_PATH: string, BASE_URL: undefined, FORCE_NON_DOM_HTML_UNESCAPING: boolean, WS_CHECK_TIMEOUT: number, WS_SVC_HOST_LEGACY: string}}
  */
 export const getSetting = (key = undefined, defaultValue = undefined, strict = false) => {
-  if(!key){
-    return settings;
+  if (!key) {
+    return settings
   }
 
   const foundSetting = get(settings, key, undefined);

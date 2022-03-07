@@ -26,10 +26,11 @@ export const DlsWebService = function () {
       printParamsXml,
       labelXml,
       labelSetXml,
-    });
-  };
+    })
+  }
 
-  this.printLabel2 = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  this.printLabel2 = function (
+    printerName, printParamsXml, labelXml, labelSetXml) {
     return invokeWsCommandAsync(POST, getSetting('WS_CMD_PRINT_LABEL2'), {
       printerName,
       printParamsXml,

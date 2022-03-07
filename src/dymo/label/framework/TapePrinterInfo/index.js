@@ -14,7 +14,7 @@ const TapePrinterInfo = function (
   name, modelName, isConnected, isLocal, isAutoCutSupported) {
   PrinterInfo.call(this, 'TapePrinter', name, modelName, isConnected, isLocal)
 
-  this['isAutoCutSupported'] = isAutoCutSupported
+  this.isAutoCutSupported = isAutoCutSupported
 }
 
 export default TapePrinterInfo

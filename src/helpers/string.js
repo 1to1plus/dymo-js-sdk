@@ -1,5 +1,5 @@
 export const isString = (testString) => {
-  return typeof testString == 'string'
+  return typeof testString === 'string'
 }
 
 export const appendUrlPath = (baseUri, path) => {
@@ -11,5 +11,5 @@ export const appendUrlPath = (baseUri, path) => {
     path = path.substr(1)
   }
 
-  return '' + baseUri + '/' + path
+  return `${baseUri}/${path}`
 }

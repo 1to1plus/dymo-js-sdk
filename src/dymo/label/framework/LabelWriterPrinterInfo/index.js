@@ -11,22 +11,11 @@ import PrinterInfo from '../PrinterInfo'
  @param {boolean} isTwinTurbo
  */
 const LabelWriterPrinterInfo = function (
-  name,
-  modelName,
-  isConnected,
-  isLocal,
-  isTwinTurbo,
-) {
-  PrinterInfo.call(
-    this,
-    'LabelWriterPrinter',
-    name,
-    modelName,
-    isConnected,
-    isLocal,
-  )
+  name, modelName, isConnected, isLocal, isTwinTurbo) {
+  PrinterInfo.call(this, 'LabelWriterPrinter', name, modelName, isConnected,
+    isLocal)
 
-  this['isTwinTurbo'] = isTwinTurbo
+  this.isTwinTurbo = isTwinTurbo
 }
 
 export default LabelWriterPrinterInfo

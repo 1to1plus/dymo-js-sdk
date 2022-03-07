@@ -2,10 +2,10 @@
 
 import axios from 'axios'
 import { isNumber } from 'lodash'
+import qs from 'qs'
 import { getSetting, buildApiUrl, setSetting } from '../settings'
 import printLabel2 from '../dymo/label/framework/PrintLabel2'
 import { xmlToJson } from '../dymo/xml'
-import qs from 'qs'
 
 export const GET = 'get'
 export const POST = 'post'
@@ -41,7 +41,7 @@ const apiService = async ({
     const { data = undefined, ...others } = await axios(config)
 
     // if data is a string and starts with < it's probably xml
-    if (data && (typeof data == 'string') && data.charAt(0) == '<') {
+    if (data && typeof data === 'string' && data.charAt(0) == '<') {
       const xmlResponse = xmlToJson(data, {})
       return JSON.parse(xmlResponse)
     }
@@ -135,10 +135,10 @@ export const _findWebService = async (host, successFindWebService, errorFindWebS
 };
 
 // Aliases that used to do basically the same thing.
-export const asyncFindWebService = (onSuccess, onError) => _findWebService(
-  undefined, onSuccess, onError)
-export const syncCheckWebService = (onSuccess, onError) => _findWebService(
-  undefined, onSuccess, onError)
+export const asyncFindWebService = (onSuccess, onError) =>
+  _findWebService(undefined, onSuccess, onError)
+export const syncCheckWebService = (onSuccess, onError) =>
+  _findWebService(undefined, onSuccess, onError)
 
 export const invokeWsCommandAsync = (method, command, params) => {
   const url = buildApiUrl(command)
@@ -162,19 +162,15 @@ export const printLabelAndPollStatus = (
   statusCallback,
   pollInterval,
 ) => {
-  const printJob = printLabel2(
-    printerName,
-    printParamsXml,
-    labelXml,
-    labelSetXml,
-  )
+  const printJob = printLabel2(printerName, printParamsXml, labelXml,
+    labelSetXml)
 
   const statusChecker = async function (pjs) {
     const callbackResult = statusCallback(printJob, pjs)
     if (!callbackResult) return
 
     // schedule more status checking
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(resolve, pollInterval)
     })
 

@@ -5,28 +5,28 @@ const PrintJobStatus = {}
 // real job status (when a job has been successfully created on the host machine / network printer)
 
 /// Unknown/unexpected status, see statusMessage for more details
-/**@export*/
+/** @export */
 PrintJobStatus.Unknown = 0
-/**@export*/
+/** @export */
 PrintJobStatus.Printing = 1
-/**@export*/
+/** @export */
 PrintJobStatus.Finished = 2
-/**@export*/
+/** @export */
 PrintJobStatus.Error = 3
-/**@export*/
+/** @export */
 PrintJobStatus.PaperOut = 4
-/**@export*/
+/** @export */
 PrintJobStatus.InQueue = 5
 
 // surrogate statuses
 
-/**@export*/
+/** @export */
 PrintJobStatus.ProcessingError = -1
-/**@export*/
+/** @export */
 PrintJobStatus.PrinterBusy = -2
-/**@export*/
+/** @export */
 PrintJobStatus.InvalidJobId = -3
-/**@export*/
+/** @export */
 PrintJobStatus.NotSpooled = -4
 
 export default PrintJobStatus

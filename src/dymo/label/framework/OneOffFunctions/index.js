@@ -85,7 +85,7 @@ export const addPrinterUri = function (
   // TODO :: refactor this to remove goog
   // const jsonp = new goog.net.Jsonp(getPrintersUri, 'callback')
   // jsonp.send(null, successCallback, errorCallback)
-}
+};
 
 /**
  @export
@@ -196,7 +196,7 @@ export const getPrinters = async (printersXml) => {
     addPrinterToCollection(dzPrinterInfo, result)
   }
   return result
-}
+};
 
 /** filters printers list by specified printer type
  @private
@@ -288,7 +288,7 @@ export const getDZPrintersAsync = () => {
  */
 export const openLabelFile = (fileName) => {
   return new Label(createFramework().openLabelFile(fileName))
-}
+};
 
 /**
  @param {string} fileName
@@ -313,10 +313,10 @@ export const openLabelFileAsync = (fileName) => {
  @export
  */
 export const openLabelXml = (labelXml) => {
-  traceMsg(labelXml, {key: 'dymo.label.framework'})
+  traceMsg(labelXml, { key: 'dymo.label.framework' })
 
   return new Label(labelXml)
-}
+};
 
 /** Prints a label
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -356,7 +356,7 @@ export const printLabel = (
   }
 
   throw new Error(`printLabel(): unknown printer '${printerName}'`)
-}
+};
 
 /** Prints a label and runs status checking in a loop
 
@@ -391,7 +391,7 @@ export const printLabelAndPollStatus = (
     if (!callbackResult) return
 
     // schedule more status checking
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(resolve, pollInterval)
     })
 
@@ -402,7 +402,7 @@ export const printLabelAndPollStatus = (
 
   // noinspection JSValidateTypes
   return printJob
-}
+};
 /** Prints a label and runs status checking in a loop
 
  @param {string} printerName the printer to print on. A list of printers can be obtained by getPrinters()
@@ -436,7 +436,7 @@ export const printLabelAndPollStatusAsync = (
         if (!callbackResult) return
 
         // schedule more status checking
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           setTimeout(resolve, pollInterval)
         })
 
@@ -447,7 +447,7 @@ export const printLabelAndPollStatusAsync = (
 
       return printJob
     })
-}
+};
 
 /** Creates a label bitmap image can be used for label previewing
  Params:
@@ -474,7 +474,7 @@ export const renderLabel = (labelXml, renderParamsXml, printerName) => {
   printerName = printerName || ''
 
   return createFramework().renderLabel(labelXml, renderParamsXml, printerName)
-}
+};
 
 /** Creates a label bitmap image can be used for label previewing
  Params:
@@ -504,7 +504,7 @@ export const renderLabelAsync = (labelXml, renderParamsXml, printerName) => {
 
   return createFramework().
     renderLabelAsync(labelXml, renderParamsXml, printerName)
-}
+};
 
 /** Utility function to create a render label request object
  @param {string} requestId
@@ -575,4 +575,4 @@ export const createTapePrintParamsXml = (params) => {
   }
 
   return xml.serialize(doc)
-}
+};

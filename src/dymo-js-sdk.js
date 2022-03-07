@@ -19,6 +19,6 @@ const dymoJsSdk = initApp()
 
 export const createFramework = initFramework;
 export const sampleSingleLabel = require('./dymo/label/framework/createFramework/__tests__/data/singleLabel').sampleSingleLabel;
-export const LabelSetBuilder = require('./dymo/label/framework/LabelSetBuilder');
+export const LabelSetBuilder = require('./dymo/label/framework/LabelSetBuilder').default;
 
 export default dymoJsSdk

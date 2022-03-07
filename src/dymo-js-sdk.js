@@ -21,6 +21,10 @@ export const initApp = (config = {}, callback) => {
 
 const dymoJsSdk = initApp()
 
+dymoJsSdk.prototype.LabelSetBuilder = _LabelSetBuilder;
+dymoJsSdk.prototype.sampleSingleLabel = sampleLabel;
+dymoJsSdk.createFramework.sampleSingleLabel = createFramework;
+
 export const createFramework = initFramework;
 export const sampleSingleLabel = sampleLabel;
 export const LabelSetBuilder = _LabelSetBuilder;

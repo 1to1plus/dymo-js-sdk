@@ -3005,6 +3005,9 @@ const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
     return new $357bab5e353b9a9d$export$118613715be2faef(callback);
 };
 const $98024307a5d0726a$var$dymoJsSdk = $98024307a5d0726a$export$bec0ec21ab4579a();
+$98024307a5d0726a$var$dymoJsSdk.prototype.LabelSetBuilder = $dd6befa10a7b6c73$export$2e2bcd8739ae039;
+$98024307a5d0726a$var$dymoJsSdk.prototype.sampleSingleLabel = $8dade80d0b9d9e5d$export$f71ef76cc1435eaa;
+$98024307a5d0726a$var$dymoJsSdk.createFramework.sampleSingleLabel = $98024307a5d0726a$export$118613715be2faef;
 const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$118613715be2faef;
 const $98024307a5d0726a$export$f71ef76cc1435eaa = $8dade80d0b9d9e5d$export$f71ef76cc1435eaa;
 const $98024307a5d0726a$export$3e1928330f93828b = $dd6befa10a7b6c73$export$2e2bcd8739ae039;

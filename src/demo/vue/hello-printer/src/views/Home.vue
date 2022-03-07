@@ -22,9 +22,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import { createFramework } from '../../../../../dymo/label/framework/createFramework'
-import { sampleSingleLabel } from '../../../../../dymo/label/framework/createFramework/__tests__/data/singleLabel'
-import LabelSetBuilder from '../../../../../dymo/label/framework/LabelSetBuilder'
+import framework, { sampleSingleLabel, LabelSetBuilder } from 'dymo-js-sdk';
 
 export default {
   name: 'Home',
@@ -56,7 +54,7 @@ export default {
     },
   },
   async mounted () {
-    this.framework = await createFramework(undefined, true)
+    this.framework = framework; //await createFramework(undefined, true)
   },
 }
 </script>

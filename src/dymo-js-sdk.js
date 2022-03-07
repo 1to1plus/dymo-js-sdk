@@ -1,5 +1,9 @@
 import { setSetting } from './settings'
-import { createFramework } from './dymo/label/framework/createFramework'
+import { createFramework as initFramework } from './dymo/label/framework/createFramework'
+import {
+  sampleSingleLabel as sampleLabel
+} from './dymo/label/framework/createFramework/__tests__/data/singleLabel'
+import _LabelSetBuilder from './dymo/label/framework/LabelSetBuilder'
 
 /**
  *
@@ -7,17 +11,18 @@ import { createFramework } from './dymo/label/framework/createFramework'
  * @param callback
  * @return {Promise<undefined>|_createFramework}
  */
-const initApp = (config = {}, callback) => {
+export const initApp = (config = {}, callback) => {
   Object.keys(config).forEach((key) => {
     setSetting(key, config[key])
   })
 
-  return new createFramework(callback)
+  return new initFramework(callback)
 }
 
 const dymoJsSdk = initApp()
 
-dymoJsSdk.initApp = initApp
-dymoJsSdk.createFramework = createFramework
+export const createFramework = initFramework;
+export const sampleSingleLabel = sampleLabel;
+export const LabelSetBuilder = _LabelSetBuilder;
 
 export default dymoJsSdk

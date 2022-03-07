@@ -54,7 +54,8 @@ export default {
     },
   },
   async mounted () {
-    this.framework = framework; //await createFramework(undefined, true)
+    // from dymo js sdk framework is a promise. When called it will poll the printer common ports and try to find the printer.
+    this.framework = await framework; //await createFramework(undefined, true)
   },
 }
 </script>

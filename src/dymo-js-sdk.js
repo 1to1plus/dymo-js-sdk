@@ -12,7 +12,7 @@ export const initApp = (config = {}, callback) => {
     setSetting(key, config[key])
   })
 
-  return new initFramework(callback)
+  return initFramework(callback)
 }
 
 const dymoJsSdk = initApp()

@@ -3,7 +3,7 @@
   "version": "3.0.7",
   "homepage": "https://github.com/1to1plus/dymo-js-sdk",
   "description": "Node project for js dymo node communications",
-  "main": "./src/dymo-js-sdk.js",
+  "main": "./dist/dymo-js-sdk.js",
   "keywords": [
     "dymo",
     "communications",
@@ -30,7 +30,7 @@
     }
   ],
   "scripts": {
-    "build": "rm ./dist -Rf; parcel build --dist-dir dist",
+    "build": "rm ./dist -Rf; parcel build ./src/dymo-js-sdk.js --dist-dir dist",
     "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
     "test": "jest",
@@ -40,6 +40,7 @@
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
     "push:all": "git push && git push --tags",
+    "prerelease": "npm run build",
     "release": "npm version patch && yarn push:all"
   },
   "babel": {

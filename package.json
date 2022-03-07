@@ -40,7 +40,6 @@
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
     "push:all": "git push && git push --tags",
-    "prerelease": "npm run build",
     "release": "npm version patch && yarn push:all"
   },
   "babel": {

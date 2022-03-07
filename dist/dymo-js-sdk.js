@@ -1,18 +1,476 @@
 var $02FXs$lodash = require("lodash");
-var $02FXs$axios = require("axios");
-var $02FXs$qs = require("qs");
 var $02FXs$xml2js = require("xml2js");
 var $02FXs$xmldomxmldom = require("@xmldom/xmldom");
 var $02FXs$xmljs = require("xml-js");
+var $02FXs$axios = require("axios");
+var $02FXs$qs = require("qs");
 
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
+}
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
+var $parcel$global =
+typeof globalThis !== 'undefined'
+  ? globalThis
+  : typeof self !== 'undefined'
+  ? self
+  : typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+  ? global
+  : {};
+var $parcel$modules = {};
+var $parcel$inits = {};
 
-$parcel$export(module.exports, "initApp", () => $98024307a5d0726a$export$bec0ec21ab4579a, (v) => $98024307a5d0726a$export$bec0ec21ab4579a = v);
+var parcelRequire = $parcel$global["parcelRequire4374"];
+if (parcelRequire == null) {
+  parcelRequire = function(id) {
+    if (id in $parcel$modules) {
+      return $parcel$modules[id].exports;
+    }
+    if (id in $parcel$inits) {
+      var init = $parcel$inits[id];
+      delete $parcel$inits[id];
+      var module = {id: id, exports: {}};
+      $parcel$modules[id] = module;
+      init.call(module.exports, module, module.exports);
+      return module.exports;
+    }
+    var err = new Error("Cannot find module '" + id + "'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
+  };
+
+  parcelRequire.register = function register(id, init) {
+    $parcel$inits[id] = init;
+  };
+
+  $parcel$global["parcelRequire4374"] = parcelRequire;
+}
+parcelRequire.register("ca9Ex", function(module, exports) {
+
+$parcel$export(module.exports, "sampleSingleLabel", () => $8dade80d0b9d9e5d$export$f71ef76cc1435eaa);
+const $8dade80d0b9d9e5d$export$f71ef76cc1435eaa = `<?xml version="1.0" encoding="utf-8"?>
+<DesktopLabel Version="1">
+    <DYMOLabel Version="3">
+        <Description>DYMO Label</Description>
+        <Orientation>Landscape</Orientation>
+        <LabelName>Address</LabelName>
+        <InitialLength>0</InitialLength>
+        <BorderStyle>SolidLine</BorderStyle>
+        <DYMORect>
+            <DYMOPoint>
+                <X>0.23</X>
+                <Y>0.06</Y>
+            </DYMOPoint>
+            <Size>
+                <Width>3.21</Width>
+                <Height>0.9966666</Height>
+            </Size>
+        </DYMORect>
+        <BorderColor>
+            <SolidColorBrush>
+                <Color A="1" R="0" G="0" B="0"> </Color>
+            </SolidColorBrush>
+        </BorderColor>
+        <BorderThickness>1</BorderThickness>
+        <Show_Border>False</Show_Border>
+        <DynamicLayoutManager>
+            <RotationBehavior>ClearObjects</RotationBehavior>
+            <LabelObjects>
+                <TextObject>
+                    <Name>Line1</Name>
+                    <Brushes>
+                        <BackgroundBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BackgroundBrush>
+                        <BorderBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BorderBrush>
+                        <StrokeBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </StrokeBrush>
+                        <FillBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </FillBrush>
+                    </Brushes>
+                    <Rotation>Rotation0</Rotation>
+                    <OutlineThickness>1</OutlineThickness>
+                    <IsOutlined>False</IsOutlined>
+                    <BorderStyle>SolidLine</BorderStyle>
+                    <Margin>
+                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
+                    </Margin>
+                    <HorizontalAlignment>Center</HorizontalAlignment>
+                    <VerticalAlignment>Middle</VerticalAlignment>
+                    <FitMode>None</FitMode>
+                    <IsVertical>False</IsVertical>
+                    <FormattedText>
+                        <FitMode>None</FitMode>
+                        <HorizontalAlignment>Center</HorizontalAlignment>
+                        <VerticalAlignment>Middle</VerticalAlignment>
+                        <IsVertical>False</IsVertical>
+                        <LineTextSpan>
+                            <TextSpan>
+                                <Text>Line1</Text>
+                                <FontInfo>
+                                    <FontName>Segoe UI</FontName>
+                                    <FontSize>8</FontSize>
+                                    <IsBold>True</IsBold>
+                                    <IsItalic>False</IsItalic>
+                                    <IsUnderline>False</IsUnderline>
+                                    <FontBrush>
+                                        <SolidColorBrush>
+                                            <Color A="1" R="0" G="0" B="0"> </Color>
+                                        </SolidColorBrush>
+                                    </FontBrush>
+                                </FontInfo>
+                            </TextSpan>
+                        </LineTextSpan>
+                    </FormattedText>
+                    <ObjectLayout>
+                        <DYMOPoint>
+                            <X>0.23</X>
+                            <Y>0.06</Y>
+                        </DYMOPoint>
+                        <Size>
+                            <Width>3.193756</Width>
+                            <Height>0.1368766</Height>
+                        </Size>
+                    </ObjectLayout>
+                </TextObject>
+                <TextObject>
+                    <Name>Line2</Name>
+                    <Brushes>
+                        <BackgroundBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BackgroundBrush>
+                        <BorderBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BorderBrush>
+                        <StrokeBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </StrokeBrush>
+                        <FillBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </FillBrush>
+                    </Brushes>
+                    <Rotation>Rotation0</Rotation>
+                    <OutlineThickness>1</OutlineThickness>
+                    <IsOutlined>False</IsOutlined>
+                    <BorderStyle>SolidLine</BorderStyle>
+                    <Margin>
+                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
+                    </Margin>
+                    <HorizontalAlignment>Center</HorizontalAlignment>
+                    <VerticalAlignment>Middle</VerticalAlignment>
+                    <FitMode>None</FitMode>
+                    <IsVertical>False</IsVertical>
+                    <FormattedText>
+                        <FitMode>None</FitMode>
+                        <HorizontalAlignment>Center</HorizontalAlignment>
+                        <VerticalAlignment>Middle</VerticalAlignment>
+                        <IsVertical>False</IsVertical>
+                        <LineTextSpan>
+                            <TextSpan>
+                                <Text>Line2</Text>
+                                <FontInfo>
+                                    <FontName>Segoe UI</FontName>
+                                    <FontSize>8</FontSize>
+                                    <IsBold>False</IsBold>
+                                    <IsItalic>False</IsItalic>
+                                    <IsUnderline>False</IsUnderline>
+                                    <FontBrush>
+                                        <SolidColorBrush>
+                                            <Color A="1" R="0" G="0" B="0"> </Color>
+                                        </SolidColorBrush>
+                                    </FontBrush>
+                                </FontInfo>
+                            </TextSpan>
+                        </LineTextSpan>
+                    </FormattedText>
+                    <ObjectLayout>
+                        <DYMOPoint>
+                            <X>0.23</X>
+                            <Y>0.1968766</Y>
+                        </DYMOPoint>
+                        <Size>
+                            <Width>3.180007</Width>
+                            <Height>0.1338767</Height>
+                        </Size>
+                    </ObjectLayout>
+                </TextObject>
+                <TextObject>
+                    <Name>Line3</Name>
+                    <Brushes>
+                        <BackgroundBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BackgroundBrush>
+                        <BorderBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BorderBrush>
+                        <StrokeBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </StrokeBrush>
+                        <FillBrush>
+                            <SolidColorBrush>
+                                <Color A="0" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </FillBrush>
+                    </Brushes>
+                    <Rotation>Rotation0</Rotation>
+                    <OutlineThickness>1</OutlineThickness>
+                    <IsOutlined>False</IsOutlined>
+                    <BorderStyle>SolidLine</BorderStyle>
+                    <Margin>
+                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
+                    </Margin>
+                    <HorizontalAlignment>Center</HorizontalAlignment>
+                    <VerticalAlignment>Middle</VerticalAlignment>
+                    <FitMode>None</FitMode>
+                    <IsVertical>False</IsVertical>
+                    <FormattedText>
+                        <FitMode>None</FitMode>
+                        <HorizontalAlignment>Center</HorizontalAlignment>
+                        <VerticalAlignment>Middle</VerticalAlignment>
+                        <IsVertical>False</IsVertical>
+                        <LineTextSpan>
+                            <TextSpan>
+                                <Text>Line3</Text>
+                                <FontInfo>
+                                    <FontName>Segoe UI</FontName>
+                                    <FontSize>10</FontSize>
+                                    <IsBold>False</IsBold>
+                                    <IsItalic>False</IsItalic>
+                                    <IsUnderline>False</IsUnderline>
+                                    <FontBrush>
+                                        <SolidColorBrush>
+                                            <Color A="1" R="0" G="0" B="0"> </Color>
+                                        </SolidColorBrush>
+                                    </FontBrush>
+                                </FontInfo>
+                            </TextSpan>
+                        </LineTextSpan>
+                    </FormattedText>
+                    <ObjectLayout>
+                        <DYMOPoint>
+                            <X>0.23</X>
+                            <Y>0.7875001</Y>
+                        </DYMOPoint>
+                        <Size>
+                            <Width>3.19878</Width>
+                            <Height>0.2691666</Height>
+                        </Size>
+                    </ObjectLayout>
+                </TextObject>
+                <BarcodeObject>
+                    <Name>ItemCode</Name>
+                    <Brushes>
+                        <BackgroundBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="1" G="1" B="1"> </Color>
+                            </SolidColorBrush>
+                        </BackgroundBrush>
+                        <BorderBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </BorderBrush>
+                        <StrokeBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </StrokeBrush>
+                        <FillBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </FillBrush>
+                    </Brushes>
+                    <Rotation>Rotation0</Rotation>
+                    <OutlineThickness>1</OutlineThickness>
+                    <IsOutlined>False</IsOutlined>
+                    <BorderStyle>SolidLine</BorderStyle>
+                    <Margin>
+                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
+                    </Margin>
+                    <BarcodeFormat>Code128B</BarcodeFormat>
+                    <Data>
+                        <MultiDataString>
+                            <DataString>1234</DataString>
+                        </MultiDataString>
+                    </Data>
+                    <HorizontalAlignment>Center</HorizontalAlignment>
+                    <VerticalAlignment>Middle</VerticalAlignment>
+                    <Size>Medium</Size>
+                    <TextPosition>None</TextPosition>
+                    <FontInfo>
+                        <FontName>Arial</FontName>
+                        <FontSize>12</FontSize>
+                        <IsBold>False</IsBold>
+                        <IsItalic>False</IsItalic>
+                        <IsUnderline>False</IsUnderline>
+                        <FontBrush>
+                            <SolidColorBrush>
+                                <Color A="1" R="0" G="0" B="0"> </Color>
+                            </SolidColorBrush>
+                        </FontBrush>
+                    </FontInfo>
+                    <ObjectLayout>
+                        <DYMOPoint>
+                            <X>0.23</X>
+                            <Y>0.3498435</Y>
+                        </DYMOPoint>
+                        <Size>
+                            <Width>3.196882</Width>
+                            <Height>0.5037009</Height>
+                        </Size>
+                    </ObjectLayout>
+                </BarcodeObject>
+            </LabelObjects>
+        </DynamicLayoutManager>
+    </DYMOLabel>
+    <LabelApplication>Blank</LabelApplication>
+    <DataTable>
+        <Columns> </Columns>
+        <Rows> </Rows>
+    </DataTable>
+</DesktopLabel>`;
+
+});
+
+parcelRequire.register("j0Czp", function(module, exports) {
+
+$parcel$defineInteropFlag(module.exports);
+
+$parcel$export(module.exports, "default", () => $dd6befa10a7b6c73$export$2e2bcd8739ae039);
+
+var $2uQZa = parcelRequire("2uQZa");
+
+
+var $9IkM5 = parcelRequire("9IkM5");
+const $dd6befa10a7b6c73$var$LabelSetBuilder = function() {
+    /**
+   @private
+   */ this._records = [];
+};
+/** Returns label set records
+ @export
+ @return {Array.<ILabelSetRecord>}
+ */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.getRecords = function() {
+    return this._records;
+};
+/** Adds a new record to the label-set
+ // Returns created record object
+ @export
+ @return {ILabelSetRecord}
+ */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.addRecord = function() {
+    const record = new $2uQZa.default();
+    this._records.push(record);
+    // noinspection JSValidateTypes
+    return record;
+};
+/** Convert record objects into xml format defined in LabelSet.xsd
+ // Returned xml can be passed to dymo.label.framework.printLabel() as labelSetXml parameter.
+ // Parameters:
+ //      records - records to convert to xml. records should be array-like object of associative-arrays with object names as keys and object text as values.
+ // Return string contains xml data
+ // Note: this function can be used independent of other LabelSetBuilder methods if records data is generated by other functions
+
+ @export
+ @param {Array.<Object.<string, string>>} records
+ */ $dd6befa10a7b6c73$var$LabelSetBuilder.toXml = function(records) {
+    // create xml representation of LabelSet
+    // records is an Array-like object of associative arrays of object name/object value pairs
+    const doc = $9IkM5.default.xml.parse('<LabelSet/>');
+    const root = doc.documentElement;
+    for(let i = 0; i < records.length; i++){
+        const record = records[i];
+        const recordElem = doc.createElement('LabelRecord');
+        for(const objectName in record){
+            let objectValue = record[objectName];
+            if (typeof objectValue === 'function') continue;
+            objectValue = objectValue.toString();
+            const objectElem = doc.createElement('ObjectData');
+            objectElem.setAttribute('Name', objectName);
+            if (objectValue.indexOf($87a73fe4e23c61da$export$9319d8092206b03f) == 0) {
+                // parse the markup into xml and insert it as is
+                const markupDoc = $9IkM5.default.xml.parse(objectValue);
+                objectElem.appendChild(markupDoc.documentElement.cloneNode(true));
+            } else {
+                const textNode = doc.createTextNode(objectValue);
+                objectElem.appendChild(textNode);
+            }
+            recordElem.appendChild(objectElem);
+        }
+        root.appendChild(recordElem);
+    }
+    return $9IkM5.default.xml.serialize(doc);
+};
+/** Converts the builder to a xml string
+ @override
+ */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.toString = function() {
+    return $dd6befa10a7b6c73$var$LabelSetBuilder.toXml(this._records);
+};
+var $dd6befa10a7b6c73$export$2e2bcd8739ae039 = $dd6befa10a7b6c73$var$LabelSetBuilder;
+
+});
+parcelRequire.register("2uQZa", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $1d177bef11cfbeda$export$2e2bcd8739ae039);
+
+/** LabelSetRecord class
+ Holds data of one label-set records and provides methods to add data to the record
+
+ @constructor
+ @private
+ @implements {ILabelSetRecord}
+ */ const $1d177bef11cfbeda$var$LabelSetRecord = function() {
+};
+/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setTextMarkup = function(objectName, textMarkup) {
+    textMarkup = textMarkup.toString();
+    if (textMarkup.indexOf($87a73fe4e23c61da$export$9319d8092206b03f) != 0) textMarkup = $87a73fe4e23c61da$export$9319d8092206b03f + textMarkup + $87a73fe4e23c61da$export$4a23fba8ac5e0d2e;
+    this[objectName] = textMarkup;
+    return this;
+};
+/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setText = function(objectName, text) {
+    this[objectName] = text;
+    return this;
+};
+/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setBase64Image = function(objectName, base64Image) {
+    this[objectName] = base64Image;
+    return this;
+};
+var $1d177bef11cfbeda$export$2e2bcd8739ae039 = $1d177bef11cfbeda$var$LabelSetRecord;
+
+});
 
 const $87a73fe4e23c61da$export$a5a6e0b888b2c992 = {
     DEBUG: false,
@@ -134,41 +592,84 @@ const $87a73fe4e23c61da$export$1974eb46f550e54f = (printer, result)=>{
 };
 
 
+parcelRequire.register("9IkM5", function(module, exports) {
 
-const $b327b8d2b73d3bbc$var$window = {
-};
-const $b327b8d2b73d3bbc$export$d3d0fd7db52b9fa3 = (msg, { key: key = 'general.log' , level: level = 'log'  } = {
-})=>{
-    if ($87a73fe4e23c61da$export$8206e8d612b3e63('dymo.label.framework.trace')) {
-        if ($b327b8d2b73d3bbc$var$window.console && $b327b8d2b73d3bbc$var$window.console.log) console[level](key, msg);
+$parcel$export(module.exports, "default", () => $7128567ed2719561$export$2e2bcd8739ae039);
+
+
+
+
+
+var $ioKZN = parcelRequire("ioKZN");
+
+
+
+
+var $kMf1E = parcelRequire("kMf1E");
+
+
+var $48txS = parcelRequire("48txS");
+
+
+var $jwKGU = parcelRequire("jwKGU");
+
+var $5BwOC = parcelRequire("5BwOC");
+
+var $j0Czp = parcelRequire("j0Czp");
+
+var $bLohu = parcelRequire("bLohu");
+
+
+var $2uQZa = parcelRequire("2uQZa");
+
+var $c3viI = parcelRequire("c3viI");
+
+var $2pwfF = parcelRequire("2pwfF");
+
+var $38Q9S = parcelRequire("38Q9S");
+
+var $b4vjN = parcelRequire("b4vjN");
+
+var $f1wLl = parcelRequire("f1wLl");
+
+var $9JEOk = parcelRequire("9JEOk");
+const $7128567ed2719561$var$dymo = {
+    xml: $c7e2149312647974$export$2e2bcd8739ae039,
+    uuid: $762530daf0de5182$export$2e2bcd8739ae039,
+    label: {
+        framework: {
+            trace: false,
+            PrinterInfo: $730e2c8499c69cff$export$2e2bcd8739ae039,
+            AddressBarcodePosition: $47261f1d7d3d2ea1$export$2e2bcd8739ae039,
+            TapeCutMode: $ioKZN.default,
+            TapePrinterInfo: $2ce209adcfae9472$export$2e2bcd8739ae039,
+            PrintJob: $f6bbdda70da0550a$export$2e2bcd8739ae039,
+            Label: $9a9d7ad69b4a3113$export$2e2bcd8739ae039,
+            FlowDirection: $kMf1E.default,
+            PrintJobStatusInfo: $af45e04149270ecf$export$2e2bcd8739ae039,
+            LabelWriterPrintQuality: $48txS.default,
+            LabelWriterPrinterInfo: $180af6f8d627d8c4$export$2e2bcd8739ae039,
+            ILabelSetRecord: $jwKGU.default,
+            ILabel: $5BwOC.default,
+            LabelSetBuilder: $j0Czp.default,
+            NetworkPrinter: (/*@__PURE__*/$parcel$interopDefault($bLohu)),
+            NetworkPrinterName: $f1wLl.default,
+            createLabelWriterPrintParamsXml: $b4vjN.default,
+            DZPrinterInfo: $cd37e7dc69c02314$export$2e2bcd8739ae039,
+            LabelSetRecord: $2uQZa.default,
+            TapeAlignment: $c3viI.default,
+            TwinTurboRoll: $2pwfF.default,
+            CheckEnvironmentResult: $38Q9S.default,
+            is550Printer: $9JEOk.is550Printer,
+            is550PrinterAsync: $9JEOk.is550PrinterAsync,
+            getConsumableInfoIn550Printer: $9JEOk.getConsumableInfoIn550Printer,
+            getConsumableInfoIn550PrinterAsync: $9JEOk.getConsumableInfoIn550PrinterAsync
+        }
     }
 };
+var $7128567ed2719561$export$2e2bcd8739ae039 = $7128567ed2719561$var$dymo;
 
-
-
-
-
-
-
-
-/**
- Create printer collection
- @private
- @return {Array}
- */ const $e9a3303efdb223e1$var$createPrintersCollection = ()=>{
-    const result = [];
-    result.byIndex = [];
-    Object.defineProperty(result, 'byIndex', {
-        enumerable: false,
-        value: []
-    });
-    return result;
-};
-var $e9a3303efdb223e1$export$2e2bcd8739ae039 = $e9a3303efdb223e1$var$createPrintersCollection;
-
-
-
-
+});
 
 
 
@@ -271,84 +772,6 @@ const $c7e2149312647974$export$dacdacba7f766aa8 = async (json)=>{
 };
 var $c7e2149312647974$export$2e2bcd8739ae039 = $c7e2149312647974$var$xml;
 
-
-
-//----------------------------------------------------------------------------
-//
-//  $Id: DYMO.Label.Framework.js 12271 2010-06-16 14:25:34Z vbuzuev $
-//
-// Project -------------------------------------------------------------------
-//
-//  DYMO Label Framework JavaScript Library
-//
-// Content -------------------------------------------------------------------
-//
-//  Main functions
-//
-//----------------------------------------------------------------------------
-//
-//  Copyright (c), 2010, Sanford, L.P. All Rights Reserved.
-//
-//----------------------------------------------------------------------------
-/**
- @fileoverview PrinterInfo support
- */ /**
- @public
- @constructor
- @param {string} printerType
- @param {string} name
- @param {string} modelName
- @param {boolean} isConnected
- @param {boolean} isLocal
- */ const $730e2c8499c69cff$var$PrinterInfo = function(printerType, name, modelName, isConnected, isLocal) {
-    this.printerType = printerType;
-    this.name = name;
-    this.modelName = modelName;
-    this.isConnected = isConnected;
-    this.isLocal = isLocal;
-    /**
-   internal field to store a printer uri as "network/mobile/remote" printer, e.g. uri for DYMO Label lProxy service
-   @public
-   @type {string}
-   */ this.printerUri = '';
-    /**
-   internal field to store an original printer name as got from network printer
-   @public
-   @type {string}
-   */ this.originalPrinterName = '';
-};
-/** Determines is the printer local or network
- Local means installed as a Printer on the Desktop machine
- where javascript is executing, e.g. it is a printer available as 'printer' on Windows machine
- 'Network' means a printer installed on a 'proxy' machine or a real network printer (in the future)
-
- @return {boolean}
- */ $730e2c8499c69cff$var$PrinterInfo.prototype.isNetworkPrinter = function() {
-    return this.printerUri != '';
-};
-var $730e2c8499c69cff$export$2e2bcd8739ae039 = $730e2c8499c69cff$var$PrinterInfo;
-
-
-/**
- @public
- @constructor
- @extends {PrinterInfo}
- @param {string} name
- @param {string} modelName
- @param {boolean} isConnected
- @param {boolean} isLocal
- @param {boolean} isTwinTurbo
- */ const $180af6f8d627d8c4$var$LabelWriterPrinterInfo = function(name, modelName, isConnected, isLocal, isTwinTurbo) {
-    $730e2c8499c69cff$export$2e2bcd8739ae039.call(this, 'LabelWriterPrinter', name, modelName, isConnected, isLocal);
-    this.isTwinTurbo = isTwinTurbo;
-};
-var $180af6f8d627d8c4$export$2e2bcd8739ae039 = $180af6f8d627d8c4$var$LabelWriterPrinterInfo;
-
-
-
-
-
-
 /*
  * Generate a RFC4122(v4) UUID
  *
@@ -416,6 +839,166 @@ var $180af6f8d627d8c4$export$2e2bcd8739ae039 = $180af6f8d627d8c4$var$LabelWriter
     return uuid.toString();
 };
 var $762530daf0de5182$export$2e2bcd8739ae039 = $762530daf0de5182$var$uuid;
+
+//----------------------------------------------------------------------------
+//
+//  $Id: DYMO.Label.Framework.js 12271 2010-06-16 14:25:34Z vbuzuev $
+//
+// Project -------------------------------------------------------------------
+//
+//  DYMO Label Framework JavaScript Library
+//
+// Content -------------------------------------------------------------------
+//
+//  Main functions
+//
+//----------------------------------------------------------------------------
+//
+//  Copyright (c), 2010, Sanford, L.P. All Rights Reserved.
+//
+//----------------------------------------------------------------------------
+/**
+ @fileoverview PrinterInfo support
+ */ /**
+ @public
+ @constructor
+ @param {string} printerType
+ @param {string} name
+ @param {string} modelName
+ @param {boolean} isConnected
+ @param {boolean} isLocal
+ */ const $730e2c8499c69cff$var$PrinterInfo = function(printerType, name, modelName, isConnected, isLocal) {
+    this.printerType = printerType;
+    this.name = name;
+    this.modelName = modelName;
+    this.isConnected = isConnected;
+    this.isLocal = isLocal;
+    /**
+   internal field to store a printer uri as "network/mobile/remote" printer, e.g. uri for DYMO Label lProxy service
+   @public
+   @type {string}
+   */ this.printerUri = '';
+    /**
+   internal field to store an original printer name as got from network printer
+   @public
+   @type {string}
+   */ this.originalPrinterName = '';
+};
+/** Determines is the printer local or network
+ Local means installed as a Printer on the Desktop machine
+ where javascript is executing, e.g. it is a printer available as 'printer' on Windows machine
+ 'Network' means a printer installed on a 'proxy' machine or a real network printer (in the future)
+
+ @return {boolean}
+ */ $730e2c8499c69cff$var$PrinterInfo.prototype.isNetworkPrinter = function() {
+    return this.printerUri != '';
+};
+var $730e2c8499c69cff$export$2e2bcd8739ae039 = $730e2c8499c69cff$var$PrinterInfo;
+
+// TODO :: complete
+/** Specifies when to draw Intelligent-Mail barcode for address object
+ // AboveAddress - print barcode above the address
+ // BelowAddress - print barcode below the address
+ // Suppress - don't print barcode as all
+ @enum {string}
+ @export
+ */ const $47261f1d7d3d2ea1$var$AddressBarcodePosition = {
+};
+/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.AboveAddress = 'AboveAddress';
+/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.BelowAddress = 'BelowAddress';
+/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.Suppress = 'Suppress';
+var $47261f1d7d3d2ea1$export$2e2bcd8739ae039 = $47261f1d7d3d2ea1$var$AddressBarcodePosition;
+
+parcelRequire.register("ioKZN", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $d64eec3b73a0f03c$export$2e2bcd8739ae039);
+/** Specifies how tape is cut between label when printing multiple labels on Tape printers.
+ // Note: it affects multiple pages print jobs only, if one page job is printed the tape is always cut.
+ // AutoCut - cut tape between pages
+ // ChainMarks - draw a mark between pages
+ @enum {string}
+ @export
+ */ const $d64eec3b73a0f03c$var$TapeCutMode = {
+};
+/** @export */ $d64eec3b73a0f03c$var$TapeCutMode.AutoCut = 'AutoCut';
+/** @export */ $d64eec3b73a0f03c$var$TapeCutMode.ChainMarks = 'ChainMarks';
+var $d64eec3b73a0f03c$export$2e2bcd8739ae039 = $d64eec3b73a0f03c$var$TapeCutMode;
+
+});
+
+
+/**
+ @public
+ @constructor
+ @extends {PrinterInfo}
+ @param {string} name
+ @param {string} modelName
+ @param {boolean} isConnected
+ @param {boolean} isLocal
+ @param {boolean} isAutoCutSupported
+ */ const $2ce209adcfae9472$var$TapePrinterInfo = function(name, modelName, isConnected, isLocal, isAutoCutSupported) {
+    $730e2c8499c69cff$export$2e2bcd8739ae039.call(this, 'TapePrinter', name, modelName, isConnected, isLocal);
+    this.isAutoCutSupported = isAutoCutSupported;
+};
+var $2ce209adcfae9472$export$2e2bcd8739ae039 = $2ce209adcfae9472$var$TapePrinterInfo;
+
+
+const $b327b8d2b73d3bbc$var$window = {
+};
+const $b327b8d2b73d3bbc$export$d3d0fd7db52b9fa3 = (msg, { key: key = 'general.log' , level: level = 'log'  } = {
+})=>{
+    if ($87a73fe4e23c61da$export$8206e8d612b3e63('dymo.label.framework.trace')) {
+        if ($b327b8d2b73d3bbc$var$window.console && $b327b8d2b73d3bbc$var$window.console.log) console[level](key, msg);
+    }
+};
+
+
+
+
+
+
+
+
+/**
+ Create printer collection
+ @private
+ @return {Array}
+ */ const $e9a3303efdb223e1$var$createPrintersCollection = ()=>{
+    const result = [];
+    result.byIndex = [];
+    Object.defineProperty(result, 'byIndex', {
+        enumerable: false,
+        value: []
+    });
+    return result;
+};
+var $e9a3303efdb223e1$export$2e2bcd8739ae039 = $e9a3303efdb223e1$var$createPrintersCollection;
+
+
+
+
+
+
+
+/**
+ @public
+ @constructor
+ @extends {PrinterInfo}
+ @param {string} name
+ @param {string} modelName
+ @param {boolean} isConnected
+ @param {boolean} isLocal
+ @param {boolean} isTwinTurbo
+ */ const $180af6f8d627d8c4$var$LabelWriterPrinterInfo = function(name, modelName, isConnected, isLocal, isTwinTurbo) {
+    $730e2c8499c69cff$export$2e2bcd8739ae039.call(this, 'LabelWriterPrinter', name, modelName, isConnected, isLocal);
+    this.isTwinTurbo = isTwinTurbo;
+};
+var $180af6f8d627d8c4$export$2e2bcd8739ae039 = $180af6f8d627d8c4$var$LabelWriterPrinterInfo;
+
+
+
+
+
 
 
 function $d5ef754421ca3e16$var$printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml) {
@@ -494,20 +1077,6 @@ const $9643c783b3f6d52e$export$24b501728b598e90 = function(printerName, printPar
 var $9643c783b3f6d52e$export$2e2bcd8739ae039 = $9643c783b3f6d52e$export$24b501728b598e90;
 
 
-
-// TODO :: complete
-/** Specifies when to draw Intelligent-Mail barcode for address object
- // AboveAddress - print barcode above the address
- // BelowAddress - print barcode below the address
- // Suppress - don't print barcode as all
- @enum {string}
- @export
- */ const $47261f1d7d3d2ea1$var$AddressBarcodePosition = {
-};
-/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.AboveAddress = 'AboveAddress';
-/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.BelowAddress = 'BelowAddress';
-/** @export */ $47261f1d7d3d2ea1$var$AddressBarcodePosition.Suppress = 'Suppress';
-var $47261f1d7d3d2ea1$export$2e2bcd8739ae039 = $47261f1d7d3d2ea1$var$AddressBarcodePosition;
 
 
 /**
@@ -1098,22 +1667,6 @@ var $9a9d7ad69b4a3113$export$2e2bcd8739ae039 = $9a9d7ad69b4a3113$var$Label;
 
 
 
-/**
- @public
- @constructor
- @extends {PrinterInfo}
- @param {string} name
- @param {string} modelName
- @param {boolean} isConnected
- @param {boolean} isLocal
- @param {boolean} isAutoCutSupported
- */ const $2ce209adcfae9472$var$TapePrinterInfo = function(name, modelName, isConnected, isLocal, isAutoCutSupported) {
-    $730e2c8499c69cff$export$2e2bcd8739ae039.call(this, 'TapePrinter', name, modelName, isConnected, isLocal);
-    this.isAutoCutSupported = isAutoCutSupported;
-};
-var $2ce209adcfae9472$export$2e2bcd8739ae039 = $2ce209adcfae9472$var$TapePrinterInfo;
-
-
 
 /**
  @public
@@ -1455,116 +2008,6 @@ var $b97309180d2fd587$export$2e2bcd8739ae039 = $b97309180d2fd587$var$getPrinters
 
 
 
-/**
- @public
- @constructor
- @param {string} printerName
- @param {string} jobId
- @param {number} status
- @param {string} statusMessage
- */ const $af45e04149270ecf$var$PrintJobStatusInfo = function(printerName, jobId, status, statusMessage) {
-    this.printerName = printerName;
-    this.jobId = jobId;
-    this.status = status;
-    this.statusMessage = statusMessage;
-};
-/**
- Parses statusStr that contains status code abd status message separates by a space
- Returns an object with 'status' and 'statusMessage' properties
- @param {string} statusStr
- @return {{status: number, statusMessage: string}}
- */ $af45e04149270ecf$var$PrintJobStatusInfo.parse = function(statusStr) {
-    const result = {
-    };
-    const a = statusStr.split(' ');
-    if (a.length >= 1) result.status = parseInt(a[0], 10);
-    result.statusMessage = a.slice(1).join(' ');
-    return result;
-};
-var $af45e04149270ecf$export$2e2bcd8739ae039 = $af45e04149270ecf$var$PrintJobStatusInfo;
-
-
-/** Specifies print job status
- @export
- */ const $fd3139ff3ad63450$var$PrintJobStatus = {
-};
-// real job status (when a job has been successfully created on the host machine / network printer)
-/// Unknown/unexpected status, see statusMessage for more details
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Unknown = 0;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Printing = 1;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Finished = 2;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Error = 3;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.PaperOut = 4;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.InQueue = 5;
-// surrogate statuses
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.ProcessingError = -1;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.PrinterBusy = -2;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.InvalidJobId = -3;
-/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.NotSpooled = -4;
-var $fd3139ff3ad63450$export$2e2bcd8739ae039 = $fd3139ff3ad63450$var$PrintJobStatus;
-
-
-const $f6bbdda70da0550a$var$PrintJob = function(printerInfo, jobId) {
-    /**
-   @private
-   */ this._printerInfo = printerInfo;
-    /**
-   @private
-   */ this._jobId = jobId;
-};
-/**
- Gets printer name the print job has been created for
- @return {string}
- */ $f6bbdda70da0550a$var$PrintJob.prototype.getPrinterName = function() {
-    return this._printerInfo.name;
-};
-/**
- Gets print job id
- @return {string}
- */ $f6bbdda70da0550a$var$PrintJob.prototype.getJobId = function() {
-    return this._jobId;
-};
-/**
- Gets a status of the print job
- @public
- @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
- @return {undefined}
- */ $f6bbdda70da0550a$var$PrintJob.prototype.getStatus = function(replyCallback) {
-    if (!this._printerInfo.isNetworkPrinter()) {
-        let statusInfo;
-        try {
-            statusInfo = $357bab5e353b9a9d$export$118613715be2faef().getJobStatus(this._printerInfo.name, this._jobId);
-        } catch (e) {
-            statusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(this.getPrinterName(), this._jobId, $fd3139ff3ad63450$export$2e2bcd8739ae039.ProcessingError, e.message || e);
-        }
-        replyCallback(statusInfo);
-    } else this.getStatusForNetworkPrinter(replyCallback);
-};
-/**
- Gets a status of the print job
- @private
- @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
- */ $f6bbdda70da0550a$var$PrintJob.prototype.getStatusForNetworkPrinter = function(replyCallback) {
-    const printerName = this.getPrinterName();
-    const jobId = this._jobId;
-    // let networkPrinterName = splitNetworkPrinterName(printerName);
-    // try to get data
-    const { printerUri: printerUri  } = this._printerInfo;
-    const jsonp2 = new goog.net.Jsonp(goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback');
-    jsonp2.send({
-        jobId: jobId,
-        printerName: this._printerInfo.originalPrinterName
-    }, function(pjs) {
-        const jobStatusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(printerName, jobId, pjs.status, pjs.statusMessage);
-        replyCallback(jobStatusInfo);
-    }, function() {
-        const jobStatusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(printerName, jobId, $fd3139ff3ad63450$export$2e2bcd8739ae039.ProcessingError, `Error processing getPrintJobStatus(): Unable to contact "${printerUri}"`);
-        replyCallback(jobStatusInfo);
-    });
-};
-var $f6bbdda70da0550a$export$2e2bcd8739ae039 = $f6bbdda70da0550a$var$PrintJob;
-
-
 
 
 /** Prints a label and return a job id
@@ -1847,6 +2290,53 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
 
 
 
+/**
+ @public
+ @constructor
+ @param {string} printerName
+ @param {string} jobId
+ @param {number} status
+ @param {string} statusMessage
+ */ const $af45e04149270ecf$var$PrintJobStatusInfo = function(printerName, jobId, status, statusMessage) {
+    this.printerName = printerName;
+    this.jobId = jobId;
+    this.status = status;
+    this.statusMessage = statusMessage;
+};
+/**
+ Parses statusStr that contains status code abd status message separates by a space
+ Returns an object with 'status' and 'statusMessage' properties
+ @param {string} statusStr
+ @return {{status: number, statusMessage: string}}
+ */ $af45e04149270ecf$var$PrintJobStatusInfo.parse = function(statusStr) {
+    const result = {
+    };
+    const a = statusStr.split(' ');
+    if (a.length >= 1) result.status = parseInt(a[0], 10);
+    result.statusMessage = a.slice(1).join(' ');
+    return result;
+};
+var $af45e04149270ecf$export$2e2bcd8739ae039 = $af45e04149270ecf$var$PrintJobStatusInfo;
+
+
+/** Specifies print job status
+ @export
+ */ const $fd3139ff3ad63450$var$PrintJobStatus = {
+};
+// real job status (when a job has been successfully created on the host machine / network printer)
+/// Unknown/unexpected status, see statusMessage for more details
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Unknown = 0;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Printing = 1;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Finished = 2;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.Error = 3;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.PaperOut = 4;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.InQueue = 5;
+// surrogate statuses
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.ProcessingError = -1;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.PrinterBusy = -2;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.InvalidJobId = -3;
+/** @export */ $fd3139ff3ad63450$var$PrintJobStatus.NotSpooled = -4;
+var $fd3139ff3ad63450$export$2e2bcd8739ae039 = $fd3139ff3ad63450$var$PrintJobStatus;
 
 
 const $ace4824fd98414a7$var$chooseEnvironment = function(envCheckResult) {
@@ -2045,363 +2535,71 @@ const $357bab5e353b9a9d$export$118613715be2faef = (callBack, checkWebService)=>n
 ;
 
 
-const $8dade80d0b9d9e5d$export$f71ef76cc1435eaa = `<?xml version="1.0" encoding="utf-8"?>
-<DesktopLabel Version="1">
-    <DYMOLabel Version="3">
-        <Description>DYMO Label</Description>
-        <Orientation>Landscape</Orientation>
-        <LabelName>Address</LabelName>
-        <InitialLength>0</InitialLength>
-        <BorderStyle>SolidLine</BorderStyle>
-        <DYMORect>
-            <DYMOPoint>
-                <X>0.23</X>
-                <Y>0.06</Y>
-            </DYMOPoint>
-            <Size>
-                <Width>3.21</Width>
-                <Height>0.9966666</Height>
-            </Size>
-        </DYMORect>
-        <BorderColor>
-            <SolidColorBrush>
-                <Color A="1" R="0" G="0" B="0"> </Color>
-            </SolidColorBrush>
-        </BorderColor>
-        <BorderThickness>1</BorderThickness>
-        <Show_Border>False</Show_Border>
-        <DynamicLayoutManager>
-            <RotationBehavior>ClearObjects</RotationBehavior>
-            <LabelObjects>
-                <TextObject>
-                    <Name>Line1</Name>
-                    <Brushes>
-                        <BackgroundBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BackgroundBrush>
-                        <BorderBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BorderBrush>
-                        <StrokeBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </StrokeBrush>
-                        <FillBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </FillBrush>
-                    </Brushes>
-                    <Rotation>Rotation0</Rotation>
-                    <OutlineThickness>1</OutlineThickness>
-                    <IsOutlined>False</IsOutlined>
-                    <BorderStyle>SolidLine</BorderStyle>
-                    <Margin>
-                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
-                    </Margin>
-                    <HorizontalAlignment>Center</HorizontalAlignment>
-                    <VerticalAlignment>Middle</VerticalAlignment>
-                    <FitMode>None</FitMode>
-                    <IsVertical>False</IsVertical>
-                    <FormattedText>
-                        <FitMode>None</FitMode>
-                        <HorizontalAlignment>Center</HorizontalAlignment>
-                        <VerticalAlignment>Middle</VerticalAlignment>
-                        <IsVertical>False</IsVertical>
-                        <LineTextSpan>
-                            <TextSpan>
-                                <Text>Line1</Text>
-                                <FontInfo>
-                                    <FontName>Segoe UI</FontName>
-                                    <FontSize>8</FontSize>
-                                    <IsBold>True</IsBold>
-                                    <IsItalic>False</IsItalic>
-                                    <IsUnderline>False</IsUnderline>
-                                    <FontBrush>
-                                        <SolidColorBrush>
-                                            <Color A="1" R="0" G="0" B="0"> </Color>
-                                        </SolidColorBrush>
-                                    </FontBrush>
-                                </FontInfo>
-                            </TextSpan>
-                        </LineTextSpan>
-                    </FormattedText>
-                    <ObjectLayout>
-                        <DYMOPoint>
-                            <X>0.23</X>
-                            <Y>0.06</Y>
-                        </DYMOPoint>
-                        <Size>
-                            <Width>3.193756</Width>
-                            <Height>0.1368766</Height>
-                        </Size>
-                    </ObjectLayout>
-                </TextObject>
-                <TextObject>
-                    <Name>Line2</Name>
-                    <Brushes>
-                        <BackgroundBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BackgroundBrush>
-                        <BorderBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BorderBrush>
-                        <StrokeBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </StrokeBrush>
-                        <FillBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </FillBrush>
-                    </Brushes>
-                    <Rotation>Rotation0</Rotation>
-                    <OutlineThickness>1</OutlineThickness>
-                    <IsOutlined>False</IsOutlined>
-                    <BorderStyle>SolidLine</BorderStyle>
-                    <Margin>
-                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
-                    </Margin>
-                    <HorizontalAlignment>Center</HorizontalAlignment>
-                    <VerticalAlignment>Middle</VerticalAlignment>
-                    <FitMode>None</FitMode>
-                    <IsVertical>False</IsVertical>
-                    <FormattedText>
-                        <FitMode>None</FitMode>
-                        <HorizontalAlignment>Center</HorizontalAlignment>
-                        <VerticalAlignment>Middle</VerticalAlignment>
-                        <IsVertical>False</IsVertical>
-                        <LineTextSpan>
-                            <TextSpan>
-                                <Text>Line2</Text>
-                                <FontInfo>
-                                    <FontName>Segoe UI</FontName>
-                                    <FontSize>8</FontSize>
-                                    <IsBold>False</IsBold>
-                                    <IsItalic>False</IsItalic>
-                                    <IsUnderline>False</IsUnderline>
-                                    <FontBrush>
-                                        <SolidColorBrush>
-                                            <Color A="1" R="0" G="0" B="0"> </Color>
-                                        </SolidColorBrush>
-                                    </FontBrush>
-                                </FontInfo>
-                            </TextSpan>
-                        </LineTextSpan>
-                    </FormattedText>
-                    <ObjectLayout>
-                        <DYMOPoint>
-                            <X>0.23</X>
-                            <Y>0.1968766</Y>
-                        </DYMOPoint>
-                        <Size>
-                            <Width>3.180007</Width>
-                            <Height>0.1338767</Height>
-                        </Size>
-                    </ObjectLayout>
-                </TextObject>
-                <TextObject>
-                    <Name>Line3</Name>
-                    <Brushes>
-                        <BackgroundBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BackgroundBrush>
-                        <BorderBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BorderBrush>
-                        <StrokeBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </StrokeBrush>
-                        <FillBrush>
-                            <SolidColorBrush>
-                                <Color A="0" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </FillBrush>
-                    </Brushes>
-                    <Rotation>Rotation0</Rotation>
-                    <OutlineThickness>1</OutlineThickness>
-                    <IsOutlined>False</IsOutlined>
-                    <BorderStyle>SolidLine</BorderStyle>
-                    <Margin>
-                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
-                    </Margin>
-                    <HorizontalAlignment>Center</HorizontalAlignment>
-                    <VerticalAlignment>Middle</VerticalAlignment>
-                    <FitMode>None</FitMode>
-                    <IsVertical>False</IsVertical>
-                    <FormattedText>
-                        <FitMode>None</FitMode>
-                        <HorizontalAlignment>Center</HorizontalAlignment>
-                        <VerticalAlignment>Middle</VerticalAlignment>
-                        <IsVertical>False</IsVertical>
-                        <LineTextSpan>
-                            <TextSpan>
-                                <Text>Line3</Text>
-                                <FontInfo>
-                                    <FontName>Segoe UI</FontName>
-                                    <FontSize>10</FontSize>
-                                    <IsBold>False</IsBold>
-                                    <IsItalic>False</IsItalic>
-                                    <IsUnderline>False</IsUnderline>
-                                    <FontBrush>
-                                        <SolidColorBrush>
-                                            <Color A="1" R="0" G="0" B="0"> </Color>
-                                        </SolidColorBrush>
-                                    </FontBrush>
-                                </FontInfo>
-                            </TextSpan>
-                        </LineTextSpan>
-                    </FormattedText>
-                    <ObjectLayout>
-                        <DYMOPoint>
-                            <X>0.23</X>
-                            <Y>0.7875001</Y>
-                        </DYMOPoint>
-                        <Size>
-                            <Width>3.19878</Width>
-                            <Height>0.2691666</Height>
-                        </Size>
-                    </ObjectLayout>
-                </TextObject>
-                <BarcodeObject>
-                    <Name>ItemCode</Name>
-                    <Brushes>
-                        <BackgroundBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="1" G="1" B="1"> </Color>
-                            </SolidColorBrush>
-                        </BackgroundBrush>
-                        <BorderBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </BorderBrush>
-                        <StrokeBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </StrokeBrush>
-                        <FillBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </FillBrush>
-                    </Brushes>
-                    <Rotation>Rotation0</Rotation>
-                    <OutlineThickness>1</OutlineThickness>
-                    <IsOutlined>False</IsOutlined>
-                    <BorderStyle>SolidLine</BorderStyle>
-                    <Margin>
-                        <DYMOThickness Left="0" Top="0" Right="0" Bottom="0" />
-                    </Margin>
-                    <BarcodeFormat>Code128B</BarcodeFormat>
-                    <Data>
-                        <MultiDataString>
-                            <DataString>1234</DataString>
-                        </MultiDataString>
-                    </Data>
-                    <HorizontalAlignment>Center</HorizontalAlignment>
-                    <VerticalAlignment>Middle</VerticalAlignment>
-                    <Size>Medium</Size>
-                    <TextPosition>None</TextPosition>
-                    <FontInfo>
-                        <FontName>Arial</FontName>
-                        <FontSize>12</FontSize>
-                        <IsBold>False</IsBold>
-                        <IsItalic>False</IsItalic>
-                        <IsUnderline>False</IsUnderline>
-                        <FontBrush>
-                            <SolidColorBrush>
-                                <Color A="1" R="0" G="0" B="0"> </Color>
-                            </SolidColorBrush>
-                        </FontBrush>
-                    </FontInfo>
-                    <ObjectLayout>
-                        <DYMOPoint>
-                            <X>0.23</X>
-                            <Y>0.3498435</Y>
-                        </DYMOPoint>
-                        <Size>
-                            <Width>3.196882</Width>
-                            <Height>0.5037009</Height>
-                        </Size>
-                    </ObjectLayout>
-                </BarcodeObject>
-            </LabelObjects>
-        </DynamicLayoutManager>
-    </DYMOLabel>
-    <LabelApplication>Blank</LabelApplication>
-    <DataTable>
-        <Columns> </Columns>
-        <Rows> </Rows>
-    </DataTable>
-</DesktopLabel>`;
 
 
-
-/** LabelSetRecord class
- Holds data of one label-set records and provides methods to add data to the record
-
- @constructor
+const $f6bbdda70da0550a$var$PrintJob = function(printerInfo, jobId) {
+    /**
+   @private
+   */ this._printerInfo = printerInfo;
+    /**
+   @private
+   */ this._jobId = jobId;
+};
+/**
+ Gets printer name the print job has been created for
+ @return {string}
+ */ $f6bbdda70da0550a$var$PrintJob.prototype.getPrinterName = function() {
+    return this._printerInfo.name;
+};
+/**
+ Gets print job id
+ @return {string}
+ */ $f6bbdda70da0550a$var$PrintJob.prototype.getJobId = function() {
+    return this._jobId;
+};
+/**
+ Gets a status of the print job
+ @public
+ @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
+ @return {undefined}
+ */ $f6bbdda70da0550a$var$PrintJob.prototype.getStatus = function(replyCallback) {
+    if (!this._printerInfo.isNetworkPrinter()) {
+        let statusInfo;
+        try {
+            statusInfo = $357bab5e353b9a9d$export$118613715be2faef().getJobStatus(this._printerInfo.name, this._jobId);
+        } catch (e) {
+            statusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(this.getPrinterName(), this._jobId, $fd3139ff3ad63450$export$2e2bcd8739ae039.ProcessingError, e.message || e);
+        }
+        replyCallback(statusInfo);
+    } else this.getStatusForNetworkPrinter(replyCallback);
+};
+/**
+ Gets a status of the print job
  @private
- @implements {ILabelSetRecord}
- */ const $1d177bef11cfbeda$var$LabelSetRecord = function() {
+ @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
+ */ $f6bbdda70da0550a$var$PrintJob.prototype.getStatusForNetworkPrinter = function(replyCallback) {
+    const printerName = this.getPrinterName();
+    const jobId = this._jobId;
+    // let networkPrinterName = splitNetworkPrinterName(printerName);
+    // try to get data
+    const { printerUri: printerUri  } = this._printerInfo;
+    const jsonp2 = new goog.net.Jsonp(goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback');
+    jsonp2.send({
+        jobId: jobId,
+        printerName: this._printerInfo.originalPrinterName
+    }, function(pjs) {
+        const jobStatusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(printerName, jobId, pjs.status, pjs.statusMessage);
+        replyCallback(jobStatusInfo);
+    }, function() {
+        const jobStatusInfo = new $af45e04149270ecf$export$2e2bcd8739ae039(printerName, jobId, $fd3139ff3ad63450$export$2e2bcd8739ae039.ProcessingError, `Error processing getPrintJobStatus(): Unable to contact "${printerUri}"`);
+        replyCallback(jobStatusInfo);
+    });
 };
-/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setTextMarkup = function(objectName, textMarkup) {
-    textMarkup = textMarkup.toString();
-    if (textMarkup.indexOf($87a73fe4e23c61da$export$9319d8092206b03f) != 0) textMarkup = $87a73fe4e23c61da$export$9319d8092206b03f + textMarkup + $87a73fe4e23c61da$export$4a23fba8ac5e0d2e;
-    this[objectName] = textMarkup;
-    return this;
-};
-/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setText = function(objectName, text) {
-    this[objectName] = text;
-    return this;
-};
-/** inheritDoc */ $1d177bef11cfbeda$var$LabelSetRecord.prototype.setBase64Image = function(objectName, base64Image) {
-    this[objectName] = base64Image;
-    return this;
-};
-var $1d177bef11cfbeda$export$2e2bcd8739ae039 = $1d177bef11cfbeda$var$LabelSetRecord;
+var $f6bbdda70da0550a$export$2e2bcd8739ae039 = $f6bbdda70da0550a$var$PrintJob;
 
+parcelRequire.register("kMf1E", function(module, exports) {
 
-
-
-
-
-
-/** Specifies how tape is cut between label when printing multiple labels on Tape printers.
- // Note: it affects multiple pages print jobs only, if one page job is printed the tape is always cut.
- // AutoCut - cut tape between pages
- // ChainMarks - draw a mark between pages
- @enum {string}
- @export
- */ const $d64eec3b73a0f03c$var$TapeCutMode = {
-};
-/** @export */ $d64eec3b73a0f03c$var$TapeCutMode.AutoCut = 'AutoCut';
-/** @export */ $d64eec3b73a0f03c$var$TapeCutMode.ChainMarks = 'ChainMarks';
-var $d64eec3b73a0f03c$export$2e2bcd8739ae039 = $d64eec3b73a0f03c$var$TapeCutMode;
-
-
-
-
-
+$parcel$export(module.exports, "default", () => $f203f21b73a1a142$export$2e2bcd8739ae039);
 /** Specifies how objects and object text are laid down on the label. For Middle East labels/content specify RightToLeft, otherwise "LeftToRight" (default)
  @enum {string}
  @export
@@ -2411,8 +2609,11 @@ var $d64eec3b73a0f03c$export$2e2bcd8739ae039 = $d64eec3b73a0f03c$var$TapeCutMode
 /** @export */ $f203f21b73a1a142$var$FlowDirection.RightToLeft = 'RightToLeft';
 var $f203f21b73a1a142$export$2e2bcd8739ae039 = $f203f21b73a1a142$var$FlowDirection;
 
+});
 
+parcelRequire.register("48txS", function(module, exports) {
 
+$parcel$export(module.exports, "default", () => $302ed3e4ae7cc699$export$2e2bcd8739ae039);
 /** Specifies printing quality when printed on LabelWriter printers
  // 'Text' - text print quality (fast)
  // 'BarcodeAndGraphics' - barcode and images print quality (slow)
@@ -2426,8 +2627,11 @@ var $f203f21b73a1a142$export$2e2bcd8739ae039 = $f203f21b73a1a142$var$FlowDirecti
 /** @export */ $302ed3e4ae7cc699$var$LabelWriterPrintQuality.BarcodeAndGraphics = 'BarcodeAndGraphics';
 var $302ed3e4ae7cc699$export$2e2bcd8739ae039 = $302ed3e4ae7cc699$var$LabelWriterPrintQuality;
 
+});
 
+parcelRequire.register("jwKGU", function(module, exports) {
 
+$parcel$export(module.exports, "default", () => $03ab2e58258d4619$export$2e2bcd8739ae039);
 /**
  @interface
  @public
@@ -2471,7 +2675,11 @@ var $302ed3e4ae7cc699$export$2e2bcd8739ae039 = $302ed3e4ae7cc699$var$LabelWriter
 };
 var $03ab2e58258d4619$export$2e2bcd8739ae039 = $03ab2e58258d4619$var$ILabelSetRecord;
 
+});
 
+parcelRequire.register("5BwOC", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $4149dcedf033ebb8$export$2e2bcd8739ae039);
 /**
  @public
  @interface
@@ -2723,13 +2931,15 @@ $4149dcedf033ebb8$var$ILabel.prototype.isValidLabel = function() {
 };
 var $4149dcedf033ebb8$export$2e2bcd8739ae039 = $4149dcedf033ebb8$var$ILabel;
 
+});
 
+parcelRequire.register("bLohu", function(module, exports) {
 
-var $8906eb39e86ecbaa$exports = {};
+});
 
+parcelRequire.register("c3viI", function(module, exports) {
 
-
-
+$parcel$export(module.exports, "default", () => $8c6e0b8ac29c1d85$export$2e2bcd8739ae039);
 /** Specifies tape's leader and trailer on a label when printing on Tape printer
  // Center - 10mm leader and trailer
  // Left - 6mm leader, 10mm trailer
@@ -2743,7 +2953,11 @@ var $8906eb39e86ecbaa$exports = {};
 /** @export */ $8c6e0b8ac29c1d85$var$TapeAlignment.Right = 'Right';
 var $8c6e0b8ac29c1d85$export$2e2bcd8739ae039 = $8c6e0b8ac29c1d85$var$TapeAlignment;
 
+});
 
+parcelRequire.register("2pwfF", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $1c16ef16e67ae454$export$2e2bcd8739ae039);
 /** Specifies on whitch roll to print when printing on Twin Turbo printers
  // Left - print on left roll only
  // Right - print on right roll only
@@ -2757,7 +2971,11 @@ var $8c6e0b8ac29c1d85$export$2e2bcd8739ae039 = $8c6e0b8ac29c1d85$var$TapeAlignme
 /** @export */ $1c16ef16e67ae454$var$TwinTurboRoll.Right = 'Right';
 var $1c16ef16e67ae454$export$2e2bcd8739ae039 = $1c16ef16e67ae454$var$TwinTurboRoll;
 
+});
 
+parcelRequire.register("38Q9S", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $249a940330f69ded$export$2e2bcd8739ae039);
 /**
  @constructor
  @private
@@ -2770,7 +2988,11 @@ var $1c16ef16e67ae454$export$2e2bcd8739ae039 = $1c16ef16e67ae454$var$TwinTurboRo
 };
 var $249a940330f69ded$export$2e2bcd8739ae039 = $249a940330f69ded$var$CheckEnvironmentResult;
 
+});
 
+parcelRequire.register("b4vjN", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $80f85c90e563111c$export$2e2bcd8739ae039);
 
 /** Creates an xml stream suatable to pass to printLabel() function as printParamsXml parameter
  // Created printing parameters are for printing on LabelWriter printers
@@ -2801,7 +3023,11 @@ var $249a940330f69ded$export$2e2bcd8739ae039 = $249a940330f69ded$var$CheckEnviro
 };
 var $80f85c90e563111c$export$2e2bcd8739ae039 = $80f85c90e563111c$var$createLabelWriterPrintParamsXml;
 
+});
 
+parcelRequire.register("f1wLl", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $af005cfdb1cc667d$export$2e2bcd8739ae039);
 //----------------------------------------------------------------------------
 //
 //  $Id: NetworkPrinter.js 15739 2011-08-11 15:56:29Z vbuzuev $
@@ -2855,7 +3081,14 @@ var $80f85c90e563111c$export$2e2bcd8739ae039 = $80f85c90e563111c$var$createLabel
 };
 var $af005cfdb1cc667d$export$2e2bcd8739ae039 = $af005cfdb1cc667d$var$NetworkPrinterName;
 
+});
 
+parcelRequire.register("9JEOk", function(module, exports) {
+
+$parcel$export(module.exports, "is550Printer", () => $7167f933cef13ee5$export$64fe4026710ed9e3);
+$parcel$export(module.exports, "is550PrinterAsync", () => $7167f933cef13ee5$export$2a08c1724d0b9966);
+$parcel$export(module.exports, "getConsumableInfoIn550Printer", () => $7167f933cef13ee5$export$351966686cb22eb);
+$parcel$export(module.exports, "getConsumableInfoIn550PrinterAsync", () => $7167f933cef13ee5$export$50df381d9f62ba6a);
 
 const $7167f933cef13ee5$export$64fe4026710ed9e3 = function(printerName) {
     let result = false;
@@ -2884,108 +3117,18 @@ const $7167f933cef13ee5$export$50df381d9f62ba6a = function(printerName) {
     });
 };
 
-
-const $7128567ed2719561$var$dymo = {
-    xml: $c7e2149312647974$export$2e2bcd8739ae039,
-    uuid: $762530daf0de5182$export$2e2bcd8739ae039,
-    label: {
-        framework: {
-            trace: false,
-            PrinterInfo: $730e2c8499c69cff$export$2e2bcd8739ae039,
-            AddressBarcodePosition: $47261f1d7d3d2ea1$export$2e2bcd8739ae039,
-            TapeCutMode: $d64eec3b73a0f03c$export$2e2bcd8739ae039,
-            TapePrinterInfo: $2ce209adcfae9472$export$2e2bcd8739ae039,
-            PrintJob: $f6bbdda70da0550a$export$2e2bcd8739ae039,
-            Label: $9a9d7ad69b4a3113$export$2e2bcd8739ae039,
-            FlowDirection: $f203f21b73a1a142$export$2e2bcd8739ae039,
-            PrintJobStatusInfo: $af45e04149270ecf$export$2e2bcd8739ae039,
-            LabelWriterPrintQuality: $302ed3e4ae7cc699$export$2e2bcd8739ae039,
-            LabelWriterPrinterInfo: $180af6f8d627d8c4$export$2e2bcd8739ae039,
-            ILabelSetRecord: $03ab2e58258d4619$export$2e2bcd8739ae039,
-            ILabel: $4149dcedf033ebb8$export$2e2bcd8739ae039,
-            LabelSetBuilder: $dd6befa10a7b6c73$export$2e2bcd8739ae039,
-            NetworkPrinter: (/*@__PURE__*/$parcel$interopDefault($8906eb39e86ecbaa$exports)),
-            NetworkPrinterName: $af005cfdb1cc667d$export$2e2bcd8739ae039,
-            createLabelWriterPrintParamsXml: $80f85c90e563111c$export$2e2bcd8739ae039,
-            DZPrinterInfo: $cd37e7dc69c02314$export$2e2bcd8739ae039,
-            LabelSetRecord: $1d177bef11cfbeda$export$2e2bcd8739ae039,
-            TapeAlignment: $8c6e0b8ac29c1d85$export$2e2bcd8739ae039,
-            TwinTurboRoll: $1c16ef16e67ae454$export$2e2bcd8739ae039,
-            CheckEnvironmentResult: $249a940330f69ded$export$2e2bcd8739ae039,
-            is550Printer: $7167f933cef13ee5$export$64fe4026710ed9e3,
-            is550PrinterAsync: $7167f933cef13ee5$export$2a08c1724d0b9966,
-            getConsumableInfoIn550Printer: $7167f933cef13ee5$export$351966686cb22eb,
-            getConsumableInfoIn550PrinterAsync: $7167f933cef13ee5$export$50df381d9f62ba6a
-        }
-    }
-};
-var $7128567ed2719561$export$2e2bcd8739ae039 = $7128567ed2719561$var$dymo;
+});
 
 
-const $dd6befa10a7b6c73$var$LabelSetBuilder = function() {
-    /**
-   @private
-   */ this._records = [];
-};
-/** Returns label set records
- @export
- @return {Array.<ILabelSetRecord>}
- */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.getRecords = function() {
-    return this._records;
-};
-/** Adds a new record to the label-set
- // Returns created record object
- @export
- @return {ILabelSetRecord}
- */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.addRecord = function() {
-    const record = new $1d177bef11cfbeda$export$2e2bcd8739ae039();
-    this._records.push(record);
-    // noinspection JSValidateTypes
-    return record;
-};
-/** Convert record objects into xml format defined in LabelSet.xsd
- // Returned xml can be passed to dymo.label.framework.printLabel() as labelSetXml parameter.
- // Parameters:
- //      records - records to convert to xml. records should be array-like object of associative-arrays with object names as keys and object text as values.
- // Return string contains xml data
- // Note: this function can be used independent of other LabelSetBuilder methods if records data is generated by other functions
 
- @export
- @param {Array.<Object.<string, string>>} records
- */ $dd6befa10a7b6c73$var$LabelSetBuilder.toXml = function(records) {
-    // create xml representation of LabelSet
-    // records is an Array-like object of associative arrays of object name/object value pairs
-    const doc = $7128567ed2719561$export$2e2bcd8739ae039.xml.parse('<LabelSet/>');
-    const root = doc.documentElement;
-    for(let i = 0; i < records.length; i++){
-        const record = records[i];
-        const recordElem = doc.createElement('LabelRecord');
-        for(const objectName in record){
-            let objectValue = record[objectName];
-            if (typeof objectValue === 'function') continue;
-            objectValue = objectValue.toString();
-            const objectElem = doc.createElement('ObjectData');
-            objectElem.setAttribute('Name', objectName);
-            if (objectValue.indexOf($87a73fe4e23c61da$export$9319d8092206b03f) == 0) {
-                // parse the markup into xml and insert it as is
-                const markupDoc = $7128567ed2719561$export$2e2bcd8739ae039.xml.parse(objectValue);
-                objectElem.appendChild(markupDoc.documentElement.cloneNode(true));
-            } else {
-                const textNode = doc.createTextNode(objectValue);
-                objectElem.appendChild(textNode);
-            }
-            recordElem.appendChild(objectElem);
-        }
-        root.appendChild(recordElem);
-    }
-    return $7128567ed2719561$export$2e2bcd8739ae039.xml.serialize(doc);
-};
-/** Converts the builder to a xml string
- @override
- */ $dd6befa10a7b6c73$var$LabelSetBuilder.prototype.toString = function() {
-    return $dd6befa10a7b6c73$var$LabelSetBuilder.toXml(this._records);
-};
-var $dd6befa10a7b6c73$export$2e2bcd8739ae039 = $dd6befa10a7b6c73$var$LabelSetBuilder;
+
+$parcel$defineInteropFlag(module.exports);
+
+$parcel$export(module.exports, "initApp", () => $98024307a5d0726a$export$bec0ec21ab4579a);
+$parcel$export(module.exports, "createFramework", () => $98024307a5d0726a$export$118613715be2faef);
+$parcel$export(module.exports, "sampleSingleLabel", () => $98024307a5d0726a$export$f71ef76cc1435eaa);
+$parcel$export(module.exports, "LabelSetBuilder", () => $98024307a5d0726a$export$3e1928330f93828b);
+$parcel$export(module.exports, "default", () => $98024307a5d0726a$export$2e2bcd8739ae039);
 
 
 const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
@@ -2995,12 +3138,13 @@ const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
     });
     return new $357bab5e353b9a9d$export$118613715be2faef(callback);
 };
-module.exports = {
-    default: $98024307a5d0726a$export$bec0ec21ab4579a(),
-    createFramework: $357bab5e353b9a9d$export$118613715be2faef,
-    sampleSingleLabel: $8dade80d0b9d9e5d$export$f71ef76cc1435eaa,
-    LabelSetBuilder: $dd6befa10a7b6c73$export$2e2bcd8739ae039
-};
+const $98024307a5d0726a$var$dymoJsSdk = $98024307a5d0726a$export$bec0ec21ab4579a();
+const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$118613715be2faef;
+
+const $98024307a5d0726a$export$f71ef76cc1435eaa = (parcelRequire("ca9Ex")).sampleSingleLabel;
+
+const $98024307a5d0726a$export$3e1928330f93828b = (parcelRequire("j0Czp"));
+var $98024307a5d0726a$export$2e2bcd8739ae039 = $98024307a5d0726a$var$dymoJsSdk;
 
 
 //# sourceMappingURL=dymo-js-sdk.js.map

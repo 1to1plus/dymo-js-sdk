@@ -3850,10 +3850,10 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-dymo-js-sdk@^3.0.12:
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/dymo-js-sdk/-/dymo-js-sdk-3.0.12.tgz#dd80332c7372446b366f544e9da289caf286bb26"
-  integrity sha512-ZRX54E6hgH6NM/q6y8cvNS3jIsFbZFbSMaLB6uBi8R9uMd2fdrafQNk/YhdknLy3WQNgLrcEg5AMLZexGScJEQ==
+dymo-js-sdk@^3.0.14:
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/dymo-js-sdk/-/dymo-js-sdk-3.0.14.tgz#b88496b41feb55dd05ba4132ace62bc37fb24881"
+  integrity sha512-AfaWQOX+sRu638lPqbN+ydIar4ETHabzsb1MYo2pUygZz46yDJuLNrpI2ILIjfRTVhsy34ct3lmBShv8KLt2qA==
   dependencies:
     "@parcel/reporter-bundle-analyzer" "^2.3.2"
     "@xmldom/xmldom" "^0.8.1"

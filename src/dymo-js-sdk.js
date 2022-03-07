@@ -1,9 +1,5 @@
 import { setSetting } from './settings'
 import { createFramework as initFramework } from './dymo/label/framework/createFramework'
-import {
-  sampleSingleLabel as sampleLabel
-} from './dymo/label/framework/createFramework/__tests__/data/singleLabel'
-import _LabelSetBuilder from './dymo/label/framework/LabelSetBuilder'
 
 /**
  *
@@ -19,9 +15,10 @@ export const initApp = (config = {}, callback) => {
   return new initFramework(callback)
 }
 
-module.exports = {
-  default: initApp(),
-  createFramework: initFramework,
-  sampleSingleLabel: sampleLabel,
-  LabelSetBuilder: _LabelSetBuilder,
-}
+const dymoJsSdk = initApp()
+
+export const createFramework = initFramework;
+export const sampleSingleLabel = require('./dymo/label/framework/createFramework/__tests__/data/singleLabel').sampleSingleLabel;
+export const LabelSetBuilder = require('./dymo/label/framework/LabelSetBuilder');
+
+export default dymoJsSdk

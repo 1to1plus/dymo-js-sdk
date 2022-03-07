@@ -20,7 +20,6 @@
  @fileoverview PrinterInfo support
  */
 
-
 /**
  @public
  @constructor
@@ -30,28 +29,27 @@
  @param {boolean} isConnected
  @param {boolean} isLocal
  */
-const PrinterInfo = function (
-  printerType, name, modelName, isConnected, isLocal) {
-  this['printerType'] = printerType
-  this['name'] = name
-  this['modelName'] = modelName
-  this['isConnected'] = isConnected
-  this['isLocal'] = isLocal
+const PrinterInfo = function (printerType, name, modelName, isConnected, isLocal) {
+  this.printerType = printerType;
+  this.name = name;
+  this.modelName = modelName;
+  this.isConnected = isConnected;
+  this.isLocal = isLocal;
 
   /**
    internal field to store a printer uri as "network/mobile/remote" printer, e.g. uri for DYMO Label lProxy service
    @public
    @type {string}
    */
-  this.printerUri = ''
+  this.printerUri = '';
 
   /**
    internal field to store an original printer name as got from network printer
    @public
    @type {string}
    */
-  this.originalPrinterName = ''
-}
+  this.originalPrinterName = '';
+};
 
 /** Determines is the printer local or network
  Local means installed as a Printer on the Desktop machine
@@ -61,7 +59,7 @@ const PrinterInfo = function (
  @return {boolean}
  */
 PrinterInfo.prototype.isNetworkPrinter = function () {
-  return this.printerUri != ''
-}
+  return this.printerUri != '';
+};
 
-export default PrinterInfo
+export default PrinterInfo;

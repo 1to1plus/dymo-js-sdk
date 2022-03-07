@@ -1,13 +1,27 @@
-import goog from 'google-closure-library'
+import { parseString } from 'xml2js'
+import { DOMParser, XMLSerializer } from '@xmldom/xmldom'
+import { xml2json } from 'xml-js'
 
 const xml = {}
+
+export const xmlToJson = (xmlData) => {
+  let newJson
+
+  parseString(xmlData, function (err, results) {
+    // parsing to json
+    newJson = JSON.stringify(results)
+  }, undefined);
+
+  return newJson;
+}
 
 /**
  @param {string} text
  @return {Document}
  */
 xml.parse = function (text) {
-  return goog.dom.xml.loadXml(text)
+  const parser = new DOMParser()
+  return parser.parseFromString(text, 'application/xml')
 }
 
 /**
@@ -17,20 +31,22 @@ xml.parse = function (text) {
  */
 xml.serialize = function (node) {
   function fix (node) {
-    return node.replaceAll(/<Color (.+)\/>/g, '<Color $1> </Color>')
+    try {
+      return node.replaceAll(/<Color (.+)\/>/g, '<Color $1> </Color>')
+    } catch (e) {
+
+    }
+
+    return node
   }
 
-  return fix(goog.dom.xml.serialize(node))
+  const test = new XMLSerializer().serializeToString(node)
+  console.log({ test })
 
-  /*
-  if (typeof XMLSerializer != "undefined")
-      return (new XMLSerializer()).serializeToString(node);
-  else if (node.xml)
-      return node.xml;
-  else
-      throw new Error("XML.serialize is not supported or can't serialize " + node);
-*/
+  return fix(test)
 }
+
+export const xmlSerialize = xml.serialize;
 
 // appends a new element to DOM tree as child of parent and set it content to text
 // parent - parent Element
@@ -63,20 +79,17 @@ xml.appendElement = function (parentElement, tagName, text, attributes) {
 // returns text content of the element, e.g. for tag <Name>address123</Name>, 'address123' will be returned
 /**
  */
-xml.getElementText = function (elem) {
-  if (!elem)
-    return ''
+xml.getElementText = function (elem, defaultValue = '') {
+  if (!elem) {
+    return defaultValue
+  }
 
-  return goog.dom.getRawTextContent(elem)
-
-  /*
-  let result = "";
+  let result = ''
   for (let i = 0; i < elem.childNodes.length; i++)
-      if (elem.childNodes[i].nodeType == 3) //TEXT_NODE
-      result = result + elem.childNodes[i].data;
+    if (elem.childNodes[i].nodeType == 3) //TEXT_NODE
+      result = result + elem.childNodes[i].data
 
-  return result;
-  */
+  return result
 }
 
 // returns child element of parent with tag name "elemName"
@@ -109,6 +122,17 @@ xml.setElementText = function (element, text) {
 xml.removeAllChildren = function (node) {
   while (node.firstChild)
     node.removeChild(node.firstChild)
+}
+
+xml.xmlToJson = xmlToJson
+
+export const convertJsonToXml = async (json) => {
+  return new Promise(resolve => {
+    let convert
+
+    convert = xml2json(json, { compact: true })
+    resolve(convert)
+  })
 }
 
 export default xml

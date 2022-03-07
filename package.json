@@ -1,26 +1,48 @@
 {
   "name": "dymo-js-sdk",
-  "version": "3.0.0",
-  "homepage": "https://github.com/dymosoftware/dymo-connect-framework",
-  "description": "Node project for dymo",
-  "private": true,
-  "author": {
-    "name": "Zach Robichaud",
-    "company": "https://onetooneplus.com/",
-    "email": "zach2825@gmail.com"
+  "version": "3.0.6",
+  "homepage": "https://github.com/1to1plus/dymo-js-sdk",
+  "description": "Node project for js dymo node communications",
+  "keywords": [
+    "dymo",
+    "communications",
+    "api-interaction",
+    "printer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1to1plus/dymo-js-sdk"
   },
+  "private": false,
+  "license": "MIT",
+  "files": [
+    "./src/DlsWebService",
+    "./src/helpers",
+    "./src/dymo",
+    "./src/settings",
+    "./src/LICENSE",
+    "./src/README.md",
+    "./src/package.json"
+  ],
+  "contributors": [
+    {
+      "name": "Zach Robichaud",
+      "company": "https://onetooneplus.com/",
+      "email": "zach2825@gmail.com"
+    }
+  ],
   "scripts": {
     "build": "babel src -d dist --source-maps",
-    "clean": "rm -rf dist",
-    "debug": "nodemon --exec babel-node --inspect-brk src/index.js ",
-    "serve": "node dist/index.js",
-    "start": "nodemon src/demo/index.js --exec babel-node",
+    "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
-    "test": "jest --runInBand --verbose",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "demo": "node ./src/demo/test-label.js",
     "coverage": "jest --coverage --runInBand --verbose",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
-    "release": "npm version patch && git push && git push --tags"
+    "push:all": "git push && git push --tags",
+    "release": "npm version patch && yarn push:all"
   },
   "babel": {
     "presets": [
@@ -35,7 +57,8 @@
     ]
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=10",
+    "yarn": ">=1.22.4"
   },
   "eslintConfig": {
     "plugins": [
@@ -48,7 +71,17 @@
       "plugin:jest/recommended",
       "prettier"
     ],
-    "rules": {},
+    "rules": {
+      "no-underscore-dangle": "off",
+      "func-names": "off",
+      "no-console": "off",
+      "no-plusplus": "off",
+      "import/prefer-default-export": "off",
+      "no-param-reassign": "off",
+      "import/no-cycle": "off",
+      "no-throw-literal": "off",
+      "no-bitwise": "off"
+    },
     "env": {
       "jest/globals": true,
       "node": true,
@@ -70,6 +103,7 @@
     "@babel/core": "^7.17.4",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "axios-mock-adapter": "^1.20.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -79,16 +113,19 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "jest-cli": "^27.5.1",
+    "jest-mock-axios": "^4.5.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.8.1",
     "axios": "^0.26.0",
     "dot-object": "^2.1.4",
     "dotenv": "^16.0.0",
-    "fast-xml-parser": "^4.0.3",
     "google-closure-library": "^20220104.0.0",
-    "jsonxml": "^1.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "qs": "^6.10.3",
+    "xml-js": "^1.6.11",
+    "xml2js": "^0.4.23"
   }
 }

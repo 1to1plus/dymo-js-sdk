@@ -1,10 +1,10 @@
-import getPrinters from '../getPrinters'
-import {isNil} from 'lodash';
-import { getSetting } from '../../../../settings'
-import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter'
-import _createFramework from '../createFramework'
-import PrintJob from '../PrintJob'
-import getPrintersAsync from '../getPrintersAsync'
+import { isNil } from 'lodash';
+import getPrinters from '../getPrinters';
+import { getSetting } from '../../../../settings';
+import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter';
+import _createFramework from '../createFramework';
+import PrintJob from '../PrintJob';
+import getPrintersAsync from '../getPrintersAsync';
 
 /** Prints a label and return a job id
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -22,34 +22,29 @@ import getPrintersAsync from '../getPrintersAsync'
  @return {PrintJob} print job
  @export
  */
-const printLabel2 = function (
-  printerName, printParamsXml, labelXml, labelSetXml) {
-  printParamsXml = printParamsXml || ''
-  labelSetXml = labelSetXml || ''
-  if (typeof (labelSetXml) != 'string')
-    labelSetXml = labelSetXml.toString()
+const printLabel2 = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  printParamsXml = printParamsXml || '';
+  labelSetXml = labelSetXml || '';
+  if (typeof labelSetXml !== 'string') labelSetXml = labelSetXml.toString();
 
-  if (typeof (labelXml) == 'undefined')
-    throw new Error('printLabel2(): labelXml parameter should be specified')
+  if (typeof labelXml === 'undefined')
+    throw new Error('printLabel2(): labelXml parameter should be specified');
 
-  if (typeof (labelXml) != 'string')
-    labelXml = labelXml.toString()
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
-  let printers = getPrinters()
-  let printerInfo = printers[printerName]
+  const printers = getPrinters();
+  const printerInfo = printers[printerName];
 
   if (!isNil(printerInfo)) {
     if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter())
-      return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
-        labelSetXml)
-    else
-      return new PrintJob(
-        printerInfo,
-        _createFramework().
-          printLabel2(printerName, printParamsXml, labelXml, labelSetXml))
-  } else
-    throw new Error('printLabel(): unknown printer \'' + printerName + '\'')
-}
+      return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
+    return new PrintJob(
+      printerInfo,
+      _createFramework().printLabel2(printerName, printParamsXml, labelXml, labelSetXml),
+    );
+  }
+  throw new Error(`printLabel(): unknown printer '${printerName}'`);
+};
 
 /** Prints a label and return a job id
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -67,40 +62,31 @@ const printLabel2 = function (
  @return {goog.Promise} PrintJob print job
  @export
  */
-export const printLabel2Async = function (
-  printerName, printParamsXml, labelXml, labelSetXml) {
+export const printLabel2Async = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  printParamsXml = printParamsXml || '';
+  labelSetXml = labelSetXml || '';
+  if (typeof labelSetXml !== 'string') labelSetXml = labelSetXml.toString();
 
-  printParamsXml = printParamsXml || ''
-  labelSetXml = labelSetXml || ''
-  if (typeof (labelSetXml) != 'string')
-    labelSetXml = labelSetXml.toString()
+  if (typeof labelXml === 'undefined')
+    throw new Error('printLabel2Async(): labelXml parameter should be specified');
 
-  if (typeof (labelXml) == 'undefined')
-    throw new Error(
-      'printLabel2Async(): labelXml parameter should be specified')
-
-  if (typeof (labelXml) != 'string')
-    labelXml = labelXml.toString()
+  if (typeof labelXml !== 'string') labelXml = labelXml.toString();
 
   return getPrintersAsync().then(function (printers) {
-
-    let printerInfo = printers[printerName]
+    const printerInfo = printers[printerName];
 
     if (!isNil(printerInfo)) {
       if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter()) {
-        return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml,
-          labelSetXml)
-      } else {
-        return _createFramework().
-          printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml).
-          then(function (result) {
-            return new PrintJob(printerInfo, result)
-          })
+        return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
       }
-    } else
-      throw new Error(
-        'printLabel2Async(): unknown printer \'' + printerName + '\'')
-  })
-}
+      return _createFramework()
+        .printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml)
+        .then(function (result) {
+          return new PrintJob(printerInfo, result);
+        });
+    }
+    throw new Error(`printLabel2Async(): unknown printer '${printerName}'`);
+  });
+};
 
 export default printLabel2;

@@ -1,4 +1,4 @@
-import { get, set } from 'lodash'
+import { get, set } from 'lodash';
 
 export const settings = {
   DEBUG: false,
@@ -29,7 +29,7 @@ export const settings = {
       },
     },
   },
-}
+};
 
 export const printers = [];
 export const printersObj = {};
@@ -45,17 +45,17 @@ export const constants = {
   WS_CMD_GET_JOB_STATUS: 'GetJobStatus',
   WS_CMD_IS_550_PRINTER: 'Is550Printer',
   WS_CMD_GET_CONSUMABLE_INFO_IN_550_PRINTER: 'GetConsumableInfoIn550Printer',
-}
+};
 
-export const TextMarkupTag = '<TextMarkup>'
-export const TextMarkupClosedTag = '</TextMarkup>'
+export const TextMarkupTag = '<TextMarkup>';
+export const TextMarkupClosedTag = '</TextMarkup>';
 
 /**
  * Map of tags which have predefined values with regard to whitespace.
  * @private {!Object<string, string>}
  * @const
  */
-export const PREDEFINED_TAG_VALUES_ = { 'IMG': ' ', 'BR': '\n' }
+export const PREDEFINED_TAG_VALUES_ = { IMG: ' ', BR: '\n' };
 
 /**
  * Map of tags whose content to ignore when calculating text length.
@@ -63,12 +63,12 @@ export const PREDEFINED_TAG_VALUES_ = { 'IMG': ' ', 'BR': '\n' }
  * @const
  */
 export const TAGS_TO_IGNORE_ = {
-  'SCRIPT': 1,
-  'STYLE': 1,
-  'HEAD': 1,
-  'IFRAME': 1,
-  'OBJECT': 1,
-}
+  SCRIPT: 1,
+  STYLE: 1,
+  HEAD: 1,
+  IFRAME: 1,
+  OBJECT: 1,
+};
 
 /**
  * Constants for the nodeType attribute in the Node interface.
@@ -96,21 +96,21 @@ export const NodeType = {
   DOCUMENT_TYPE: 10,
   DOCUMENT_FRAGMENT: 11,
   NOTATION: 12,
-}
+};
 
 /**
  * Maximum value of #hashCode, exclusive. 2^32.
  * @type {number}
  * @private
  */
-export const HASHCODE_MAX_ = 0x100000000
+export const HASHCODE_MAX_ = 0x100000000;
 
 /**
  * The most recent unique ID. |0 is equivalent to Math.floor in this case.
  * @type {number}
  * @private
  */
-export let uniqueStringCounter_ = Math.random() * 0x80000000 | 0
+export const uniqueStringCounter_ = (Math.random() * 0x80000000) | 0;
 
 /**
  * Common Unicode string characters.
@@ -118,7 +118,7 @@ export let uniqueStringCounter_ = Math.random() * 0x80000000 | 0
  */
 export const Unicode = {
   NBSP: '\xa0',
-}
+};
 
 /**
  * Special chars that need to be escaped for quote.
@@ -134,15 +134,15 @@ export const specialEscapeChars_ = {
   '\x0B': '\\x0B', // '\v' is not supported in JScript
   '"': '\\"',
   '\\': '\\\\',
-}
+};
 
 /**
  * Character mappings used internally for escapeChar.
  * @private {!Object<string, string>}
  */
 export const jsEscapeCache_ = {
-  '\'': '\\\'',
-}
+  "'": "\\'",
+};
 
 /**
  * Regular expression used for splitting a string into substrings of fractional
@@ -150,66 +150,68 @@ export const jsEscapeCache_ = {
  * @type {RegExp}
  * @private
  */
-export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g
+export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
 
 /**
  * gets the settings fail over to the constants
  * @param {string} key - path in the settings object
  * @param {any} [defaultValue = undefined]
  * @param {boolean} [strict]
- * @return {Exclude<{WS_CMD_GET_PRINTERS: string, WS_CMD_LOAD_IMAGE: string, WS_CMD_OPEN_LABEL: string, WS_CMD_STATUS: string, WS_CMD_RENDER_LABEL: string, WS_CMD_GET_JOB_STATUS: string, WS_CMD_PRINT_LABEL: string, WS_CMD_IS_550_PRINTER: string, WS_CMD_PRINT_LABEL2: string, WS_CMD_GET_CONSUMABLE_INFO_IN_550_PRINTER: string}[keyof {WS_CMD_GET_PRINTERS: string, WS_CMD_LOAD_IMAGE: string, WS_CMD_OPEN_LABEL: string, WS_CMD_STATUS: string, WS_CMD_RENDER_LABEL: string, WS_CMD_GET_JOB_STATUS: string, WS_CMD_PRINT_LABEL: string, WS_CMD_IS_550_PRINTER: string, WS_CMD_PRINT_LABEL2: string, WS_CMD_GET_CONSUMABLE_INFO_IN_550_PRINTER: string}], undefined>|Exclude<{DETECT_DOUBLE_ESCAPING: boolean, TRUSTED_SITE: boolean, var: string, FORCE_NON_DOM_HTML_UNESCAPING: boolean}[keyof {DETECT_DOUBLE_ESCAPING: boolean, TRUSTED_SITE: boolean, var: string, FORCE_NON_DOM_HTML_UNESCAPING: boolean}], undefined>}
+ * @return {{DETECT_DOUBLE_ESCAPING: boolean, WS_PROTOCOL: string, WS_START_PORT: number, WS_END_PORT: number, Port: number, Host: string, ASSUME_MOBILE: boolean, DEBUG: boolean, WS_COMMAND_TIMEOUT: number, WS_SVC_HOST: string, TRUSTED_SITE: boolean, dymo: {label: {framework: {trace: boolean, currentFramework: number}}}, WS_SVC_PATH: string, BASE_URL: undefined, FORCE_NON_DOM_HTML_UNESCAPING: boolean, WS_CHECK_TIMEOUT: number, WS_SVC_HOST_LEGACY: string}}
  */
-export const getSetting = (key, defaultValue = undefined, strict = false) => {
-  const foundSetting = get(settings, key, undefined)
-
-  if (foundSetting === undefined && !strict) {
-    return get(constants, key, defaultValue)
+export const getSetting = (key = undefined, defaultValue = undefined, strict = false) => {
+  if(!key){
+    return settings;
   }
 
-  return foundSetting
-}
+  const foundSetting = get(settings, key, undefined);
+
+  if (foundSetting === undefined && !strict) {
+    return get(constants, key, defaultValue);
+  }
+
+  return foundSetting;
+};
 
 export const setSetting = (key, value) => {
-  return set(settings, key, value)
-}
+  return set(settings, key, value);
+};
 
 if (!settings.BASE_URL) {
-  let host = getSetting('Host')
-  let port = getSetting('Port')
+  const host = getSetting('Host');
+  const port = getSetting('Port');
 
-  let url = getSetting('WS_PROTOCOL') + host + ':' + port + '/' +
-    getSetting('WS_SVC_PATH') + '/'
+  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
 
-  setSetting('BASE_URL', url)
+  setSetting('BASE_URL', url);
 }
 
-export const buildApiUrl = (command, {
-  host = getSetting('Host'),
-  port = getSetting('Port'),
-} = {}) => {
-  let url = getSetting('WS_PROTOCOL') + host + ':' + port + '/' +
-    getSetting('WS_SVC_PATH') + '/'
+export const buildApiUrl = (
+  command,
+  { host = getSetting('Host'), port = getSetting('Port') } = {},
+) => {
+  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
 
-  return url + command
-}
+  return url + command;
+};
 
 export const addPrinterToCollection = (printer, result) => {
-  const {
-    name: printerName,
-  } = printer;
+  const { name: printerName } = printer;
 
   printers.push(printer);
   printersObj[printerName] = printer;
 
   result.push(printer);
-  result['byIndex'].push(printer);
+  result.byIndex.push(printer);
 
   if (printerName.match(/^\d+$/)) {
-    console.error('Printer name consisting of numbers only (' + printerName + ') will break proper array behavior. Consider using "byIndex" property for accessing elements by index reliably.');
+    console.error(
+      `Printer name consisting of numbers only (${printerName}) will break proper array behavior. Consider using "byIndex" property for accessing elements by index reliably.`,
+    );
   }
   if (printerName === 'length') {
     console.error('Using "length" as printer name overrides Array.length property!');
   }
 
   result[printerName] = printer;
-}
+};

@@ -1,4 +1,4 @@
-import _createFramework from '../createFramework'
+import _createFramework from '../createFramework';
 
 /** Loads an image from url/file and returns it as base64-encoded png stream.
  // Note: the same comments as for openLabelFile() is applied to this function as well
@@ -7,8 +7,7 @@ import _createFramework from '../createFramework'
  @return {string}
  @export
  */
-const loadImageAsPngBase64 = function(imageUri)
-{
+const loadImageAsPngBase64 = function (imageUri) {
   return _createFramework().loadImageAsPngBase64(imageUri);
 };
 

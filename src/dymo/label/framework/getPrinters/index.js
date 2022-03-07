@@ -1,5 +1,3 @@
-
-
 // returns all printers supported by the DYMO Label Framework
 // printers are returned in array-like object that is an associative-array with printer name as a key as well
 // each printer object has the following properties:
@@ -13,31 +11,29 @@
 
 import { getSetting } from '../../../../settings'
 import createPrintersCollection from '../createPrintersCollection'
-import _createFramework from '../createFramework'
-import {getPrinters as onOffGetPrinters} from '../OneOffFunctions';
+import { createFramework } from '../createFramework'
+import { getPrinters as onOffGetPrinters } from '../OneOffFunctions'
 import addNetworkPrintersToCollection from '../addNetworkPrintersToCollection'
 
 /**
  @export
  @return {Array.<dymo.label.framework.PrinterInfo>}
  */
-const getPrinters = function()
-{
-  let result = createPrintersCollection();
+const getPrinters = async () => {
+  let result = createPrintersCollection()
 
-  if (!getSetting('ASSUME_MOBILE'))
-  {
+  if (!getSetting('ASSUME_MOBILE')) {
     // get 'local' printers, if we can
-    try
-    {
-      let printersXml = _createFramework().getPrinters();
-      result = onOffGetPrinters(printersXml);
+    try {
+      const printersXml = await createFramework().getPrinters()
+      result = onOffGetPrinters(printersXml)
+    } catch (e) {
+      console.log({ e })
     }
-    catch(e) {}
   }
 
   addNetworkPrintersToCollection(result);
   return result;
-}
+};
 
 export default getPrinters;

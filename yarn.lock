@@ -1525,6 +1525,15 @@
   dependencies:
     "@parcel/types" "2.3.2"
 
+"@parcel/reporter-bundle-analyzer@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@parcel/reporter-bundle-analyzer/-/reporter-bundle-analyzer-2.3.2.tgz#2a8f63a9a4e171c841d7f52239234d99110ab896"
+  integrity sha512-ZsIH6iThwf4aTb56FKuqL2WuuvSM94JBFJzwNcKS5WfwXtWPlLWfhiCBmBqUaKqZBork6N9z+AQAnZByXUh4oA==
+  dependencies:
+    "@parcel/plugin" "2.3.2"
+    "@parcel/utils" "2.3.2"
+    nullthrows "^1.1.1"
+
 "@parcel/reporter-cli@2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@parcel/reporter-cli/-/reporter-cli-2.3.2.tgz#0617e088aac5ef7fa255d088e7016bb4f9d66a53"
@@ -4942,6 +4951,13 @@ package-json@^6.3.0:
     registry-auth-token "^4.0.0"
     registry-url "^5.0.0"
     semver "^6.2.0"
+
+parcel-plugin-nuke-dist@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-nuke-dist/-/parcel-plugin-nuke-dist-1.0.1.tgz#538a00a7a071807e3c1747d94fed6b277fdcf0e1"
+  integrity sha512-pwYcpHDRohHMpRvU5HeDG8uTvMtT6xTQYDdY7jIEz5dIYQo6L17lYWal29mJyfQZeI4nLHhl+UNR6axoCoRLsg==
+  dependencies:
+    rimraf "^3.0.0"
 
 parcel@^2.3.2:
   version "2.3.2"

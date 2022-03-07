@@ -3136,7 +3136,7 @@ const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
     Object.keys(config).forEach((key)=>{
         $87a73fe4e23c61da$export$61fd6f1ddd0c20e2(key, config[key]);
     });
-    return new $357bab5e353b9a9d$export$118613715be2faef(callback);
+    return $357bab5e353b9a9d$export$118613715be2faef(callback);
 };
 const $98024307a5d0726a$var$dymoJsSdk = $98024307a5d0726a$export$bec0ec21ab4579a();
 const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$118613715be2faef;

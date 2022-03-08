@@ -1,4 +1,4 @@
-import { setSetting as _setSetting, getSetting as _getSetting } from './settings'
+import { setSetting as _setSetting, getSetting as _getSetting, settings as appSettings } from './settings'
 import { createFramework as initFramework } from './dymo/label/framework/createFramework'
 
 /**
@@ -20,5 +20,6 @@ export const sampleSingleLabel = require('./dymo/label/framework/createFramework
 export const LabelSetBuilder = require('./dymo/label/framework/LabelSetBuilder').default;
 export const setSetting = _setSetting;
 export const getSetting = _getSetting;
+export const settings = appSettings;
 
 export default initApp

@@ -13,3 +13,7 @@ export const appendUrlPath = (baseUri, path) => {
 
   return `${baseUri}/${path}`
 }
+
+export const lowercaseFirstLetter = (theString) =>  {
+  return theString.charAt(0).toLowerCase() + theString.slice(1);
+}

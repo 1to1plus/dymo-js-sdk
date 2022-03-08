@@ -31,7 +31,7 @@
     }
   ],
   "scripts": {
-    "build": "rm ./dist -Rf; parcel build ./src/dymo-js-sdk.js",
+    "build": "parcel build ./src/dymo-js-sdk.js",
     "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
     "test": "jest",

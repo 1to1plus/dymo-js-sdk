@@ -1,12 +1,42 @@
 import { invokeWsCommandAsync, GET, POST } from '../helpers/ajax'
 import { getSetting } from '../settings'
+import { lowercaseFirstLetter } from '../helpers/string'
 
 /**
  * @constructor
  */
 export const DlsWebService = function () {
-  this.getPrinters = function () {
-    return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
+  this.getPrinters = async function () {
+    const response  = await  invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
+    const {Printers: _responsePrinters = []} = response || {};
+
+    console.log('getPrinters', {response, _responsePrinters});
+    const printers = [];
+
+    Object.keys(_responsePrinters).forEach(printerType => {
+      const modelPrinters = _responsePrinters[printerType] || [];
+      const printer = {
+        printerType,
+      };
+
+      console.log('getPrinters._responsePrinters', {modelPrinters, printer});
+
+      modelPrinters.forEach(modelPrinter => {
+        Object.keys(modelPrinter).forEach(key => {
+          const newValue = modelPrinter[key][0];
+
+          printer[key] = newValue; // regular mapped keys
+          printer[lowercaseFirstLetter(key)] = newValue; // lowercase mapped keys
+        })
+
+        printers.push(printer);
+      });
+
+    })
+
+    console.log('getPrinters', {printers});
+
+    return printers;
   }
 
   this.getJobStatus = function () {

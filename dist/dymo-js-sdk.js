@@ -1740,6 +1740,9 @@ const $1a7caefcd96a48d2$export$bc22fd4c25654bb8 = (baseUri, path)=>{
     if (path.startsWith('/')) path = path.substr(1);
     return `${baseUri}/${path}`;
 };
+const $1a7caefcd96a48d2$export$f08459d87829d2ee = (theString)=>{
+    return theString.charAt(0).toLowerCase() + theString.slice(1);
+};
 
 
 /** filters printers list by specified printer type
@@ -2188,9 +2191,39 @@ var $756044f2577989d3$export$2e2bcd8739ae039 = $756044f2577989d3$var$apiService;
 
 
 
+
 const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
-    this.getPrinters = function() {
-        return $756044f2577989d3$export$9bd96f5c5c9d87f0($756044f2577989d3$export$1bb358554aac31c1, $87a73fe4e23c61da$export$8206e8d612b3e63('WS_CMD_GET_PRINTERS'));
+    this.getPrinters = async function() {
+        const response = await $756044f2577989d3$export$9bd96f5c5c9d87f0($756044f2577989d3$export$1bb358554aac31c1, $87a73fe4e23c61da$export$8206e8d612b3e63('WS_CMD_GET_PRINTERS'));
+        const { Printers: _responsePrinters = []  } = response || {
+        };
+        console.log('getPrinters', {
+            response: response,
+            _responsePrinters: _responsePrinters
+        });
+        const printers = [];
+        Object.keys(_responsePrinters).forEach((printerType)=>{
+            const modelPrinters = _responsePrinters[printerType] || [];
+            const printer = {
+                printerType: printerType
+            };
+            console.log('getPrinters._responsePrinters', {
+                modelPrinters: modelPrinters,
+                printer: printer
+            });
+            modelPrinters.forEach((modelPrinter)=>{
+                Object.keys(modelPrinter).forEach((key)=>{
+                    const newValue = modelPrinter[key][0];
+                    printer[key] = newValue; // regular mapped keys
+                    printer[$1a7caefcd96a48d2$export$f08459d87829d2ee(key)] = newValue; // lowercase mapped keys
+                });
+                printers.push(printer);
+            });
+        });
+        console.log('getPrinters', {
+            printers: printers
+        });
+        return printers;
     };
     this.getJobStatus = function() {
         return $756044f2577989d3$export$9bd96f5c5c9d87f0($756044f2577989d3$export$1bb358554aac31c1, $87a73fe4e23c61da$export$8206e8d612b3e63('WS_CMD_GET_JOB_STATUS'));

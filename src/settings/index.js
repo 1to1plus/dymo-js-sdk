@@ -183,8 +183,6 @@ export const getSetting = (key = undefined, defaultValue = undefined, strict = f
 };
 
 export const setSetting = (key, value) => {
-  console.log(`setSetting.${key}=`, value);
-
   if(['port', 'host'].includes(key.toLowerCase())){
     reGenerateBaseUrl()
   }

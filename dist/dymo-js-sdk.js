@@ -577,7 +577,6 @@ const $87a73fe4e23c61da$export$8206e8d612b3e63 = (key, defaultValue, strict = fa
     return foundSetting;
 };
 const $87a73fe4e23c61da$export$61fd6f1ddd0c20e2 = (key, value)=>{
-    console.log(`setSetting.${key}=`, value);
     if ([
         'port',
         'host'

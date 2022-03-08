@@ -1,5 +1,5 @@
 import LabelSetBuilder from '../dymo/label/framework/LabelSetBuilder'
-import { createFramework } from '../dymo/label/framework/createFramework'
+import initFramework from '../dymo-js-sdk'
 import {
   sampleSingleLabel,
 } from '../dymo/label/framework/createFramework/__tests__/data/singleLabel'
@@ -10,7 +10,7 @@ const handler = async (settings) => {
   let loading = false
 
   // init the framework
-  const framework = await createFramework(undefined, true)
+  const framework = await initFramework()
 
   // build label template values
   const record = labelSet.addRecord()

@@ -3161,13 +3161,12 @@ const $98024307a5d0726a$export$bec0ec21ab4579a = (config = {
     });
     return $357bab5e353b9a9d$export$118613715be2faef(callback);
 };
-const $98024307a5d0726a$var$dymoJsSdk = $98024307a5d0726a$export$bec0ec21ab4579a();
 const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$118613715be2faef;
 
 const $98024307a5d0726a$export$f71ef76cc1435eaa = (parcelRequire("ca9Ex")).sampleSingleLabel;
 
 const $98024307a5d0726a$export$3e1928330f93828b = (parcelRequire("j0Czp")).default;
-var $98024307a5d0726a$export$2e2bcd8739ae039 = $98024307a5d0726a$var$dymoJsSdk;
+var $98024307a5d0726a$export$2e2bcd8739ae039 = $98024307a5d0726a$export$bec0ec21ab4579a;
 
 
 //# sourceMappingURL=dymo-js-sdk.js.map

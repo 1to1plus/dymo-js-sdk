@@ -1,6 +1,7 @@
 <template>
   <div class="container clearfix">
-    <button class="btn btn-primary" @click="printLabel">Print test label</button>
+    <button class="btn btn-primary me-3" :disabled="initializing" @click="initTheThing">Init the framework</button>
+    <button class="btn btn-secondary" @click="printLabel">Print test label</button>
     <button class="btn btn-secondary ms-3" @click="loadPrinters">Get Printers</button>
     <div class="container mt-3">
       <div class="row">
@@ -22,7 +23,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import framework, { sampleSingleLabel, LabelSetBuilder } from 'dymo-js-sdk';
+import initFramework, { sampleSingleLabel, LabelSetBuilder } from 'dymo-js-sdk';
 
 export default {
   name: 'Home',
@@ -32,6 +33,7 @@ export default {
       printers: '',
       framework: null,
       labelTemplate: null,
+      initializing: false,
       printLabelResponse: 'n/a',
     }
   },
@@ -52,10 +54,15 @@ export default {
 
       this.printLabelResponse = await this.framework.printLabel(printerToUse, '', labelXmlFromFile, labelSet + '')
     },
+    async initTheThing(){
+      this.initializing = true;
+      this.framework = await initFramework(); //await createFramework(undefined, true)
+      this.initializing = false;
+    }
   },
   async mounted () {
     // from dymo js sdk framework is a promise. When called it will poll the printer common ports and try to find the printer.
-    this.framework = await framework; //await createFramework(undefined, true)
+    this.framework = {};// await initFramework(); //await createFramework(undefined, true)
   },
 }
 </script>

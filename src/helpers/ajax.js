@@ -87,10 +87,9 @@ export const ajaxSync = (url, data, method, defaultData = undefined) => {
   return responseData;
 };
 
-export const getAjaxPromise = (currentPort, host) => {
-  const stop = 'here';
+export const getAjaxPromise = (port, host) => {
   const url = buildApiUrl(getSetting('WS_CMD_STATUS'), {
-    currentPort,
+    port,
     host,
   });
 

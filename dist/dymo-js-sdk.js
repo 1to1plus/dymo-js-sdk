@@ -2122,10 +2122,9 @@ const $756044f2577989d3$export$929c93f3ebf4dd68 = (url, data, method, defaultDat
     });
     return responseData;
 };
-const $756044f2577989d3$export$cda26f64738995f6 = (currentPort, host)=>{
-    const stop = 'here';
+const $756044f2577989d3$export$cda26f64738995f6 = (port, host)=>{
     const url = $87a73fe4e23c61da$export$937701d1b4a6fa29($87a73fe4e23c61da$export$8206e8d612b3e63('WS_CMD_STATUS'), {
-        currentPort: currentPort,
+        port: port,
         host: host
     });
     return $756044f2577989d3$var$apiService({

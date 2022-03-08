@@ -15,13 +15,14 @@ export const DlsWebService = function () {
 
     Object.keys(_responsePrinters).forEach(printerType => {
       const modelPrinters = _responsePrinters[printerType] || [];
-      const printer = {
-        printerType,
-      };
 
       console.log('getPrinters._responsePrinters', {modelPrinters, printer});
 
       modelPrinters.forEach(modelPrinter => {
+        const printer = {
+          printerType,
+        };
+
         Object.keys(modelPrinter).forEach(key => {
           const newValue = modelPrinter[key][0];
 

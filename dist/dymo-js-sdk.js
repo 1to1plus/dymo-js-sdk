@@ -2204,14 +2204,14 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
         const printers = [];
         Object.keys(_responsePrinters).forEach((printerType)=>{
             const modelPrinters = _responsePrinters[printerType] || [];
-            const printer = {
-                printerType: printerType
-            };
             console.log('getPrinters._responsePrinters', {
                 modelPrinters: modelPrinters,
                 printer: printer
             });
             modelPrinters.forEach((modelPrinter)=>{
+                const printer = {
+                    printerType: printerType
+                };
                 Object.keys(modelPrinter).forEach((key)=>{
                     const newValue = modelPrinter[key][0];
                     printer[key] = newValue; // regular mapped keys

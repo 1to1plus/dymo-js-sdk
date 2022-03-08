@@ -49,7 +49,7 @@ export const DlsWebService = function () {
       printerName,
       printParamsXml,
       labelXml,
-      labelSetXml,
+      labelSetXml: `${labelSetXml}`,
     })
   }
 

@@ -2232,7 +2232,7 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
             printerName: printerName,
             printParamsXml: printParamsXml,
             labelXml: labelXml,
-            labelSetXml: labelSetXml
+            labelSetXml: `${labelSetXml}`
         });
     };
     this.printLabel2 = function(printerName, printParamsXml, labelXml, labelSetXml) {

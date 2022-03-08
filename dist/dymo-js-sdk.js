@@ -381,13 +381,6 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
    */ getRecords() {
         return this._records;
     }
-    length() {
-        try {
-            return this._records.length;
-        } catch (err) {
-        }
-        return 0;
-    }
     /** Adds a new record to the label-set
    // Returns created record object
    @export
@@ -395,6 +388,7 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
    */ addRecord() {
         const record = new $2uQZa.default();
         this._records.push(record);
+        this.length = this._records.length;
         // noinspection JSValidateTypes
         return record;
     }
@@ -444,6 +438,7 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
         /**
      @private
      */ this._records = [];
+        this.length = 0;
     }
 }
 var $dd6befa10a7b6c73$export$2e2bcd8739ae039 = $dd6befa10a7b6c73$var$LabelSetBuilder;

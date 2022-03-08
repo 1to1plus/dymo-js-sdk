@@ -15,6 +15,7 @@ class LabelSetBuilder {
      @private
      */
     this._records = [];
+    this.length = 0;
   }
 
   /** Returns label set records
@@ -25,14 +26,6 @@ class LabelSetBuilder {
     return this._records;
   }
 
-  length() {
-    try{
-      return this._records.length;
-    }catch(err){}
-    
-    return 0;
-  }
-
   /** Adds a new record to the label-set
    // Returns created record object
    @export
@@ -41,6 +34,7 @@ class LabelSetBuilder {
   addRecord () {
     const record = new LabelSetRecord();
     this._records.push(record);
+    this.length = this._records.length;
 
     // noinspection JSValidateTypes
     return record;

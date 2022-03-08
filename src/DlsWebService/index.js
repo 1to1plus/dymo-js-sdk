@@ -9,8 +9,6 @@ export const DlsWebService = function () {
   this.getPrinters = async function () {
     const response  = await  invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
     const {Printers: _responsePrinters = []} = response || {};
-
-    console.log('getPrinters', {response, _responsePrinters});
     const printers = [];
 
     Object.keys(_responsePrinters).forEach(printerType => {
@@ -30,10 +28,7 @@ export const DlsWebService = function () {
 
         printers.push(printer);
       });
-
     })
-
-    console.log('getPrinters', {printers});
 
     return printers;
   }

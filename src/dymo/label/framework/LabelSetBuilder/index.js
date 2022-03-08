@@ -25,6 +25,14 @@ class LabelSetBuilder {
     return this._records;
   }
 
+  length() {
+    try{
+      return this._records.length;
+    }catch(err){}
+    
+    return 0;
+  }
+
   /** Adds a new record to the label-set
    // Returns created record object
    @export

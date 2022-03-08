@@ -381,6 +381,13 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
    */ getRecords() {
         return this._records;
     }
+    length() {
+        try {
+            return this._records.length;
+        } catch (err) {
+        }
+        return 0;
+    }
     /** Adds a new record to the label-set
    // Returns created record object
    @export
@@ -2197,10 +2204,6 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
         const response = await $756044f2577989d3$export$9bd96f5c5c9d87f0($756044f2577989d3$export$1bb358554aac31c1, $87a73fe4e23c61da$export$8206e8d612b3e63('WS_CMD_GET_PRINTERS'));
         const { Printers: _responsePrinters = []  } = response || {
         };
-        console.log('getPrinters', {
-            response: response,
-            _responsePrinters: _responsePrinters
-        });
         const printers = [];
         Object.keys(_responsePrinters).forEach((printerType)=>{
             const modelPrinters = _responsePrinters[printerType] || [];
@@ -2215,9 +2218,6 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
                 });
                 printers.push(printer);
             });
-        });
-        console.log('getPrinters', {
-            printers: printers
         });
         return printers;
     };

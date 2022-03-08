@@ -43,7 +43,6 @@ xml.serialize = function (node) {
   }
 
   const test = new XMLSerializer().serializeToString(node)
-  console.log({ test })
 
   return fix(test)
 };

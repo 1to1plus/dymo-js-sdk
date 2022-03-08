@@ -707,9 +707,6 @@ const $c7e2149312647974$export$ddc9d26d0b3d592d = (xmlData)=>{
         return node;
     }
     const test = new $02FXs$xmldomxmldom.XMLSerializer().serializeToString(node1);
-    console.log({
-        test: test
-    });
     return fix(test);
 };
 const $c7e2149312647974$export$9e49107c32070c1a = $c7e2149312647974$var$xml.serialize;

@@ -125,11 +125,8 @@ export const _findWebService = async (host, successFindWebService, errorFindWebS
 
     let found = false;
 
-    console.log({ports});
-
     ports.forEach((port) => {
       if (!found && isNumber(port)) {
-        console.log('setCachedService.calling', {port, host});
         found = true;
         setCachedService(port, host);
         successFindWebService();

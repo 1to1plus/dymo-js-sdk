@@ -2151,15 +2151,8 @@ const $756044f2577989d3$export$60a731736ea9a494 = async (host, successFindWebSer
         const ports = await Promise.all(ajaxPromises);
         errorFindWebService && errorFindWebService();
         let found = false;
-        console.log({
-            ports: ports
-        });
         ports.forEach((port)=>{
             if (!found && $02FXs$lodash.isNumber(port)) {
-                console.log('setCachedService.calling', {
-                    port: port,
-                    host: host
-                });
                 found = true;
                 $756044f2577989d3$export$3a4d4692811ad9db(port, host);
                 successFindWebService();

@@ -16,8 +16,6 @@ export const DlsWebService = function () {
     Object.keys(_responsePrinters).forEach(printerType => {
       const modelPrinters = _responsePrinters[printerType] || [];
 
-      console.log('getPrinters._responsePrinters', {modelPrinters, printer});
-
       modelPrinters.forEach(modelPrinter => {
         const printer = {
           printerType,

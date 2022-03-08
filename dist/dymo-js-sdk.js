@@ -2204,10 +2204,6 @@ const $4689b3733c33ff98$export$9342ab57b40592c6 = function() {
         const printers = [];
         Object.keys(_responsePrinters).forEach((printerType)=>{
             const modelPrinters = _responsePrinters[printerType] || [];
-            console.log('getPrinters._responsePrinters', {
-                modelPrinters: modelPrinters,
-                printer: printer
-            });
             modelPrinters.forEach((modelPrinter)=>{
                 const printer = {
                     printerType: printerType

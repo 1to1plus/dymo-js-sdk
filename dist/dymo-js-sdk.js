@@ -389,6 +389,7 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
         const record = new $2uQZa.default();
         this._records.push(record);
         this._recordLength = this._records.length;
+        this.length = this._records.length;
         // noinspection JSValidateTypes
         return record;
     }
@@ -439,6 +440,7 @@ class $dd6befa10a7b6c73$var$LabelSetBuilder {
      @private
      */ this._records = [];
         this._recordLength = 0;
+        this.length = 0;
     }
 }
 var $dd6befa10a7b6c73$export$2e2bcd8739ae039 = $dd6befa10a7b6c73$var$LabelSetBuilder;

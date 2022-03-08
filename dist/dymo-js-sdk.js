@@ -3150,6 +3150,8 @@ $parcel$export(module.exports, "initApp", () => $98024307a5d0726a$export$bec0ec2
 $parcel$export(module.exports, "createFramework", () => $98024307a5d0726a$export$118613715be2faef);
 $parcel$export(module.exports, "sampleSingleLabel", () => $98024307a5d0726a$export$f71ef76cc1435eaa);
 $parcel$export(module.exports, "LabelSetBuilder", () => $98024307a5d0726a$export$3e1928330f93828b);
+$parcel$export(module.exports, "setSetting", () => $98024307a5d0726a$export$61fd6f1ddd0c20e2);
+$parcel$export(module.exports, "getSetting", () => $98024307a5d0726a$export$8206e8d612b3e63);
 $parcel$export(module.exports, "default", () => $98024307a5d0726a$export$2e2bcd8739ae039);
 
 
@@ -3165,6 +3167,8 @@ const $98024307a5d0726a$export$118613715be2faef = $357bab5e353b9a9d$export$11861
 const $98024307a5d0726a$export$f71ef76cc1435eaa = (parcelRequire("ca9Ex")).sampleSingleLabel;
 
 const $98024307a5d0726a$export$3e1928330f93828b = (parcelRequire("j0Czp")).default;
+const $98024307a5d0726a$export$61fd6f1ddd0c20e2 = $87a73fe4e23c61da$export$61fd6f1ddd0c20e2;
+const $98024307a5d0726a$export$8206e8d612b3e63 = $87a73fe4e23c61da$export$8206e8d612b3e63;
 var $98024307a5d0726a$export$2e2bcd8739ae039 = $98024307a5d0726a$export$bec0ec21ab4579a;
 
 

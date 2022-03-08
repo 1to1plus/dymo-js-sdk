@@ -1,8 +1,8 @@
 <template>
   <div class="container clearfix">
     <button class="btn btn-primary me-3" :disabled="initializing" @click="initTheThing">Init the framework</button>
-    <button class="btn btn-secondary" @click="printLabel">Print test label</button>
-    <button class="btn btn-secondary ms-3" @click="loadPrinters">Get Printers</button>
+    <button class="btn btn-secondary"  :disabled="initializing" @click="printLabel">Print test label</button>
+    <button class="btn btn-secondary ms-3"  :disabled="initializing" @click="loadPrinters">Get Printers</button>
     <div class="container mt-3">
       <div class="row">
         <div class="col-md-6">
@@ -23,7 +23,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import initFramework, { sampleSingleLabel, LabelSetBuilder } from 'dymo-js-sdk';
+import initFramework, { sampleSingleLabel, LabelSetBuilder, settings } from 'dymo-js-sdk';
 
 export default {
   name: 'Home',
@@ -58,6 +58,8 @@ export default {
       this.initializing = true;
       this.framework = await initFramework(); //await createFramework(undefined, true)
       this.initializing = false;
+
+      console.log({settings});
     }
   },
   async mounted () {

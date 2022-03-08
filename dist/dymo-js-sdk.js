@@ -564,6 +564,12 @@ const $87a73fe4e23c61da$export$52c364fca0e4c322 = {
     "'": "\\'"
 };
 const $87a73fe4e23c61da$export$f94a1a83b1ea80c6 = /(\.\d+)|(\d+)|(\D+)/g;
+const $87a73fe4e23c61da$export$35d1ca88fd4cea2c = ()=>{
+    const host = $87a73fe4e23c61da$export$8206e8d612b3e63('Host', '127.0.0.1');
+    const port = $87a73fe4e23c61da$export$8206e8d612b3e63('Port');
+    const url = `${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_PROTOCOL') + host}:${port}/${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_SVC_PATH')}/`;
+    $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('BASE_URL', url);
+};
 const $87a73fe4e23c61da$export$8206e8d612b3e63 = (key, defaultValue, strict = false)=>{
     if (!key) return $87a73fe4e23c61da$export$a5a6e0b888b2c992;
     const foundSetting = $02FXs$lodash.get($87a73fe4e23c61da$export$a5a6e0b888b2c992, key, undefined);
@@ -571,14 +577,14 @@ const $87a73fe4e23c61da$export$8206e8d612b3e63 = (key, defaultValue, strict = fa
     return foundSetting;
 };
 const $87a73fe4e23c61da$export$61fd6f1ddd0c20e2 = (key, value)=>{
+    console.log(`setSetting.${key}=`, value);
+    if ([
+        'port',
+        'host'
+    ].includes(key.toLowerCase())) $87a73fe4e23c61da$export$35d1ca88fd4cea2c();
     return $02FXs$lodash.set($87a73fe4e23c61da$export$a5a6e0b888b2c992, key, value);
 };
-if (!$87a73fe4e23c61da$export$a5a6e0b888b2c992.BASE_URL) {
-    const host = $87a73fe4e23c61da$export$8206e8d612b3e63('Host');
-    const port = $87a73fe4e23c61da$export$8206e8d612b3e63('Port');
-    const url = `${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_PROTOCOL') + host}:${port}/${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_SVC_PATH')}/`;
-    $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('BASE_URL', url);
-}
+if (!$87a73fe4e23c61da$export$a5a6e0b888b2c992.BASE_URL) $87a73fe4e23c61da$export$35d1ca88fd4cea2c();
 const $87a73fe4e23c61da$export$937701d1b4a6fa29 = (command, { host: host = $87a73fe4e23c61da$export$8206e8d612b3e63('Host') , port: port = $87a73fe4e23c61da$export$8206e8d612b3e63('Port')  } = {
 })=>{
     const url = `${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_PROTOCOL') + host}:${port}/${$87a73fe4e23c61da$export$8206e8d612b3e63('WS_SVC_PATH')}/`;
@@ -2098,8 +2104,8 @@ const $756044f2577989d3$var$apiService = async ({ url: url , method: method = $7
     }
 };
 const $756044f2577989d3$export$3a4d4692811ad9db = (port, host)=>{
-    $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('Host', host);
-    $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('Port', port);
+    if (host) $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('Host', host);
+    if (port) $87a73fe4e23c61da$export$61fd6f1ddd0c20e2('Port', port);
 };
 const $756044f2577989d3$export$e6d175d6dda5b1c6 = async (method, command, params, defaultData = {
 })=>{
@@ -2136,17 +2142,25 @@ const $756044f2577989d3$export$60a731736ea9a494 = async (host, successFindWebSer
     const startPort = $87a73fe4e23c61da$export$8206e8d612b3e63('WS_START_PORT');
     const endPort = $87a73fe4e23c61da$export$8206e8d612b3e63('WS_END_PORT');
     const ajaxPromises = [];
-    for(let i = startPort; i <= endPort; ++i)ajaxPromises.push($756044f2577989d3$export$cda26f64738995f6(i, host));
+    for(let i = startPort; i <= endPort; ++i)ajaxPromises.push($756044f2577989d3$export$cda26f64738995f6(i, host).then((res)=>res ? i : false
+    ).catch((err)=>false
+    ));
     // using reverse logic: first successful response will result in rejected promise, so it will break .all() loop
     // and ignore all pending results from other promises.
     // So 'thenCatch' is called in case of success, and 'then' handler is called in case of failure (no ports found).
     try {
-        const ports = await Promise.all(ajaxPromises).catch(()=>false
-        );
+        const ports = await Promise.all(ajaxPromises);
         errorFindWebService && errorFindWebService();
         let found = false;
+        console.log({
+            ports: ports
+        });
         ports.forEach((port)=>{
             if (!found && $02FXs$lodash.isNumber(port)) {
+                console.log('setCachedService.calling', {
+                    port: port,
+                    host: host
+                });
                 found = true;
                 $756044f2577989d3$export$3a4d4692811ad9db(port, host);
                 successFindWebService();

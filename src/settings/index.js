@@ -152,6 +152,15 @@ export const jsEscapeCache_ = {
  */
 export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
 
+export const reGenerateBaseUrl = () => {
+  const host = getSetting('Host', '127.0.0.1');
+  const port = getSetting('Port');
+
+  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
+
+  setSetting('BASE_URL', url);
+}
+
 /**
  * gets the settings fail over to the constants
  * @param {string} key - path in the settings object
@@ -174,16 +183,17 @@ export const getSetting = (key = undefined, defaultValue = undefined, strict = f
 };
 
 export const setSetting = (key, value) => {
+  console.log(`setSetting.${key}=`, value);
+
+  if(['port', 'host'].includes(key.toLowerCase())){
+    reGenerateBaseUrl()
+  }
+
   return set(settings, key, value);
 };
 
 if (!settings.BASE_URL) {
-  const host = getSetting('Host');
-  const port = getSetting('Port');
-
-  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
-
-  setSetting('BASE_URL', url);
+  reGenerateBaseUrl()
 }
 
 export const buildApiUrl = (

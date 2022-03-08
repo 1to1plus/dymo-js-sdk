@@ -55,8 +55,12 @@ const apiService = async ({
 };
 
 export const setCachedService = (port, host) => {
-  setSetting('Host', host);
-  setSetting('Port', port);
+  if(host) {
+    setSetting('Host', host);
+  }
+  if(port) {
+    setSetting('Port', port);
+  }
 };
 
 export const fireAjaxAsync = async (method, command, params, defaultData = {}) => {
@@ -105,20 +109,27 @@ export const _findWebService = async (host, successFindWebService, errorFindWebS
   const ajaxPromises = [];
 
   for (let i = startPort; i <= endPort; ++i) {
-    ajaxPromises.push(getAjaxPromise(i, host));
+    ajaxPromises.push(
+      getAjaxPromise(i, host)
+        .then(res => res? i: false)
+        .catch((err) => false)
+    );
   }
 
   // using reverse logic: first successful response will result in rejected promise, so it will break .all() loop
   // and ignore all pending results from other promises.
   // So 'thenCatch' is called in case of success, and 'then' handler is called in case of failure (no ports found).
   try {
-    const ports = await Promise.all(ajaxPromises).catch(() => false);
+    const ports = await Promise.all(ajaxPromises);
     errorFindWebService && errorFindWebService()
 
     let found = false;
 
+    console.log({ports});
+
     ports.forEach((port) => {
       if (!found && isNumber(port)) {
+        console.log('setCachedService.calling', {port, host});
         found = true;
         setCachedService(port, host);
         successFindWebService();

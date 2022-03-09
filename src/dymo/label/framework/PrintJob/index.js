@@ -5,7 +5,7 @@
  @param {PrinterInfo} printerInfo printer the print job has been created for
  @param {string} jobId print job Id
  */
-import _createFramework from '../createFramework'
+import { createFramework } from '../createFramework'
 import PrintJobStatusInfo from '../PrintJobStatusInfo'
 import PrintJobStatus from '../PrintJobStatus'
 
@@ -26,7 +26,7 @@ const PrintJob = function (printerInfo, jobId) {
  @return {string}
  */
 PrintJob.prototype.getPrinterName = function () {
-  return this._printerInfo['name']
+  return this._printerInfo.name
 }
 
 /**
@@ -47,17 +47,20 @@ PrintJob.prototype.getStatus = function (replyCallback) {
   if (!this._printerInfo.isNetworkPrinter()) {
     let statusInfo
     try {
-      statusInfo = _createFramework().
-        getJobStatus(this._printerInfo['name'], this._jobId)
+      statusInfo = createFramework().
+        getJobStatus(this._printerInfo.name, this._jobId)
     } catch (e) {
-      statusInfo = new PrintJobStatusInfo(this.getPrinterName(), this._jobId,
-        PrintJobStatus.ProcessingError, e.message || e)
+      statusInfo = new PrintJobStatusInfo(
+        this.getPrinterName(),
+        this._jobId,
+        PrintJobStatus.ProcessingError,
+        e.message || e,
+      )
     }
 
     replyCallback(statusInfo)
-  } else
-    this.getStatusForNetworkPrinter(replyCallback)
-}
+  } else this.getStatusForNetworkPrinter(replyCallback)
+};
 
 /**
  Gets a status of the print job
@@ -65,36 +68,38 @@ PrintJob.prototype.getStatus = function (replyCallback) {
  @param {function(PrintJobStatusInfo)} replyCallback a function call when the status is available
  */
 PrintJob.prototype.getStatusForNetworkPrinter = function (replyCallback) {
-  let printerName = this.getPrinterName()
-  let jobId = this._jobId
+  const printerName = this.getPrinterName()
+  const jobId = this._jobId
 
-  //let networkPrinterName = splitNetworkPrinterName(printerName);
+  // let networkPrinterName = splitNetworkPrinterName(printerName);
 
   // try to get data
-  let printerUri = this._printerInfo.printerUri
-  let jsonp2 = new goog.net.Jsonp(
+  const { printerUri } = this._printerInfo
+  const jsonp2 = new goog.net.Jsonp(
     goog.Uri.resolve(printerUri, 'getPrintJobStatus'), 'callback')
   jsonp2.send(
-    { 'jobId': jobId, 'printerName': this._printerInfo.originalPrinterName },
+    { jobId, printerName: this._printerInfo.originalPrinterName },
     function (pjs) {
-      let jobStatusInfo = new PrintJobStatusInfo(
+      const jobStatusInfo = new PrintJobStatusInfo(
         printerName,
         jobId,
-        pjs['status'],
-        pjs['statusMessage'])
+        pjs.status,
+        pjs.statusMessage,
+      )
 
       replyCallback(jobStatusInfo)
     },
     function () {
-      let jobStatusInfo = new PrintJobStatusInfo(
+      const jobStatusInfo = new PrintJobStatusInfo(
         printerName,
         jobId,
         PrintJobStatus.ProcessingError,
-        'Error processing getPrintJobStatus(): Unable to contact "' +
-        printerUri + '"')
+        `Error processing getPrintJobStatus(): Unable to contact "${printerUri}"`,
+      )
 
       replyCallback(jobStatusInfo)
-    })
-}
+    },
+  )
+};
 
 export default PrintJob

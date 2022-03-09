@@ -1,8 +1,9 @@
 {
   "name": "dymo-js-sdk",
-  "version": "3.0.6",
+  "version": "3.0.39",
   "homepage": "https://github.com/1to1plus/dymo-js-sdk",
   "description": "Node project for js dymo node communications",
+  "main": "dist/dymo-js-sdk.js",
   "keywords": [
     "dymo",
     "communications",
@@ -16,10 +17,8 @@
   "private": false,
   "license": "MIT",
   "files": [
-    "./src/DlsWebService",
-    "./src/helpers",
-    "./src/dymo",
-    "./src/settings",
+    "./dist/dymo-js-sdk.js",
+    "./dist/dymo-js-sdk.js.map",
     "./src/LICENSE",
     "./src/README.md",
     "./src/package.json"
@@ -32,7 +31,7 @@
     }
   ],
   "scripts": {
-    "build": "babel src -d dist --source-maps",
+    "build": "parcel build ./src/dymo-js-sdk.js",
     "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
     "dev": "yarn start",
     "test": "jest",
@@ -118,12 +117,15 @@
     "prettier": "^2.5.1"
   },
   "dependencies": {
+    "@parcel/reporter-bundle-analyzer": "^2.3.2",
     "@xmldom/xmldom": "^0.8.1",
     "axios": "^0.26.0",
     "dot-object": "^2.1.4",
     "dotenv": "^16.0.0",
     "google-closure-library": "^20220104.0.0",
     "lodash": "^4.17.21",
+    "parcel": "^2.3.2",
+    "parcel-plugin-nuke-dist": "^1.0.1",
     "qs": "^6.10.3",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.23"

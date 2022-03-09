@@ -15,7 +15,7 @@ const DZPrinterInfo = function (
   name, modelName, isConnected, isLocal, isAutoCutSupported) {
   PrinterInfo.call(this, 'DZPrinter', name, modelName, isConnected, isLocal)
 
-  this['isAutoCutSupported'] = isAutoCutSupported
-}
+  this.isAutoCutSupported = isAutoCutSupported
+};
 
 export default DZPrinterInfo

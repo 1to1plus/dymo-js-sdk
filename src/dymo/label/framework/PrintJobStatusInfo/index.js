@@ -7,15 +7,11 @@
  @param {string} statusMessage
  */
 const PrintJobStatusInfo = function (
-  printerName,
-  jobId,
-  status,
-  statusMessage,
-) {
-  this['printerName'] = printerName
-  this['jobId'] = jobId
-  this['status'] = status
-  this['statusMessage'] = statusMessage
+  printerName, jobId, status, statusMessage) {
+  this.printerName = printerName
+  this.jobId = jobId
+  this.status = status
+  this.statusMessage = statusMessage
 }
 
 /**
@@ -25,8 +21,8 @@ const PrintJobStatusInfo = function (
  @return {{status: number, statusMessage: string}}
  */
 PrintJobStatusInfo.parse = function (statusStr) {
-  let result = {}
-  let a = statusStr.split(' ')
+  const result = {}
+  const a = statusStr.split(' ')
 
   if (a.length >= 1) {
     result.status = parseInt(a[0], 10)
@@ -35,6 +31,6 @@ PrintJobStatusInfo.parse = function (statusStr) {
   result.statusMessage = a.slice(1).join(' ')
 
   return result
-}
+};
 
 export default PrintJobStatusInfo

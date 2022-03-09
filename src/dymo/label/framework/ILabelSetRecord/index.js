@@ -15,7 +15,7 @@ const ILabelSetRecord = function () {}
  @param {string} textMarkup
  @return {ILabelSetRecord}
  */
-ILabelSetRecord.prototype.setTextMarkup = function (objectName, textMarkup) {}
+ILabelSetRecord.prototype.setTextMarkup = function (objectName, textMarkup) {};
 
 /**
  // Adds data to the record specified as plain text
@@ -28,7 +28,7 @@ ILabelSetRecord.prototype.setTextMarkup = function (objectName, textMarkup) {}
  @param {string} text
  @return {ILabelSetRecord}
  */
-ILabelSetRecord.prototype.setText = function (objectName, text) {}
+ILabelSetRecord.prototype.setText = function (objectName, text) {};
 
 /**
  // Adds image data to the record.
@@ -41,6 +41,7 @@ ILabelSetRecord.prototype.setText = function (objectName, text) {}
  @param {string} base64Image
  @return {ILabelSetRecord}
  */
-ILabelSetRecord.prototype.setBase64Image = function (objectName, base64Image) {}
+ILabelSetRecord.prototype.setBase64Image = function (
+  objectName, base64Image) {};
 
 export default ILabelSetRecord

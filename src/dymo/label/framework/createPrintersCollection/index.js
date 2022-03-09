@@ -4,8 +4,8 @@
  @return {Array}
  */
 const createPrintersCollection = () => {
-  let result = []
-  result['byIndex'] = []
+  const result = []
+  result.byIndex = []
 
   Object.defineProperty(result, 'byIndex', {
     enumerable: false,
@@ -13,6 +13,6 @@ const createPrintersCollection = () => {
   })
 
   return result
-}
+};
 
 export default createPrintersCollection

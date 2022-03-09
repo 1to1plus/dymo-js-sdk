@@ -1,7 +1,8 @@
 <template>
   <div class="container clearfix">
-    <button class="btn btn-primary" @click="printLabel">Print test label</button>
-    <button class="btn btn-secondary ms-3" @click="loadPrinters">Get Printers</button>
+    <button class="btn btn-primary me-3" :disabled="initializing" @click="initTheThing">Init the framework</button>
+    <button class="btn btn-secondary"  :disabled="initializing" @click="printLabel">Print test label</button>
+    <button class="btn btn-secondary ms-3"  :disabled="initializing" @click="loadPrinters">Get Printers</button>
     <div class="container mt-3">
       <div class="row">
         <div class="col-md-6">
@@ -22,9 +23,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import { createFramework } from '../../../../../dymo/label/framework/createFramework'
-import { sampleSingleLabel } from '../../../../../dymo/label/framework/createFramework/__tests__/data/singleLabel'
-import LabelSetBuilder from '../../../../../dymo/label/framework/LabelSetBuilder'
+import initFramework, { sampleSingleLabel, LabelSetBuilder, settings } from 'dymo-js-sdk';
 
 export default {
   name: 'Home',
@@ -34,6 +33,7 @@ export default {
       printers: '',
       framework: null,
       labelTemplate: null,
+      initializing: false,
       printLabelResponse: 'n/a',
     }
   },
@@ -54,9 +54,17 @@ export default {
 
       this.printLabelResponse = await this.framework.printLabel(printerToUse, '', labelXmlFromFile, labelSet + '')
     },
+    async initTheThing(){
+      this.initializing = true;
+      this.framework = await initFramework(); //await createFramework(undefined, true)
+      this.initializing = false;
+
+      console.log({settings});
+    }
   },
   async mounted () {
-    this.framework = await createFramework(undefined, true)
+    // from dymo js sdk framework is a promise. When called it will poll the printer common ports and try to find the printer.
+    this.framework = {};// await initFramework(); //await createFramework(undefined, true)
   },
 }
 </script>

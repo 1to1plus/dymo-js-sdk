@@ -1,10 +1,10 @@
-import { isNil } from 'lodash';
-import getPrinters from '../getPrinters';
-import { getSetting } from '../../../../settings';
-import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter';
-import _createFramework from '../createFramework';
-import PrintJob from '../PrintJob';
-import getPrintersAsync from '../getPrintersAsync';
+import { isNil } from 'lodash'
+import getPrinters from '../getPrinters'
+import { getSetting } from '../../../../settings'
+import printLabelToNetworkPrinter from '../printLabelToNetworkPrinter'
+import PrintJob from '../PrintJob'
+import getPrintersAsync from '../getPrintersAsync'
+import { createFramework } from '../createFramework'
 
 /** Prints a label and return a job id
  // printerName - the printer to print on. A list of printers can be obtained by getPrinters()
@@ -40,7 +40,8 @@ const printLabel2 = function (printerName, printParamsXml, labelXml, labelSetXml
       return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
     return new PrintJob(
       printerInfo,
-      _createFramework().printLabel2(printerName, printParamsXml, labelXml, labelSetXml),
+      createFramework().
+        printLabel2(printerName, printParamsXml, labelXml, labelSetXml),
     );
   }
   throw new Error(`printLabel(): unknown printer '${printerName}'`);
@@ -79,11 +80,11 @@ export const printLabel2Async = function (printerName, printParamsXml, labelXml,
       if (getSetting('ASSUME_MOBILE') || printerInfo.isNetworkPrinter()) {
         return printLabelToNetworkPrinter(printerInfo, printParamsXml, labelXml, labelSetXml);
       }
-      return _createFramework()
-        .printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml)
-        .then(function (result) {
-          return new PrintJob(printerInfo, result);
-        });
+      return createFramework().
+        printLabel2Async(printerName, printParamsXml, labelXml, labelSetXml).
+        then(function (result) {
+          return new PrintJob(printerInfo, result)
+        })
     }
     throw new Error(`printLabel2Async(): unknown printer '${printerName}'`);
   });

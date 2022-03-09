@@ -23,7 +23,8 @@ const checkEnvironment = async function (
     result.isFrameworkInstalled = true
     result.isWebServicePresent = true
 
-    onEnvironmentCheckedCallback && await onEnvironmentCheckedCallback(result)
+    onEnvironmentCheckedCallback &&
+    (await onEnvironmentCheckedCallback(result))
   }
 
   const onLegacyPluginFound = async function () {
@@ -31,11 +32,12 @@ const checkEnvironment = async function (
     result.isFrameworkInstalled = true
     result.isWebServicePresent = false
 
-    onEnvironmentCheckedCallback && await onEnvironmentCheckedCallback(result)
+    onEnvironmentCheckedCallback &&
+    (await onEnvironmentCheckedCallback(result))
   }
 
   const checkLegacyPlugins = function () {
-    traceMsg('checkLegacyPlugins');
+    traceMsg('checkLegacyPlugins')
     result.isWebServicePresent = false
     result.isBrowserSupported = true
   };

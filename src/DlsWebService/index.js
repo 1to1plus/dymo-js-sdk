@@ -1,12 +1,36 @@
 import { invokeWsCommandAsync, GET, POST } from '../helpers/ajax'
 import { getSetting } from '../settings'
+import { lowercaseFirstLetter } from '../helpers/string'
 
 /**
  * @constructor
  */
 export const DlsWebService = function () {
-  this.getPrinters = function () {
-    return invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
+  this.getPrinters = async function () {
+    const response  = await  invokeWsCommandAsync(GET, getSetting('WS_CMD_GET_PRINTERS'))
+    const {Printers: _responsePrinters = []} = response || {};
+    const printers = [];
+
+    Object.keys(_responsePrinters).forEach(printerType => {
+      const modelPrinters = _responsePrinters[printerType] || [];
+
+      modelPrinters.forEach(modelPrinter => {
+        const printer = {
+          printerType,
+        };
+
+        Object.keys(modelPrinter).forEach(key => {
+          const newValue = modelPrinter[key][0];
+
+          printer[key] = newValue; // regular mapped keys
+          printer[lowercaseFirstLetter(key)] = newValue; // lowercase mapped keys
+        })
+
+        printers.push(printer);
+      });
+    })
+
+    return printers;
   }
 
   this.getJobStatus = function () {
@@ -25,11 +49,12 @@ export const DlsWebService = function () {
       printerName,
       printParamsXml,
       labelXml,
-      labelSetXml,
-    });
-  };
+      labelSetXml: `${labelSetXml}`,
+    })
+  }
 
-  this.printLabel2 = function (printerName, printParamsXml, labelXml, labelSetXml) {
+  this.printLabel2 = function (
+    printerName, printParamsXml, labelXml, labelSetXml) {
     return invokeWsCommandAsync(POST, getSetting('WS_CMD_PRINT_LABEL2'), {
       printerName,
       printParamsXml,

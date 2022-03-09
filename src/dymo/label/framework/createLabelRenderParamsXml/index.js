@@ -14,38 +14,37 @@
  @export
  */
 const createLabelRenderParamsXml = function (params) {
-  if (!params)
-    return ''
+  if (!params) return ''
 
-  var doc = dymo.xml.parse('<LabelRenderParams/>')
-  var root = doc.documentElement
+  const doc = dymo.xml.parse('<LabelRenderParams/>')
+  const root = doc.documentElement
 
-  var addColor = function (tagName, color) {
-    dymo.xml.appendElement(root, tagName, undefined,
-      {
-        'Alpha': color.a || color.alpha || 255, // opaque
-        'Red': color.r || color.red || 0,
-        'Green': color.g || color.green || 0,
-        'Blue': color.b || color.blue || 0,
-      })
+  const addColor = function (tagName, color) {
+    dymo.xml.appendElement(root, tagName, undefined, {
+      Alpha: color.a || color.alpha || 255, // opaque
+      Red: color.r || color.red || 0,
+      Green: color.g || color.green || 0,
+      Blue: color.b || color.blue || 0,
+    })
   }
 
-  if (params.labelColor)
-    addColor('LabelColor', params.labelColor)
+  if (params.labelColor) addColor('LabelColor', params.labelColor)
 
-  if (params.shadowColor)
-    addColor('ShadowColor', params.shadowColor)
+  if (params.shadowColor) addColor('ShadowColor', params.shadowColor)
 
-  if (typeof params.shadowDepth != 'undefined')
+  if (typeof params.shadowDepth !== 'undefined')
     dymo.xml.appendElement(root, 'ShadowDepth', params.shadowDepth.toString())
 
-  if (params.flowDirection)
-    dymo.xml.appendElement(root, 'FlowDirection', params.flowDirection)
+  if (params.flowDirection) dymo.xml.appendElement(root, 'FlowDirection',
+    params.flowDirection)
 
-  if (typeof params.pngUseDisplayResolution != 'undefined')
-    dymo.xml.appendElement(root, 'PngUseDisplayResolution',
-      params.pngUseDisplayResolution ? 'True' : 'False')
+  if (typeof params.pngUseDisplayResolution !== 'undefined')
+    dymo.xml.appendElement(
+      root,
+      'PngUseDisplayResolution',
+      params.pngUseDisplayResolution ? 'True' : 'False',
+    )
 
   return dymo.xml.serialize(doc)
-}
+};
 export default createLabelRenderParamsXml

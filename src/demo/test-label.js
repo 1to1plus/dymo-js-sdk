@@ -1,21 +1,16 @@
 import LabelSetBuilder from '../dymo/label/framework/LabelSetBuilder'
-import { createFramework } from '../dymo/label/framework/createFramework'
+import initFramework from '../dymo-js-sdk'
 import {
   sampleSingleLabel,
 } from '../dymo/label/framework/createFramework/__tests__/data/singleLabel'
 
 const handler = async (settings) => {
-
-  const {
-    printerToUse,
-    labelXmlFromFile,
-    labelSet,
-  } = settings
+  const { printerToUse, labelXmlFromFile, labelSet } = settings
 
   let loading = false
 
   // init the framework
-  const framework = await createFramework(undefined, true)
+  const framework = await initFramework()
 
   // build label template values
   const record = labelSet.addRecord()
@@ -32,10 +27,10 @@ const handler = async (settings) => {
     // labelSet implements toString so it will automatically convert to
     // xml format that the application is looking for
     this.printLabelResponse = await framework.printLabel(
-      printerToUse,       // printer name
-      '',                 // printer configs
-      labelXmlFromFile,   // label template
-      labelSet + '',       // label values to pop into the template
+      printerToUse, // printer name
+      '', // printer configs
+      labelXmlFromFile, // label template
+      `${labelSet}`, // label values to pop into the template
     )
   } catch (err) {
     console.log('Something went wrong: ', err)
@@ -44,7 +39,7 @@ const handler = async (settings) => {
     // end sample loading state
     loading = false
   }
-}
+};
 
 // these are sample settings that could come from local storage or database settings
 const printerToUse = 'DYMO LabelWriter 550'
@@ -56,6 +51,6 @@ console.log('----------------')
 handler({ printerToUse, labelXmlFromFile, labelSet }).then(() => {
   console.log('----------------')
   console.log('Demos all done')
-}).catch(err => {
+}).catch((err) => {
   console.log('Demo ended with error:', err)
 })

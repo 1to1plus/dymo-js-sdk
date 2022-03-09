@@ -1,4 +1,4 @@
-import { get, set } from 'lodash';
+import { get, set } from 'lodash'
 
 export const settings = {
   DEBUG: false,
@@ -152,6 +152,15 @@ export const jsEscapeCache_ = {
  */
 export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
 
+export const reGenerateBaseUrl = () => {
+  const host = getSetting('Host', '127.0.0.1');
+  const port = getSetting('Port');
+
+  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
+
+  setSetting('BASE_URL', url);
+}
+
 /**
  * gets the settings fail over to the constants
  * @param {string} key - path in the settings object
@@ -160,8 +169,8 @@ export const numerateCompareRegExp_ = /(\.\d+)|(\d+)|(\D+)/g;
  * @return {{DETECT_DOUBLE_ESCAPING: boolean, WS_PROTOCOL: string, WS_START_PORT: number, WS_END_PORT: number, Port: number, Host: string, ASSUME_MOBILE: boolean, DEBUG: boolean, WS_COMMAND_TIMEOUT: number, WS_SVC_HOST: string, TRUSTED_SITE: boolean, dymo: {label: {framework: {trace: boolean, currentFramework: number}}}, WS_SVC_PATH: string, BASE_URL: undefined, FORCE_NON_DOM_HTML_UNESCAPING: boolean, WS_CHECK_TIMEOUT: number, WS_SVC_HOST_LEGACY: string}}
  */
 export const getSetting = (key = undefined, defaultValue = undefined, strict = false) => {
-  if(!key){
-    return settings;
+  if (!key) {
+    return settings
   }
 
   const foundSetting = get(settings, key, undefined);
@@ -174,16 +183,15 @@ export const getSetting = (key = undefined, defaultValue = undefined, strict = f
 };
 
 export const setSetting = (key, value) => {
+  if(['port', 'host'].includes(key.toLowerCase())){
+    reGenerateBaseUrl()
+  }
+
   return set(settings, key, value);
 };
 
 if (!settings.BASE_URL) {
-  const host = getSetting('Host');
-  const port = getSetting('Port');
-
-  const url = `${getSetting('WS_PROTOCOL') + host}:${port}/${getSetting('WS_SVC_PATH')}/`;
-
-  setSetting('BASE_URL', url);
+  reGenerateBaseUrl()
 }
 
 export const buildApiUrl = (

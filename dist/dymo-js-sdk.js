@@ -2076,7 +2076,7 @@ const $756044f2577989d3$export$5508c7b57250ebc6 = 'put';
 const $756044f2577989d3$export$4bd2facc4a3e6aa1 = 'delete';
 const $756044f2577989d3$export$8eb3892b442747bd = 'options';
 const $756044f2577989d3$var$apiService = async ({ url: url , method: method = $756044f2577989d3$export$1bb358554aac31c1 , params: params , headers: headers = {
-} , debug: debug = false , timeout: timeout = 1000 ,  })=>{
+} , debug: debug = false , timeout: timeout = $87a73fe4e23c61da$export$8206e8d612b3e63('API_TIMEOUT') ,  })=>{
     const writer = (output, force = debug)=>{
         if (force) console.log('apiService.writer', output);
     };

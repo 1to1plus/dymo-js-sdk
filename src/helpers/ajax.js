@@ -20,7 +20,7 @@ const apiService = async ({
   params = undefined,
   headers = {},
   debug = false,
-  timeout = 1000,
+  timeout = getSetting('API_TIMEOUT'),
 }) => {
   const writer = (output, force = debug) => {
     if (force) {

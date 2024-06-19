@@ -12,7 +12,7 @@ const { default: initFramework, LabelSetBuilder } = dymoJsSdk
 
 const printerService = await initFramework()
 
-const printers = await this.printerService.getPrinters()
+const printers = await printerService.getPrinters()
 const printerToUse = printers[0] // maybe look at the list and choose one
 
 // Get the lap builder instance 

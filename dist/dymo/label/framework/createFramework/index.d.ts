@@ -1,0 +1,20 @@
+export declare const createFaultyFramework: (e: typeof Error) => {
+    getPrinters: () => never;
+    openLabelFile: () => never;
+    printLabel: () => never;
+    printLabel2: () => never;
+    renderLabel: () => never;
+    loadImageAsPngBase64: () => never;
+    getJobStatus: () => never;
+    is550Printer: () => never;
+    getConsumableInfoIn550Printer: () => never;
+    getPrintersAsync: () => never;
+    openLabelFileAsync: () => never;
+    printLabelAsync: () => never;
+    printLabel2Async: () => never;
+    renderLabelAsync: () => never;
+    loadImageAsPngBase64Async: () => never;
+    is550PrinterAsync: () => never;
+    getConsumableInfoIn550PrinterAsync: () => never;
+};
+export declare const createFramework: (callBack?: any, checkWebService?: any) => any;

@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
+
+// @ts-ignore
+import dts from 'vite-plugin-dts';
 import path from 'path';
 
 export default defineConfig({
   build: {
+    sourcemap: true,
     lib: {
       entry: path.resolve(__dirname, 'src/dymo-js-sdk.ts'), // Adjust to your main TypeScript file
       name: 'DymoJsSdk',
@@ -24,4 +28,11 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    dts({
+      insertTypesEntry: true,
+      // @ts-ignore
+      tsConfigFilePath: path.resolve(__dirname, 'tsconfig.json'),
+    }),
+  ],
 });

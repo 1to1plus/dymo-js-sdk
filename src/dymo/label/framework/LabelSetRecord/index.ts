@@ -1,35 +1,31 @@
-import { TextMarkupTag, TextMarkupClosedTag } from '../../../../settings';
+import { TextMarkupClosedTag, TextMarkupTag } from '../../../../settings';
+import { ILabelSetRecord } from '../ILabelSetRecord';
 
-/** LabelSetRecord class
- Holds data of one label-set records and provides methods to add data to the record
+// Define the LabelSetRecord class
+class LabelSetRecord implements ILabelSetRecord {
 
- @constructor
- @private
- @implements {ILabelSetRecord}
- */
-const LabelSetRecord = function () {};
+  setTextMarkup(objectName: string, textMarkup: string): this {
+    textMarkup = textMarkup.toString();
 
-/** inheritDoc */
-LabelSetRecord.prototype.setTextMarkup = function (objectName, textMarkup) {
-  textMarkup = textMarkup.toString();
+    if (textMarkup.indexOf(TextMarkupTag) !== 0) {
+      textMarkup = TextMarkupTag + textMarkup + TextMarkupClosedTag;
+    }
 
-  if (textMarkup.indexOf(TextMarkupTag) != 0)
-    textMarkup = TextMarkupTag + textMarkup + TextMarkupClosedTag;
+    this[objectName] = textMarkup;
+    return this;
+  }
 
-  this[objectName] = textMarkup;
-  return this;
-};
+  setText(objectName: string, text: string): this {
+    this[objectName] = text;
+    return this;
+  }
 
-/** inheritDoc */
-LabelSetRecord.prototype.setText = function (objectName, text) {
-  this[objectName] = text;
-  return this;
-};
+  setBase64Image(objectName: string, base64Image: string): this {
+    this[objectName] = base64Image;
+    return this;
+  }
 
-/** inheritDoc */
-LabelSetRecord.prototype.setBase64Image = function (objectName, base64Image) {
-  this[objectName] = base64Image;
-  return this;
-};
+  [key: string]: string & any;
+}
 
 export default LabelSetRecord;

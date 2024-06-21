@@ -5,7 +5,7 @@ import { asyncFindWebService, syncCheckWebService } from '../../../../helpers/aj
 /**
  Checks is browser environment suitable for the framework
  */
-const checkEnvironment = async function (onEnvironmentCheckedCallback: any, checkWebService: any) {
+const checkEnvironment = async function(onEnvironmentCheckedCallback: any, checkWebService: any) {
   const result = {
     isBrowserSupported: false,
     isFrameworkInstalled: false,
@@ -13,7 +13,7 @@ const checkEnvironment = async function (onEnvironmentCheckedCallback: any, chec
     errorDetails: '',
   };
 
-  const onWebServiceFound = async function () {
+  const onWebServiceFound = async function() {
     result.isBrowserSupported = true;
     result.isFrameworkInstalled = true;
     result.isWebServicePresent = true;
@@ -21,7 +21,7 @@ const checkEnvironment = async function (onEnvironmentCheckedCallback: any, chec
     onEnvironmentCheckedCallback && (await onEnvironmentCheckedCallback(result));
   };
 
-  const onLegacyPluginFound = async function () {
+  const onLegacyPluginFound = async function() {
     result.isBrowserSupported = true;
     result.isFrameworkInstalled = true;
     result.isWebServicePresent = false;
@@ -29,15 +29,15 @@ const checkEnvironment = async function (onEnvironmentCheckedCallback: any, chec
     onEnvironmentCheckedCallback && (await onEnvironmentCheckedCallback(result));
   };
 
-  const checkLegacyPlugins = function () {
+  const checkLegacyPlugins = function() {
     traceMsg('checkLegacyPlugins');
     result.isWebServicePresent = false;
     result.isBrowserSupported = true;
   };
 
-  const errorFindWebService = function () {
+  const errorFindWebService = function(e) {
     checkLegacyPlugins();
-    onEnvironmentCheckedCallback && onEnvironmentCheckedCallback(result);
+    onEnvironmentCheckedCallback && onEnvironmentCheckedCallback({ ...result, error: e });
   };
 
   if (getSetting('dymo.label.framework.currentFramework')) {

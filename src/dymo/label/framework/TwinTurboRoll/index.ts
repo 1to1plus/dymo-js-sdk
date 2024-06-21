@@ -1,4 +1,4 @@
-import GeneralRecord from '../../../types/generalRecord';
+import GeneralRecord from '../../../../types/generalRecord';
 
 /** Specifies on whitch roll to print when printing on Twin Turbo printers
  // Left - print on left roll only

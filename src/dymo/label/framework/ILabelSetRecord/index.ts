@@ -1,8 +1,10 @@
+type GeneralObject = Record<string, any>
+
 /**
  * @interface
  * @public
  */
-export interface ILabelSetRecord {
+export interface ILabelSetRecord extends GeneralObject {
   /**
    * Adds data to the record specified as text markup.
    * @param {string} _objectName - object name which the markup is set for

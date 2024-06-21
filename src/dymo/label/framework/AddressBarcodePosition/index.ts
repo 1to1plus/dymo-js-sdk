@@ -1,4 +1,4 @@
-import GeneralRecord from '../../../types/generalRecord';
+import GeneralRecord from '../../../../types/generalRecord';
 
 /** Specifies when to draw Intelligent-Mail barcode for address object
  // AboveAddress - print barcode above the address

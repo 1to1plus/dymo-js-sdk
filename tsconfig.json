@@ -20,7 +20,7 @@
     "alwaysStrict": false,
     "resolveJsonModule": true,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/types",
     "emitDeclarationOnly": true,
     "typeRoots": [
       "./node_modules/@types"

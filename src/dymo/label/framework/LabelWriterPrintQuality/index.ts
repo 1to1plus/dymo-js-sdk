@@ -1,4 +1,4 @@
-import GeneralRecord from '../../../types/generalRecord';
+import GeneralRecord from '../../../../types/generalRecord';
 
 /** Specifies printing quality when printed on LabelWriter printers
  // 'Text' - text print quality (fast)

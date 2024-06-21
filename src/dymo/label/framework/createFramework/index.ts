@@ -1,10 +1,9 @@
-// import checkEnvironment from '../checkEnvironment'
 import chooseEnvironment from '../chooseEnvironment';
-import { setSetting } from '../../../../settings';
 import checkEnvironment from '../checkEnvironment';
 import { traceMsg } from '../../../../helpers/debug';
+import { setSetting } from '../../../../dymo-js-sdk';
 
-export const createFaultyFramework = function (e: typeof Error) {
+export const createFaultyFramework = function(e: typeof Error) {
   const error = e || new Error('DYMO Label Framework Plugin or WebService are not installed');
   const throwError = () => {
     throw error;
@@ -67,13 +66,19 @@ function _createFramework(
   if (this && this.constructor == _createFramework) {
     _waitWebService = true;
 
-    const onEnvironmentChecked = function (checkResult: any) {
+    const onEnvironmentChecked = function(checkResult: any) {
       _checkResult = checkResult;
 
       try {
         _framework = chooseEnvironment(checkResult);
         currentFramework = checkResult.isWebServicePresent ? 2 : 1;
-        setSetting('dymo.label.framework.currentFramework', currentFramework);
+
+        // FIXME :: This makes sure the framework can be initialized once,
+        // but this breaks if the printer can't be detected
+        // then one is plugged in since the framework does not re-check for a printer
+        if (currentFramework === 2) {
+          setSetting('dymo.label.framework.currentFramework', currentFramework);
+        }
       } catch (e) {
         traceMsg(`onEnvironmentChecked > exception e : ${e.description || e.message || e}`);
         if (!checkWebService) throw e;

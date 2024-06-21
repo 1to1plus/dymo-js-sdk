@@ -1,4 +1,4 @@
-import GeneralRecord from '../../../types/generalRecord';
+import GeneralRecord from '../../../../types/generalRecord';
 
 /**
  @public
@@ -8,7 +8,7 @@ import GeneralRecord from '../../../types/generalRecord';
  @param {number} status
  @param {string} statusMessage
  */
-const PrintJobStatusInfo = function (printerName, jobId, status, statusMessage): void {
+const PrintJobStatusInfo = function(printerName, jobId, status, statusMessage): void {
   this.printerName = printerName;
   this.jobId = jobId;
   this.status = status;

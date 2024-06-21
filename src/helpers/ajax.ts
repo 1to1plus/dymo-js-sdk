@@ -6,19 +6,20 @@ import qs from 'qs';
 import { getSetting, setSetting } from '../dymo-js-sdk';
 import { xmlToJson } from '../dymo/xml';
 import { buildApiUrl } from '../settings';
+import MissingPrinter from '../Exceptions/MissingPrinter';
 
 export const GET = 'get';
 export const POST = 'post';
 
 const apiService = async ({
-  url,
-  method = GET,
-  params = undefined,
-  headers = {},
-  debug = false,
-  timeout = getSetting('API_TIMEOUT'),
-  ...otherParams
-}) => {
+                            url,
+                            method = GET,
+                            params = undefined,
+                            headers = {},
+                            debug = false,
+                            timeout = getSetting('API_TIMEOUT'),
+                            ...otherParams
+                          }) => {
   const writer = (output: any, force = debug) => {
     if (force) {
       console.log('apiService.writer', output);
@@ -87,7 +88,6 @@ export const _findWebService = async (
 
   try {
     const ports = await Promise.all(ajaxPromises);
-    errorFindWebService && errorFindWebService();
 
     let found = false;
 
@@ -100,7 +100,7 @@ export const _findWebService = async (
     });
 
     if (!found) {
-      throw 'Could not find dymo port';
+      throw new MissingPrinter('Could not find dymo port');
     }
   } catch (e) {
     errorFindWebService && errorFindWebService(e);

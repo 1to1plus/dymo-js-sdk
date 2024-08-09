@@ -10,9 +10,10 @@ npm install --save dymo-js-sdk
 
 ## Usage
 
-Can be seen in the [./src/demo/test-label.js](./src/demo/test-label.js) or in the sample [./src/demo/vue/hello-printer](./src/demo/vue/hello-printer) application
+Can be seen in the [src/demo/test-label.ts](src/demo/test-label.ts) or in the
+sample [./src/demo/vue/hello-printer](./src/demo/vue/hello-printer) application
 
-But, initialize the framework and print the label. The code might look like this
+Initialize the framework and print the label. The code might look like this
 
 ```vue
 // init the framework
@@ -34,13 +35,14 @@ in your terminal navigate to ./src/demo/vue/hello-printer
 * start the dev server `yarn start`
 * it should display a link when building is done
 * click the link to open in your browser
-* on the "Home" page you'll have get printers and print label buttons they should be functional assuming the printer is setup correctly
+* on the "Home"
+  page you'll have to get printers and print label buttons they should be functional assuming the printer is
+  set up correctly
 
 ## Developer notes
 
 * clone the repo `git clone git@github.com:1to1plus/dymo-js-sdk.git`
 * install dev dependencies `yarn install`
-* run tests with `yarn test`
 
 ## PLEASE NOTE
 
@@ -50,6 +52,7 @@ My adoption of https://github.com/dymosoftware/dymo-connect-framework
 
 ## Roadmap
 
+* remove unused extra stuff
 * re-build the dymo object in ./src/dymo/index.js from the updated structure
 * test the framework
 * build examples

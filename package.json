@@ -1,9 +1,11 @@
 {
   "name": "dymo-js-sdk",
-  "version": "3.0.39",
+  "version": "4.0.0",
   "homepage": "https://github.com/1to1plus/dymo-js-sdk",
   "description": "Node project for js dymo node communications",
-  "main": "dist/dymo-js-sdk.js",
+  "main": "dist/dymo-js-sdk.cjs.js",
+  "module": "dist/dymo-js-sdk.es.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "dymo",
     "communications",
@@ -17,9 +19,12 @@
   "private": false,
   "license": "MIT",
   "files": [
-    "./dist/dymo-js-sdk.js",
-    "./dist/dymo-js-sdk.js.map",
+    "./dist/dymo-js-sdk.cjs.js",
+    "./dist/dymo-js-sdk.cjs.js.map",
+    "./dist/dymo-js-sdk.es.js",
+    "./dist/dymo-js-sdk.es.js.map",
     "./src/LICENSE",
+    "./src/docs/README.md",
     "./src/README.md",
     "./src/package.json"
   ],
@@ -31,14 +36,11 @@
     }
   ],
   "scripts": {
-    "build": "parcel build ./src/dymo-js-sdk.js",
-    "start": "PORT=3006 nodemon src/demo/test-label.js --exec babel-node",
+    "build": "vite build",
+    "start": "ts-node src/demo/test-label.ts",
     "dev": "yarn start",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "demo": "node ./src/demo/test-label.js",
-    "coverage": "jest --coverage --runInBand --verbose",
-    "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\"",
+    "demo": "ts-node ./src/demo/test-label.ts",
+    "eslint": "eslint src/**/*.ts --ignore-pattern \"node_modules/\"",
     "lint": "eslint src --fix",
     "push:all": "git push && git push --tags",
     "release": "npm version patch && yarn push:all"
@@ -56,40 +58,8 @@
     ]
   },
   "engines": {
-    "node": ">=10",
+    "node": ">=18",
     "yarn": ">=1.22.4"
-  },
-  "eslintConfig": {
-    "plugins": [
-      "node",
-      "jest"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:prettier/recommended",
-      "plugin:jest/recommended",
-      "prettier"
-    ],
-    "rules": {
-      "no-underscore-dangle": "off",
-      "func-names": "off",
-      "no-console": "off",
-      "no-plusplus": "off",
-      "import/prefer-default-export": "off",
-      "no-param-reassign": "off",
-      "import/no-cycle": "off",
-      "no-throw-literal": "off",
-      "no-bitwise": "off"
-    },
-    "env": {
-      "jest/globals": true,
-      "node": true,
-      "es6": true
-    },
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 2018
-    }
   },
   "prettier": {
     "singleQuote": true,
@@ -102,30 +72,32 @@
     "@babel/core": "^7.17.4",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.17.5",
+    "@types/node": "^20.14.5",
+    "@typescript-eslint/parser": "7.0.0",
     "axios-mock-adapter": "^1.20.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.5.1",
-    "jest-cli": "^27.5.1",
-    "jest-mock-axios": "^4.5.0",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "vite-plugin-dts": "^3.9.1"
   },
   "dependencies": {
-    "@parcel/reporter-bundle-analyzer": "^2.3.2",
     "@xmldom/xmldom": "^0.8.1",
     "axios": "^0.26.0",
     "dot-object": "^2.1.4",
     "dotenv": "^16.0.0",
+    "fast-xml-parser": "^4.4.0",
     "google-closure-library": "^20220104.0.0",
     "lodash": "^4.17.21",
-    "parcel": "^2.3.2",
-    "parcel-plugin-nuke-dist": "^1.0.1",
     "qs": "^6.10.3",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.23"
